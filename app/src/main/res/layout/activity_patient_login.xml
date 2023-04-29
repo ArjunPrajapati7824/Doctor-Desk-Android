@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".patient.PatientLogin"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_page">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:background="@drawable/edit_text">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            >
+
+            <TextView
+                android:id="@+id/LoginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textColor="@color/Main"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/PatientLoginNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="phone"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_person_outline_24"
+                android:paddingStart="8dp"
+                android:hint="  Phone Number"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientLoginPass"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Password"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:id="@+id/PatientLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Login"
+                android:backgroundTint="@color/Main"
+                android:background="@drawable/buttion"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="50dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have Account ?"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/RegisterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Register"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>
