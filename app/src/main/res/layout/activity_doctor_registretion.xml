@@ -42,117 +42,113 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/DoctorRegName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:ems="20"
-                    android:inputType="text"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_person_outline_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Name"
-                    android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/DoctorRegName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_person_outline_24"
+                android:paddingStart="8dp"
+                android:hint="  Name"
+                android:textColor="@color/black"/>
 
-                <EditText
-                    android:id="@+id/DoctorPhoneNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:ems="20"
-                    android:inputType="phone"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_phone_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Phone Number"
-                    android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/DoctorPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="phone"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_phone_24"
+                android:paddingStart="8dp"
+                android:hint="  Phone Number"
+                android:textColor="@color/black"/>
 
-                <EditText
-                    android:id="@+id/DoctorClinicName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Clinic Name"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/DoctorClinicName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Clinic Name"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
 
-                <EditText
-                    android:id="@+id/DoctorClinicAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Clinic Address"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/DoctorClinicAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Clinic Address"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
 
-                <EditText
-                    android:id="@+id/DoctorRegistrationNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Registration Number"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/DoctorRegistrationNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Registration Number"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
 
-                <EditText
-                    android:id="@+id/DoctorSpecialization"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Specialization"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/DoctorSpecialization"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Specialization"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
 
 
-                <EditText
-                    android:id="@+id/DoctorRegPass1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:ems="20"
-                    android:inputType="textPassword"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Password"
-                    android:textColor="@color/black"/>
-                <EditText
-                    android:id="@+id/DoctorRegPass2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_lock_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Confirm Password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/DoctorRegPass1"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="textPassword"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Password"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientLoginPass"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:paddingStart="8dp"
+                android:hint="  Confirm Password"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"/>
 
 
             </LinearLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:animateLayoutChanges="true">
+
 
             <Button
                 android:id="@+id/DoctorSignup"
@@ -162,15 +158,6 @@
                 android:text="Sign Up"
                 android:backgroundTint="@color/Main"
                 android:background="@drawable/buttion"/>
-
-            <ProgressBar
-                android:id="@+id/ProgressBar"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:visibility="invisible"/>
-
-            </FrameLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

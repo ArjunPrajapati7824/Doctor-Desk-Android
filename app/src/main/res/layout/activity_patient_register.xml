@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -34,20 +34,6 @@
                 android:textColor="@color/Main"
                 android:textSize="36sp"
                 android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/PatientLoginNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="phone"
-                android:background="@drawable/edit_text"
-                android:drawableLeft="@drawable/baseline_person_outline_24"
-                android:paddingStart="8dp"
-                android:hint="  Phone Number"
-                android:textColor="@color/black"/>
-
             <EditText
                 android:id="@+id/PatientLoginName"
                 android:layout_width="wrap_content"
@@ -60,6 +46,114 @@
                 android:paddingStart="8dp"
                 android:hint="  Name"
                 android:textColor="@color/black"/>
+
+
+            <EditText
+                android:id="@+id/PatientPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="phone"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_phone_24"
+                android:paddingStart="8dp"
+                android:hint="  Phone Number"
+                android:textColor="@color/black"/>
+
+
+            <EditText
+                android:id="@+id/PatientWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="number"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_monitor_weight_24"
+                android:paddingStart="8dp"
+                android:hint="  Weight in KG"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/PatientHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  Height in cm "
+                android:drawableLeft="@drawable/baseline_man_3_24"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientBloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  Blood Group"
+                android:drawableLeft="@drawable/baseline_bloodtype_24"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientCity"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  City"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="@drawable/baseline_location_on_24"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:selectAllOnFocus="true"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+                    <RadioButton
+                        android:id="@+id/other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Other"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/PatientLoginPass1"
                 android:layout_width="wrap_content"
@@ -126,4 +220,4 @@
 
 
 
-</LinearLayout>
+</ScrollView>
