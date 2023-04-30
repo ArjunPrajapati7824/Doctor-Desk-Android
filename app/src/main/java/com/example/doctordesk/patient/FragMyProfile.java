@@ -1,5 +1,6 @@
 package com.example.doctordesk.patient;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.doctordesk.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +64,27 @@ public class FragMyProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_my_profile, container, false);
+        View v=inflater.inflate(R.layout.fragment_frag_my_profile, container, false);
+        Button logout=(Button) v.findViewById(R.id.PatientLogout);
+        Button Edit=(Button) v.findViewById(R.id.PatientEditProfile);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(getActivity(),PatientLogin.class);
+                startActivity(i);
+
+            }
+        });
+
+        Edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),Patient_EditProfile.class);
+                startActivity(i);
+
+            }
+        });
+        return v;
     }
 }

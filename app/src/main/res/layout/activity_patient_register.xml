@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".patient.PatientLogin"
+    tools:context=".patient.PatientRegister"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/login_page">
@@ -29,11 +29,12 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign In"
+                android:text="Sign Up"
                 android:textAlignment="center"
                 android:textColor="@color/Main"
                 android:textSize="36sp"
                 android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/PatientLoginName"
                 android:layout_width="wrap_content"
@@ -60,45 +61,6 @@
                 android:paddingStart="8dp"
                 android:hint="  Phone Number"
                 android:textColor="@color/black"/>
-
-
-            <EditText
-                android:id="@+id/PatientWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="number"
-                android:background="@drawable/edit_text"
-                android:drawableLeft="@drawable/baseline_monitor_weight_24"
-                android:paddingStart="8dp"
-                android:hint="  Weight in KG"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/PatientHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="text"
-                android:background="@drawable/edit_text"
-                android:paddingStart="8dp"
-                android:hint="  Height in cm "
-                android:drawableLeft="@drawable/baseline_man_3_24"
-                android:textColor="@color/black"/>
-            <EditText
-                android:id="@+id/PatientBloodGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="text"
-                android:background="@drawable/edit_text"
-                android:paddingStart="8dp"
-                android:hint="  Blood Group"
-                android:drawableLeft="@drawable/baseline_bloodtype_24"
-                android:textColor="@color/black"/>
             <EditText
                 android:id="@+id/PatientCity"
                 android:layout_width="wrap_content"
@@ -111,6 +73,20 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"
                 android:drawableLeft="@drawable/baseline_location_on_24"/>
+
+
+            <EditText
+                android:id="@+id/PatientAge"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  Age "
+                android:drawableLeft="@drawable/baseline_man_3_24"
+                android:textColor="@color/black"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,6 +130,35 @@
                 </RadioGroup>
             </LinearLayout>
 
+
+            <EditText
+                android:id="@+id/PatientWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_monitor_weight_24"
+                android:ems="20"
+                android:hint="  Weight in KG"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/PatientBloodGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  Blood Group"
+                android:drawableLeft="@drawable/baseline_bloodtype_24"
+                android:textColor="@color/black"/>
+
+
+
             <EditText
                 android:id="@+id/PatientLoginPass1"
                 android:layout_width="wrap_content"
@@ -183,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Sign in"
+                android:text="Sign Up"
                 android:backgroundTint="@color/Main"
                 android:background="@drawable/buttion"/>
             <LinearLayout

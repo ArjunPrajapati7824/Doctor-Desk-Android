@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".doctor.Doctor_EditProfile"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_page">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/edit_text">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            >
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textAlignment="center"
+                android:textColor="@color/Main"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/DoctorEditRegName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_person_outline_24"
+                    android:ems="20"
+                    android:hint="  Name"
+                    android:inputType="text"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/DoctorEditPhoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="20"
+                    android:inputType="phone"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_phone_24"
+                    android:paddingStart="8dp"
+                    android:hint="  Phone Number"
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/DoctorEditClinicName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_medical_services_24"
+                    android:ems="20"
+                    android:hint="  Clinic Name"
+                    android:inputType="text"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/DoctorEditClinicAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:ems="20"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_location_on_24"
+                    android:paddingStart="8dp"
+                    android:hint="  Clinic Address"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:id="@+id/DoctorEditRegistrationNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:ems="20"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_app_registration_24"
+                    android:paddingStart="8dp"
+                    android:hint="  Registration Number"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:id="@+id/DoctorEditSpecialization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:ems="20"
+                    android:background="@drawable/edit_text"
+                    android:drawableLeft="@drawable/baseline_content_paste_search_24"
+                    android:paddingStart="8dp"
+                    android:hint="  Specialization"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="15dp"/>
+
+
+
+
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:animateLayoutChanges="true">
+                <Button
+                    android:id="@+id/DoctorUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Update"
+                    android:backgroundTint="@color/Main"
+                    android:background="@drawable/buttion"/>
+
+                <ProgressBar
+                    android:id="@+id/ProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</ScrollView>
