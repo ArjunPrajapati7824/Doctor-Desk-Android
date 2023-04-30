@@ -26,7 +26,7 @@ public class otpVerification extends AppCompatActivity {
 
     EditText intputnumber1, intputnumber2, intputnumber3, intputnumber4, intputnumber5, intputnumber6;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    String otp;
+    String otp,typeDoc,typePatient;
     Button verfiybuttonclick;
     ProgressBar progressBar;
 
@@ -50,7 +50,8 @@ public class otpVerification extends AppCompatActivity {
         verfiybuttonclick = findViewById(R.id.submit);
 
         otp =getIntent().getStringExtra("otp");
-
+        typeDoc=getIntent().getStringExtra("typeD");
+        typePatient=getIntent().getStringExtra("typeP");
         verfiybuttonclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,11 +70,16 @@ public class otpVerification extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 //                                progressBar.setVisibility(View.INVISIBLE);
 //                                verfiybuttonclick.setVisibility(View.VISIBLE);
-                                if (task.isSuccessful()) {
+                                if (task.isSuccessful() && typeDoc.equals("Doctor")) {
                                     Intent intent = new Intent(getApplicationContext(), doctor_home.class);
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivities(new Intent[]{intent});
-                                } else {
+                                } else if (task.isSuccessful() && typePatient.equals("Patient")) {
+                                    Intent intent = new Intent(getApplicationContext(), doctor_home.class);
+                                    //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivities(new Intent[]{intent});
+                                }
+                               else {
                                     Toast.makeText(otpVerification.this, "Please enter correct OTP ", Toast.LENGTH_SHORT).show();
                                 }
                             }

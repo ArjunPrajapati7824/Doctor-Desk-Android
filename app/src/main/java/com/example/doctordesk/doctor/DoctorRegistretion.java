@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ public class DoctorRegistretion extends AppCompatActivity {
     TextView LoginText;
     EditText phoneNumber;
     private FirebaseAuth mAuth;
+    ProgressBar processbar_sending_otp;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,7 +42,7 @@ public class DoctorRegistretion extends AppCompatActivity {
         LoginText=findViewById(R.id.RegLoginText);
         DoctorRegister=findViewById(R.id.DoctorSignup);
         phoneNumber=findViewById(R.id.DoctorPhoneNumber);
-
+        processbar_sending_otp=findViewById(R.id.processbar_sending_otp);
         DoctorRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +51,7 @@ public class DoctorRegistretion extends AppCompatActivity {
                     if((phoneNumber.getText().toString().trim()).length() == 10)
                     {
 
-                        DoctorRegister.setVisibility(View.INVISIBLE);
+//                        DoctorRegister.setVisibility(View.INVISIBLE);
                         PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
                                 .setActivity(DoctorRegistretion.this)
                                 .setPhoneNumber("+91"+phoneNumber.getText().toString())
@@ -56,27 +59,28 @@ public class DoctorRegistretion extends AppCompatActivity {
                                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                     @Override
                                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
-                                        DoctorRegister.setVisibility(View.VISIBLE);
+//                                        processbar_sending_otp.setVisibility(View.VISIBLE);
+//                                        DoctorRegister.setVisibility(View.INVISIBLE);
                                     }
 
 
                                     @Override
                                     public void onVerificationFailed(@NonNull FirebaseException e) {
-
-                                        DoctorRegister.setVisibility(View.VISIBLE);
+//                                        processbar_sending_otp.setVisibility(View.VISIBLE);
+//                                        DoctorRegister.setVisibility(View.INVISIBLE);
                                         Toast.makeText(DoctorRegistretion.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onCodeSent(@NonNull String otp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                                         super.onCodeSent(otp, forceResendingToken);
-
-                                        DoctorRegister.setVisibility(View.VISIBLE);
+//                                        processbar_sending_otp.setVisibility(View.VISIBLE);
+//                                        DoctorRegister.setVisibility(View.INVISIBLE);
 
                                         Intent intent = new Intent(DoctorRegistretion.this, otpVerification.class);
                                         intent.putExtra("mobile",phoneNumber.getText().toString());
                                         intent.putExtra("otp",otp);
+                                        intent.putExtra("typeD","Doctor");
                                         startActivity(intent);
                                         finish();
 

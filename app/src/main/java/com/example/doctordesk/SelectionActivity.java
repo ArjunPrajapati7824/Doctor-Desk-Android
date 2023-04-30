@@ -25,7 +25,7 @@ Button Patient,Doctor;
             public void onClick(View view) {
                 Intent i = new Intent(SelectionActivity.this, PatientLogin.class);
                 startActivity(i);
-                finish();
+//                finish();
             }
         });
 
@@ -34,7 +34,7 @@ Button Patient,Doctor;
             public void onClick(View view) {
                 Intent i = new Intent(SelectionActivity.this, DoctorLogin.class);
                 startActivity(i);
-                finish();
+//                finish();
             }
         });
     }
