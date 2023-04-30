@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doctordesk.doctor.DoctorRegistretion;
 import com.example.doctordesk.doctor.doctor_home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +31,7 @@ public class otpVerification extends AppCompatActivity {
     Button verfiybuttonclick;
     ProgressBar progressBar;
 
+    public static int veryfy_otp = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,9 @@ public class otpVerification extends AppCompatActivity {
 //                                progressBar.setVisibility(View.INVISIBLE);
 //                                verfiybuttonclick.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
+                                    DoctorRegistretion r1=new DoctorRegistretion();
+                                    r1.SignUp();
+//                                    veryfy_otp=1;
                                     Intent intent = new Intent(getApplicationContext(), doctor_home.class);
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivities(new Intent[]{intent});

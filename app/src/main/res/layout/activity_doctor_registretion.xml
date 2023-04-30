@@ -77,7 +77,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:paddingStart="8dp"
                     android:hint="  Clinic Name"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     android:layout_marginTop="15dp"/>
 
@@ -90,7 +90,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:paddingStart="8dp"
                     android:hint="  Clinic Address"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     android:layout_marginTop="15dp"/>
 
@@ -103,7 +103,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:paddingStart="8dp"
                     android:hint="  Registration Number"
-                    android:inputType="textPassword"
+                    android:inputType="number"
                     android:textColor="@color/black"
                     android:layout_marginTop="15dp"/>
 
@@ -116,7 +116,7 @@
                     android:drawableLeft="@drawable/baseline_lock_24"
                     android:paddingStart="8dp"
                     android:hint="  Specialization"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     android:layout_marginTop="15dp"/>
 

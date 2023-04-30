@@ -11,5 +11,7 @@ public class Constants {
     public static final String KEY_DOCTOR_REGISTRATION_NUMBER="Dr_Registration_number";
     public static final String KEY_SPECIALIZATION="Specialization";
     public static final String KEY_PASSWORD="Password";
+    public static final String KEY_IS_SIGNED_IN="IsSignedIn";
+    public static final String KEY_USER_ID="UserId";
 
 }
