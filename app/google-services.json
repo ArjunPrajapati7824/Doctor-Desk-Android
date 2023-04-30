@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "285106157648",
+    "project_id": "doctor-desk",
+    "storage_bucket": "doctor-desk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285106157648:android:9a2f05cf7d8cd3a5b4f955",
+        "android_client_info": {
+          "package_name": "com.example.doctordesk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285106157648-7kot70tbo7u87915rav69iq8p2sfc7q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.doctordesk",
+            "certificate_hash": "9d304d37b7f60cbb9a934c46cdc080e014a723af"
+          }
+        },
+        {
+          "client_id": "285106157648-6gbih54mh3kto72voluhjt2mebro5599.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWAUch6Gu1xILeQGKKrxgY6zTw6MsofeI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285106157648-6gbih54mh3kto72voluhjt2mebro5599.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
