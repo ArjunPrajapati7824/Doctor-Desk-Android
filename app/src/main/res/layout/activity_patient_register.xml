@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".patient.PatientLogin"
+    tools:context=".patient.PatientRegister"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/login_page">
@@ -35,7 +35,7 @@
                 android:textSize="36sp"
                 android:textStyle="bold" />
             <EditText
-                android:id="@+id/PatientLoginName"
+                android:id="@+id/PatientRgName"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -63,30 +63,29 @@
 
 
             <EditText
-                android:id="@+id/PatientWeight"
+                android:id="@+id/PatientAge"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:ems="20"
                 android:inputType="number"
                 android:background="@drawable/edit_text"
-                android:drawableLeft="@drawable/baseline_monitor_weight_24"
                 android:paddingStart="8dp"
-                android:hint="  Weight in KG"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/PatientHeight"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="text"
-                android:background="@drawable/edit_text"
-                android:paddingStart="8dp"
-                android:hint="  Height in cm "
+                android:hint="Enter Age"
                 android:drawableLeft="@drawable/baseline_man_3_24"
                 android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientCity"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="Enter City"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="@drawable/baseline_location_on_24"/>
             <EditText
                 android:id="@+id/PatientBloodGroup"
                 android:layout_width="wrap_content"
@@ -99,18 +98,7 @@
                 android:hint="  Blood Group"
                 android:drawableLeft="@drawable/baseline_bloodtype_24"
                 android:textColor="@color/black"/>
-            <EditText
-                android:id="@+id/PatientCity"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:ems="20"
-                android:background="@drawable/edit_text"
-                android:paddingStart="8dp"
-                android:hint="  City"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_marginTop="15dp"
-                android:drawableLeft="@drawable/baseline_location_on_24"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,6 +113,7 @@
                     android:textColor="@color/black"/>
 
                 <RadioGroup
+                    android:id="@+id/PatientGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -155,6 +144,19 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/PatientWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="numberDecimal"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_monitor_weight_24"
+                android:paddingStart="8dp"
+                android:hint="  Weight in KG"
+                android:textColor="@color/black"/>
+
+            <EditText
                 android:id="@+id/PatientLoginPass1"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -167,7 +169,7 @@
                 android:hint="  Password"
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/PatientLoginPass"
+                android:id="@+id/PatientLoginPass2"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:ems="20"
@@ -178,14 +180,31 @@
                 android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"/>
-            <Button
-                android:id="@+id/PatientSingin"
+
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Sign in"
-                android:backgroundTint="@color/Main"
-                android:background="@drawable/buttion"/>
+                android:layout_marginTop="15dp"
+                android:animateLayoutChanges="true">
+                <Button
+                    android:id="@+id/PatientSingUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Sign Up"
+                    android:backgroundTint="@color/Main"
+                    android:background="@drawable/buttion"/>
+
+                <ProgressBar
+                    android:id="@+id/ProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

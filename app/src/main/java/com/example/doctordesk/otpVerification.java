@@ -14,7 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.doctordesk.doctor.DoctorRegistretion;
 import com.example.doctordesk.doctor.doctor_home;
+import com.example.doctordesk.patient.PatientHome;
+import com.example.doctordesk.patient.PatientRegister;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +32,8 @@ public class otpVerification extends AppCompatActivity {
     String otp;
     Button verfiybuttonclick;
     ProgressBar progressBar;
+
+
 
 
     @Override
@@ -70,9 +75,14 @@ public class otpVerification extends AppCompatActivity {
 //                                progressBar.setVisibility(View.INVISIBLE);
 //                                verfiybuttonclick.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), doctor_home.class);
+                                    if(PatientRegister.verify_otp_patient){
+                                        startActivity(new Intent(otpVerification.this, PatientHome.class));
+                                    }
+                                    if(DoctorRegistretion.verify_otp_doctor){
+                                        startActivity(new Intent(otpVerification.this, doctor_home.class));
+                                    }
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivities(new Intent[]{intent});
+//                                    startActivities(new Intent[]{intent});
                                 } else {
                                     Toast.makeText(otpVerification.this, "Please enter correct OTP ", Toast.LENGTH_SHORT).show();
                                 }

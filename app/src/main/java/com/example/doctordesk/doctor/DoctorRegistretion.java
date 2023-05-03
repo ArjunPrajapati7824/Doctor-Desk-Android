@@ -1,5 +1,7 @@
 package com.example.doctordesk.doctor;
 
+import static android.view.View.INVISIBLE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorRegistretionBinding;
 import com.example.doctordesk.otpVerification;
+import com.example.doctordesk.patient.PatientRegister;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.firebase.FirebaseApp;
@@ -35,6 +38,8 @@ public class DoctorRegistretion extends AppCompatActivity {
 
     private ActivityDoctorRegistretionBinding binding;
     private PreferenceManager preferencesManager;
+
+    public static boolean verify_otp_doctor=false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -61,56 +66,61 @@ public class DoctorRegistretion extends AppCompatActivity {
         binding.DoctorSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Signup_Isvalid()) {
-                    SignUp();
+//                if (Signup_Isvalid()) {
+
+                binding.DoctorSignup.setVisibility(INVISIBLE);
+                binding.ProgressBar.setVisibility(View.VISIBLE);
+                if(Signup_Isvalid()){
+
+                    PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
+                            .setActivity(DoctorRegistretion.this)
+                            .setPhoneNumber("+91"+binding.DoctorPhoneNumber.getText().toString())
+                            .setTimeout(60l, TimeUnit.SECONDS)
+                            .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                @Override
+                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                                }
+                                @Override
+                                public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                                    binding.ProgressBar.setVisibility(INVISIBLE);
+                                    Toast.makeText(DoctorRegistretion.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onCodeSent(@NonNull String otp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                    super.onCodeSent(otp, forceResendingToken);
+
+                                    verify_otp_doctor=true;
+                                    binding.DoctorSignup.setVisibility(INVISIBLE);
+                                    binding.ProgressBar.setVisibility(View.VISIBLE);
+                                    SignUp();
+
+                                    Intent intent = new Intent(DoctorRegistretion.this, otpVerification.class);
+                                    intent.putExtra("mobile",binding.DoctorPhoneNumber.getText().toString());
+                                    intent.putExtra("otp",otp);
+                                    startActivity(intent);
+                                    finish();
+
+                                }
+                            })
+                            .build();
+                    PhoneAuthProvider.verifyPhoneNumber(options);
                 }
 
-
-//                binding.DoctorSignup.setVisibility(view.INVISIBLE);
-//                binding.ProgressBar.setVisibility(View.VISIBLE);
-//                if(Signup_Isvalid()){
-//                    PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
-//                            .setActivity(DoctorRegistretion.this)
-//                            .setPhoneNumber("+91"+binding.DoctorPhoneNumber.getText().toString())
-//                            .setTimeout(60l, TimeUnit.SECONDS)
-//                            .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-//                                @Override
-//                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-//
-//                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
-//                                }
-//                                @Override
-//                                public void onVerificationFailed(@NonNull FirebaseException e) {
-//
-//                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
-//                                    binding.ProgressBar.setVisibility(View.INVISIBLE);
-//                                    Toast.makeText(DoctorRegistretion.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
-//                                }
-//
-//                                @Override
-//                                public void onCodeSent(@NonNull String otp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-//                                    super.onCodeSent(otp, forceResendingToken);
-//
-//                                    binding.DoctorSignup.setVisibility(View.INVISIBLE);
-//                                    binding.ProgressBar.setVisibility(View.VISIBLE);
-//
-//                                    Intent intent = new Intent(DoctorRegistretion.this, otpVerification.class);
-//                                    intent.putExtra("mobile",binding.DoctorPhoneNumber.getText().toString());
-//                                    intent.putExtra("otp",otp);
-//                                    startActivity(intent);
-//                                    finish();
-//
-//                                }
-//                            })
-//                            .build();
-//                    PhoneAuthProvider.verifyPhoneNumber(options);
-//                }
-//                //  binding.DoctorSignup.setVisibility(View.INVISIBLE);
-//            }
-//        });
-
+                  binding.DoctorSignup.setVisibility(INVISIBLE);
             }
+
         });
+
+
+
+
+
+
 
         binding.RegLoginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +134,7 @@ public class DoctorRegistretion extends AppCompatActivity {
 
 
             public void SignUp() {//sign up of doctor
-                Loading(true);
+//                Loading(true);
                 FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
                 HashMap<String, Object> user = new HashMap<>();
                 //put data in database
@@ -134,36 +144,36 @@ public class DoctorRegistretion extends AppCompatActivity {
                 user.put(Constants.KEY_CLINIC_ADDRESS, binding.DoctorClinicAddress.getText().toString());
                 user.put(Constants.KEY_DOCTOR_REGISTRATION_NUMBER, binding.DoctorRegistrationNumber.getText().toString());
                 user.put(Constants.KEY_SPECIALIZATION, binding.DoctorSpecialization.getText().toString());
-                user.put(Constants.KEY_PASSWORD, binding.DoctorRegPass1.getText().toString());
+                user.put(Constants.KEY_DOCTOR_PASSWORD, binding.DoctorRegPass1.getText().toString());
                 firebaseFireStore.collection(Constants.KEY_COLLECTION_DOCTORS)//create collection name
                         .add(user)
                         .addOnSuccessListener(documentReference -> {
-                            Loading(false);
-//                   preferencesManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
-//                   preferencesManager.putString(Constants.KEY_USER_ID, documentReference.getId());
-//                   preferencesManager.putString(Constants.KEY_NAME,binding.InputName.getText().toString());
-                            Intent intent = new Intent(getApplicationContext(), doctor_home.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            ShowToast("Welcome");
-                            startActivity(intent);//if signup then go to mainactivity
-                            finish();
+//                            Loading(false);
+//                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
+//                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
+//                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
+//                            Intent intent = new Intent(getApplicationContext(), doctor_home.class);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            ShowToast("Verify otp");
+//                            startActivity(intent);//if signup then go to mainactivity
+//                            finish();
 
                         })
                         .addOnFailureListener(exception -> {
-                            Loading(false);
+//                            Loading(false);
                             ShowToast(exception.getMessage());
                         });
             }
 
-            private void Loading(boolean IsLoading) {
-                if (IsLoading) {
-                    binding.DoctorSignup.setVisibility(View.INVISIBLE);
-                    binding.ProgressBar.setVisibility(View.VISIBLE);
-                } else {
-                    binding.ProgressBar.setVisibility(View.INVISIBLE);
-                    binding.DoctorSignup.setVisibility(View.VISIBLE);
-                }
-            }
+//            private void Loading(boolean IsLoading) {
+//                if (IsLoading) {
+//                    binding.DoctorSignup.setVisibility(INVISIBLE);
+//                    binding.ProgressBar.setVisibility(View.VISIBLE);
+//                } else {
+//                    binding.ProgressBar.setVisibility(INVISIBLE);
+//                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+//                }
+//            }
 
 
             private void ShowToast(String message) {
