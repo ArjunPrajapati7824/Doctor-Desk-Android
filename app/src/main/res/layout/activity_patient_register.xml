@@ -36,7 +36,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/PatientLoginName"
+                android:id="@+id/PatientRgName"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
@@ -101,6 +101,7 @@
                     android:textColor="@color/black"/>
 
                 <RadioGroup
+                    android:id="@+id/PatientGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -172,7 +173,7 @@
                 android:hint="  Password"
                 android:textColor="@color/black"/>
             <EditText
-                android:id="@+id/PatientLoginPass"
+                android:id="@+id/PatientLoginPass2"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:ems="20"
@@ -183,14 +184,26 @@
                 android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:animateLayoutChanges="true">
             <Button
-                android:id="@+id/PatientSingin"
+                android:id="@+id/PatientSingUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Sign Up"
                 android:backgroundTint="@color/Main"
                 android:background="@drawable/buttion"/>
+            <ProgressBar
+                android:id="@+id/ProgressBar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:visibility="invisible"/>
+            </FrameLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

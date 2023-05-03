@@ -74,7 +74,7 @@ public class PatientLogin extends AppCompatActivity {
                         startActivity(i_login);
                     }else {
                         Loading(false);
-                        ShowToast("Invalid Mobile number and password");
+                        ShowToast("Invalid Mobile number Orv  password");
                     }
 
                 });
