@@ -9,7 +9,8 @@
     android:background="@drawable/login_page">
 <ScrollView
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="75dp">
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -242,15 +243,17 @@
                 android:layout_gravity="center"
                 >
             <Button
+                android:id="@+id/PatientEditProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="edit"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"/>
             <Button
+                android:id="@+id/PatientLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Update"
+                android:text="Logout"
                 android:layout_gravity="center"/>
             </LinearLayout>
         </LinearLayout>

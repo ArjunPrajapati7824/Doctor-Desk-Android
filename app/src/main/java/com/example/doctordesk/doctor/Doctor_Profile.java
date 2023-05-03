@@ -1,5 +1,6 @@
 package com.example.doctordesk.doctor;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.doctordesk.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,12 +58,34 @@ public class Doctor_Profile extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor__profile, container, false);
+         View v=inflater.inflate(R.layout.fragment_doctor__profile, container, false);
+         Button logout=(Button) v.findViewById(R.id.DoctorLogout);
+        Button Edit=(Button) v.findViewById(R.id.DoctorEditProfile);
+         logout.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 FirebaseAuth.getInstance().signOut();
+                 Intent i = new Intent(getActivity(),DoctorLogin.class);
+                 startActivity(i);
+
+             }
+         });
+
+        Edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(),Doctor_EditProfile.class);
+                startActivity(i);
+
+            }
+        });
+        return v;
     }
 }

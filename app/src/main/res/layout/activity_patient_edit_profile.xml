@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".patient.Patient_EditProfile"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_page">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:background="@drawable/edit_text">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            >
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textAlignment="center"
+                android:textColor="@color/Main"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+            <EditText
+                android:id="@+id/PatientEditLoginName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_person_outline_24"
+                android:paddingStart="8dp"
+                android:hint="  Name"
+                android:textColor="@color/black"/>
+
+
+            <EditText
+                android:id="@+id/PatientEditPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="phone"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_phone_24"
+                android:paddingStart="8dp"
+                android:hint="  Phone Number"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/PatientEditCity"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:ems="20"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  City"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:drawableLeft="@drawable/baseline_location_on_24"/>
+
+
+            <EditText
+                android:id="@+id/PatientEditAge"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="20"
+                android:inputType="text"
+                android:background="@drawable/edit_text"
+                android:paddingStart="8dp"
+                android:hint="  Age "
+                android:drawableLeft="@drawable/baseline_man_3_24"
+                android:textColor="@color/black"/>
+
+
+            <EditText
+                android:id="@+id/PatientEditWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_monitor_weight_24"
+                android:ems="20"
+                android:hint="  Weight in KG"
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:textColor="@color/black" />
+
+
+
+
+
+            <Button
+                android:id="@+id/PatientUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Update"
+                android:backgroundTint="@color/Main"
+                android:background="@drawable/buttion"/>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</ScrollView>
