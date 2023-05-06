@@ -5,21 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".doctor.doctor_home">
+    tools:context=".patient.Patient_MyDoctor">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyDoc"
+        android:textSize="50dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BnViewDoc"
+        android:id="@+id/BnView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/doctor_bottom_nav"
+        app:menu="@menu/bottom_nav"
         app:labelVisibilityMode="labeled"
         />
     <FrameLayout
-        android:id="@+id/ContainerDoc"
+        android:id="@+id/Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
+
         />
 
 

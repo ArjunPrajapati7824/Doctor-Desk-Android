@@ -1,0 +1,124 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".doctor.Doctor_Message"
+
+    android:gravity="center"
+    android:background="@drawable/login_page">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
+        android:id="@+id/card"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/edit_text">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/LoginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Common Message "
+                android:textAlignment="center"
+                android:textColor="@color/Main"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/DoctorSendNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_message_24"
+                android:ems="20"
+                android:hint="  Write NUmber..."
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/DoctorSendMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_message_24"
+                android:ems="20"
+                android:hint="  Write Message..."
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="10"
+                android:paddingStart="8dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/black" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:animateLayoutChanges="true">
+
+                <Button
+                    android:id="@+id/DoctorMessageButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/buttion"
+                    android:backgroundTint="@color/Main"
+                    android:text="Send Message" />
+
+                <ProgressBar
+                    android:id="@+id/ProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       >
+
+       <com.google.android.material.bottomnavigation.BottomNavigationView
+           android:id="@+id/BnViewDoc"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           app:labelVisibilityMode="labeled"
+           app:menu="@menu/doctor_bottom_nav" />
+   </LinearLayout>
+
+</RelativeLayout>

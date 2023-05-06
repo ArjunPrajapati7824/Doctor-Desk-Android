@@ -48,6 +48,7 @@ public class DoctorLogin extends AppCompatActivity {
 
         binding.RegisterText.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(),DoctorRegistretion.class)));
+
         binding.DoctorLogin.setOnClickListener(view -> {
             if(isValidSignInDetails())
                 SignIn();
@@ -67,7 +68,7 @@ public class DoctorLogin extends AppCompatActivity {
 //                        preferenceManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
 //                        preferenceManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());
 //                        preferenceManager.putString(Constants.KEY_DOCTOR_NAME,documentSnapshot.getString(Constants.KEY_DOCTOR_NAME));
-                        Intent i_login=new Intent(getApplicationContext(),doctor_home.class);
+                        Intent i_login=new Intent(getApplicationContext(),Doctor_Profile.class);
                         i_login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i_login);
                     }else {

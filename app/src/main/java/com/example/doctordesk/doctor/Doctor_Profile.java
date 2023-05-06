@@ -1,91 +1,47 @@
 package com.example.doctordesk.doctor;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.MenuItem;
 
 import com.example.doctordesk.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.doctordesk.databinding.ActivityDoctorProfileBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Doctor_Profile#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Doctor_Profile extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Doctor_Profile() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Doctor_Profile.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Doctor_Profile newInstance(String param1, String param2) {
-        Doctor_Profile fragment = new Doctor_Profile();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+public class Doctor_Profile extends AppCompatActivity {
+ActivityDoctorProfileBinding binding;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        binding=ActivityDoctorProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-         View v=inflater.inflate(R.layout.fragment_doctor__profile, container, false);
-         Button logout=(Button) v.findViewById(R.id.DoctorLogout);
-        Button Edit=(Button) v.findViewById(R.id.DoctorEditProfile);
-         logout.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 FirebaseAuth.getInstance().signOut();
-                 Intent i = new Intent(getActivity(),DoctorLogin.class);
-                 startActivity(i);
-
-             }
-         });
-
-        Edit.setOnClickListener(new View.OnClickListener() {
+        binding.BnViewDoc.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(),Doctor_EditProfile.class);
-                startActivity(i);
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                int id= item.getItemId();
 
+                if(id==R.id.message){
+                    Intent i=new Intent(getApplicationContext(),Doctor_Message.class);
+                    startActivity(i);
+                    finish();
+                }
+                if(id==R.id.Appointment){
+                    Intent i=new Intent(getApplicationContext(),Doctor_Appointment.class);
+                    startActivity(i);
+                    finish();
+                }
+                if(id==R.id.MyPtient){
+                    Intent i=new Intent(getApplicationContext(),Doctor_MyPatient.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
-        return v;
     }
 }

@@ -5,13 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityPatientLoginBinding;
-import com.example.doctordesk.doctor.DoctorRegistretion;
-import com.example.doctordesk.doctor.doctor_home;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -58,6 +54,7 @@ public class PatientLogin extends AppCompatActivity {
 
     private void SignIn(){
         Loading(true);
+
         FirebaseFirestore database= FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_PATIENTS)
                 .whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientLoginNumber.getText().toString())
@@ -69,7 +66,7 @@ public class PatientLogin extends AppCompatActivity {
 //                        preferenceManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
 //                        preferenceManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());
 //                        preferenceManager.putString(Constants.KEY_DOCTOR_NAME,documentSnapshot.getString(Constants.KEY_DOCTOR_NAME));
-                        Intent i_login=new Intent(getApplicationContext(), PatientHome.class);
+                        Intent i_login=new Intent(getApplicationContext(), Patient_MyProfile.class);
                         i_login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i_login);
                     }else {

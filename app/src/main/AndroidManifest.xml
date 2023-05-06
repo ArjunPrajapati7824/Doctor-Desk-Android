@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +17,33 @@
         android:theme="@style/Theme.DoctorDesk"
         tools:targetApi="31">
         <activity
+            android:name=".patient.Patient_Appointment"
+            android:exported="false" />
+        <activity
+            android:name=".patient.Patient_TreatmentHistory"
+            android:exported="false" />
+        <activity
+            android:name=".patient.Patient_MyProfile"
+            android:exported="false" />
+        <activity
+            android:name=".patient.Patient_DoctorSearch"
+            android:exported="false" />
+        <activity
+            android:name=".patient.Patient_MyDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.Doctor_Message"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.Doctor_Profile"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.Doctor_Appointment"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.Doctor_MyPatient"
+            android:exported="false" />
+        <activity
             android:name=".patient.Patient_EditProfile"
             android:exported="false" />
         <activity
@@ -23,19 +53,10 @@
             android:name=".otpVerification"
             android:exported="false" />
         <activity
-            android:name=".doctor.Doctor_Other_detail"
-            android:exported="false" />
-        <activity
             android:name=".doctor.DoctorRegistretion"
             android:exported="false" />
         <activity
             android:name=".doctor.DoctorLogin"
-            android:exported="false" />
-        <activity
-            android:name=".doctor.doctor_home"
-            android:exported="false" />
-        <activity
-            android:name=".patient.PatientHome"
             android:exported="false" />
         <activity
             android:name=".SelectionActivity"

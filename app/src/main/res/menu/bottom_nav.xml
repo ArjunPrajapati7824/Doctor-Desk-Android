@@ -20,7 +20,7 @@
             android:title="History"
             android:icon="@drawable/baseline_history_book_24" />
         <item
-            android:id="@+id/PatientAppointment"
+            android:id="@+id/Appointment"
             android:title="Appointment"
             android:icon="@drawable/baseline_appointment_24" />
 

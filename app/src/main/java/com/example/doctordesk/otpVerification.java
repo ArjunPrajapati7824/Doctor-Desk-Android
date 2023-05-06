@@ -15,9 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctordesk.doctor.DoctorRegistretion;
-import com.example.doctordesk.doctor.doctor_home;
-import com.example.doctordesk.patient.PatientHome;
+import com.example.doctordesk.doctor.Doctor_Profile;
 import com.example.doctordesk.patient.PatientRegister;
+import com.example.doctordesk.patient.Patient_MyProfile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -76,10 +76,10 @@ public class otpVerification extends AppCompatActivity {
 //                                verfiybuttonclick.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
                                     if(PatientRegister.verify_otp_patient){
-                                        startActivity(new Intent(otpVerification.this, PatientHome.class));
+                                        startActivity(new Intent(otpVerification.this, Patient_MyProfile.class));
                                     }
                                     if(DoctorRegistretion.verify_otp_doctor){
-                                        startActivity(new Intent(otpVerification.this, doctor_home.class));
+                                        startActivity(new Intent(otpVerification.this, Doctor_Profile.class));
                                     }
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                                    startActivities(new Intent[]{intent});
