@@ -7,10 +7,10 @@
     tools:context=".doctor.Doctor_Profile"
     android:gravity="center"
     android:background="@drawable/login_page">
-    <!--<ScrollView
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="180dp">
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
 
 
         </androidx.cardview.widget.CardView>
-    </ScrollView>-->
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BnViewDoc"
         android:layout_width="match_parent"
@@ -242,13 +242,9 @@
         app:menu="@menu/doctor_bottom_nav"
         app:labelVisibilityMode="labeled"
         />
-    <FrameLayout
-        android:id="@+id/ContainerDoc"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize">
 
-    </FrameLayout>
+
+
 
 
 

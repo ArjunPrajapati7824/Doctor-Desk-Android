@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".doctor.Doctor_Message"
-
     android:gravity="center"
     android:background="@drawable/login_page">
 
-
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp">
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,18 +40,8 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/DoctorSendNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/edit_text"
-                android:drawableLeft="@drawable/baseline_message_24"
-                android:ems="20"
-                android:hint="  Write NUmber..."
-                android:inputType="number"
-                android:paddingStart="8dp"
-                android:textColor="@color/black" />
+
+
 
             <EditText
                 android:id="@+id/DoctorSendMessage"
@@ -104,21 +96,16 @@
 
 
     </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
-       >
 
        <com.google.android.material.bottomnavigation.BottomNavigationView
            android:id="@+id/BnViewDoc"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_alignParentBottom="true"
-           app:labelVisibilityMode="labeled"
-           app:menu="@menu/doctor_bottom_nav" />
-   </LinearLayout>
+           app:menu="@menu/doctor_bottom_nav"
+           app:labelVisibilityMode="labeled" />
+
 
 </RelativeLayout>
