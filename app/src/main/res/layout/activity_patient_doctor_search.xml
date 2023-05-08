@@ -7,9 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".patient.Patient_DoctorSearch">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/SearchDoctorRecycleView"
+        android:id="@+id/searchdr"
         android:layout_width="match_parent"
-        android:layout_height="500dp"/>
+        android:layout_height="wrap_content"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -46,8 +46,4 @@
         android:layout_marginBottom="?attr/actionBarSize"
 
         />
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

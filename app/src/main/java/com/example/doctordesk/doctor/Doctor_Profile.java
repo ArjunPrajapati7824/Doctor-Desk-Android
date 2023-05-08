@@ -24,13 +24,17 @@ import org.checkerframework.checker.units.qual.C;
 
 public class Doctor_Profile extends AppCompatActivity {
 ActivityDoctorProfileBinding binding;
-    PreferenceManager preferencesManager = new PreferenceManager(getApplicationContext());
+    PreferenceManager preferencesManager;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityDoctorProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        preferencesManager = new PreferenceManager(getApplicationContext());
 
 
         LoadUserDetails();
