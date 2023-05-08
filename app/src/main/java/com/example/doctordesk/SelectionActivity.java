@@ -25,8 +25,8 @@ Button Patient,Doctor;
         Patient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(SelectionActivity.this, PatientLogin.class);
-                Intent i = new Intent(SelectionActivity.this, Patient_MyProfile.class);
+                Intent i = new Intent(SelectionActivity.this, PatientLogin.class);
+//                Intent i = new Intent(SelectionActivity.this, Patient_MyProfile.class);
                 startActivity(i);
 //                finish();
             }
@@ -35,8 +35,8 @@ Button Patient,Doctor;
         Doctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(SelectionActivity.this, DoctorLogin.class);
-                Intent i = new Intent(SelectionActivity.this, Doctor_Profile.class);
+                Intent i = new Intent(SelectionActivity.this, DoctorLogin.class);
+//                Intent i = new Intent(SelectionActivity.this, Doctor_Profile.class);
                 startActivity(i);
 //                finish();
             }
