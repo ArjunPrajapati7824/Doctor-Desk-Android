@@ -134,7 +134,7 @@ public class DoctorRegistretion extends AppCompatActivity {
 
 
             public void SignUp() {//sign up of doctor
-//                Loading(true);
+                Loading(true);
                 FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
                 HashMap<String, Object> user = new HashMap<>();
                 //put data in database
@@ -148,7 +148,7 @@ public class DoctorRegistretion extends AppCompatActivity {
                 firebaseFireStore.collection(Constants.KEY_COLLECTION_DOCTORS)//create collection name
                         .add(user)
                         .addOnSuccessListener(documentReference -> {
-//                            Loading(false);
+                            Loading(false);
 //                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
 //                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
 //                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
@@ -165,15 +165,15 @@ public class DoctorRegistretion extends AppCompatActivity {
                         });
             }
 
-//            private void Loading(boolean IsLoading) {
-//                if (IsLoading) {
-//                    binding.DoctorSignup.setVisibility(INVISIBLE);
-//                    binding.ProgressBar.setVisibility(View.VISIBLE);
-//                } else {
-//                    binding.ProgressBar.setVisibility(INVISIBLE);
-//                    binding.DoctorSignup.setVisibility(View.VISIBLE);
-//                }
-//            }
+            private void Loading(boolean IsLoading) {
+                if (IsLoading) {
+                    binding.DoctorSignup.setVisibility(INVISIBLE);
+                    binding.ProgressBar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.ProgressBar.setVisibility(INVISIBLE);
+                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                }
+            }
 
 
             private void ShowToast(String message) {

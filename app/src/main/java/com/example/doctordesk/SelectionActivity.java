@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.doctordesk.doctor.DoctorLogin;
+import com.example.doctordesk.doctor.DoctorRegistretion;
 import com.example.doctordesk.doctor.Doctor_Profile;
 import com.example.doctordesk.patient.PatientLogin;
 import com.example.doctordesk.patient.Patient_MyProfile;
