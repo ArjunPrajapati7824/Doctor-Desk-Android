@@ -72,10 +72,11 @@ public class PatientRegister extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                binding.PatientSingUp.setVisibility(INVISIBLE);
-                binding.ProgressBar.setVisibility(View.VISIBLE);
+
                 if(Signup_Isvalid()){
 
+                    binding.PatientSingUp.setVisibility(INVISIBLE);
+                    binding.ProgressBar.setVisibility(View.VISIBLE);
                     PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
                             .setActivity(PatientRegister.this)
                             .setPhoneNumber("+91"+binding.PatientPhoneNumber.getText().toString())
@@ -114,7 +115,11 @@ public class PatientRegister extends AppCompatActivity {
                     PhoneAuthProvider.verifyPhoneNumber(options);
                 }
 
-                binding.PatientSingUp.setVisibility(INVISIBLE);
+                else{
+                    binding.PatientSingUp.setVisibility(View.VISIBLE);
+                    binding.ProgressBar.setVisibility(View.INVISIBLE);
+                }
+
             }
 
         });
