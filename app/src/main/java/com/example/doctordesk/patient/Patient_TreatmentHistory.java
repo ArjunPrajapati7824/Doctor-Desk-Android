@@ -18,33 +18,39 @@ ActivityPatientTreatmentHistoryBinding binding;
         super.onCreate(savedInstanceState);
         binding=ActivityPatientTreatmentHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        binding.BnView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        binding.BnView.setSelectedItemId(R.id.History);
+        binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id= item.getItemId();
 
                 if(id==R.id.MyDoctor){
-                    Intent i=new Intent(getApplicationContext(), Patient_MyDoctor.class);
-                    startActivity(i);
+                    startActivity(new Intent(getApplicationContext(), Patient_MyDoctor.class));
+                    overridePendingTransition(0 ,0);
                     finish();
+                    return true;
+
                 }
-                if(id==R.id.Appointment){
-                    Intent i=new Intent(getApplicationContext(), Patient_Appointment.class);
-                    startActivity(i);
+                else if(id==R.id.Appointment){
+                    startActivity(new Intent(getApplicationContext(), Patient_Appointment.class));
+                    overridePendingTransition(0 ,0);
                     finish();
+                    return true;
                 }
-                if(id==R.id.SearchDoctor){
-                    Intent i=new Intent(getApplicationContext(), Patient_DoctorSearch.class);
-                    startActivity(i);
+                else if(id==R.id.SearchDoctor){
+                    startActivity(new Intent(getApplicationContext(), Patient_DoctorSearch.class));
+                    overridePendingTransition(0 ,0);
                     finish();
+                    return true;
                 }
 
-                if(id==R.id.MyProfile){
-                    Intent i=new Intent(getApplicationContext(), Patient_MyProfile.class);
-                    startActivity(i);
+                else if(id==R.id.MyProfile){
+                    startActivity(new Intent(getApplicationContext(), Patient_MyProfile.class));
+                    overridePendingTransition(0 ,0);
                     finish();
+                    return true;
                 }
+                return false;
             }
         });
     }

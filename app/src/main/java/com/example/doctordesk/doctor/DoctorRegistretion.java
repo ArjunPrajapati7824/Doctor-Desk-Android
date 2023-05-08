@@ -8,17 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorRegistretionBinding;
 import com.example.doctordesk.otpVerification;
-import com.example.doctordesk.patient.PatientRegister;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.firebase.FirebaseApp;

@@ -17,16 +17,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class PatientLogin extends AppCompatActivity {
 
     private ActivityPatientLoginBinding binding;
-    private PreferenceManager preferenceManager;
+    private PreferenceManager preferencesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityPatientLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        preferenceManager=new PreferenceManager(getApplicationContext());
-
+        preferencesManager =new PreferenceManager(getApplicationContext());
         setListeners();
 
 
@@ -63,9 +61,16 @@ public class PatientLogin extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
                         DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-//                        preferenceManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
-//                        preferenceManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());
-//                        preferenceManager.putString(Constants.KEY_DOCTOR_NAME,documentSnapshot.getString(Constants.KEY_DOCTOR_NAME));
+
+                        preferencesManager.putBoolean(Constants.KEY_IS_PATIENT_SIGNED_IN,true);
+                        preferencesManager.putString(Constants.KEY_PATIENT_ID,documentSnapshot.getId());
+                        preferencesManager.putString(Constants.KEY_PATIENTS_NAME,documentSnapshot.getString(Constants.KEY_PATIENTS_NAME));
+                        preferencesManager.putString(Constants.KEY_PATIENT_GENDER,documentSnapshot.getString(Constants.KEY_PATIENT_GENDER));
+                        preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER,documentSnapshot.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
+                        preferencesManager.putString(Constants.KEY_PATIENT_CITY,documentSnapshot.getString(Constants.KEY_PATIENT_CITY));
+                        preferencesManager.putString(Constants.KEY_PATIENT_BLOOD_GROUP,documentSnapshot.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
+                        preferencesManager.putString(Constants.KEY_PATIENT_AGE,documentSnapshot.getString(Constants.KEY_PATIENT_AGE));
+                        preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT,documentSnapshot.getString(Constants.KEY_PATIENT_WEIGHT));
                         Intent i_login=new Intent(getApplicationContext(), Patient_MyProfile.class);
                         i_login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i_login);

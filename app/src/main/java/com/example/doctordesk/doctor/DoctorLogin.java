@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.doctordesk.databinding.ActivityDoctorLoginBinding;
@@ -19,7 +18,7 @@ public class DoctorLogin extends AppCompatActivity {
 
 
     ActivityDoctorLoginBinding binding;
-    private PreferenceManager preferenceManager;
+    private PreferenceManager preferencesManager;
 
     Button loginBtn;
     @Override
@@ -27,7 +26,7 @@ public class DoctorLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityDoctorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        preferenceManager=new PreferenceManager(getApplicationContext());
+        preferencesManager =new PreferenceManager(getApplicationContext());
 
 
 
@@ -35,9 +34,7 @@ public class DoctorLogin extends AppCompatActivity {
         binding.DoctorLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(DoctorLogin.this, doctor_home.class);
-//                startActivity(i);
-//                finish();
+
                 setListeners();
             }
         });
@@ -65,9 +62,20 @@ public class DoctorLogin extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
                         DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-//                        preferenceManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
-//                        preferenceManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());
-//                        preferenceManager.putString(Constants.KEY_DOCTOR_NAME,documentSnapshot.getString(Constants.KEY_DOCTOR_NAME));
+
+                        //Code fpr Getting data from Database And Sending to Profile
+                        //Start here
+
+
+
+                        preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
+                        preferencesManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());
+                        preferencesManager.putString(Constants.KEY_DOCTOR_NAME,documentSnapshot.getString(Constants.KEY_DOCTOR_NAME));
+                        preferencesManager.putString(Constants.KEY_CLINIC_NAME,documentSnapshot.getString(Constants.KEY_CLINIC_NAME));
+                        preferencesManager.putString(Constants.KEY_DOCTOR_PHONENUMBER,documentSnapshot.getString(Constants.KEY_DOCTOR_PHONENUMBER));
+                        preferencesManager.putString(Constants.KEY_CLINIC_ADDRESS,documentSnapshot.getString(Constants.KEY_CLINIC_ADDRESS));
+                        preferencesManager.putString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER,documentSnapshot.getString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER));
+                        preferencesManager.putString(Constants.KEY_SPECIALIZATION,documentSnapshot.getString(Constants.KEY_SPECIALIZATION));
                         Intent i_login=new Intent(getApplicationContext(),Doctor_Profile.class);
                         i_login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i_login);

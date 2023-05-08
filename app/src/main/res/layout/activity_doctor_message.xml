@@ -1,17 +1,13 @@
-<RelativeLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".doctor.Doctor_Message"
-    android:gravity="center"
     android:background="@drawable/login_page">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp">
+
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +16,7 @@
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp"
         android:id="@+id/card"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:background="@drawable/edit_text">
 
         <LinearLayout
@@ -28,6 +24,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
+
             android:padding="24dp">
 
             <TextView
@@ -40,8 +37,18 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-
-
+            <EditText
+                android:id="@+id/DoctorSendNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/edit_text"
+                android:drawableLeft="@drawable/baseline_message_24"
+                android:ems="20"
+                android:hint="  Write NUmber..."
+                android:inputType="number"
+                android:paddingStart="8dp"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/DoctorSendMessage"
@@ -88,24 +95,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:orientation="horizontal">
-
             </LinearLayout>
-
-
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
-    </ScrollView>
 
 
-       <com.google.android.material.bottomnavigation.BottomNavigationView
-           android:id="@+id/BnViewDoc"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_alignParentBottom="true"
-           app:menu="@menu/doctor_bottom_nav"
-           app:labelVisibilityMode="labeled" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BnViewDoc"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/doctor_bottom_nav" />
 
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

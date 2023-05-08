@@ -19,27 +19,32 @@ ActivityDoctorMyPatientBinding binding;
         super.onCreate(savedInstanceState);
         binding=ActivityDoctorMyPatientBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        binding.BnViewDoc.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        binding.BnViewDoc.setSelectedItemId(R.id.MyPtient);
+        binding.BnViewDoc.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                int id= item.getItemId();
-
-                if(id==R.id.MyProfile){
-                    Intent i=new Intent(getApplicationContext(),Doctor_Profile.class);
-                    startActivity(i);
-                    finish();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id)
+                {
+                    case R.id.MyProfile:
+                        startActivity(new Intent(getApplicationContext(), Doctor_Profile.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.MyPtient:
+                        return true;
+                    case R.id.Appointment:
+                        startActivity(new Intent(getApplicationContext(), Doctor_Appointment.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.message:
+                        startActivity(new Intent(getApplicationContext(), Doctor_Message.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
                 }
-                if(id==R.id.Appointment){
-                    Intent i=new Intent(getApplicationContext(),Doctor_Appointment.class);
-                    startActivity(i);
-                    finish();
-                }
-                if(id==R.id.message){
-                    Intent i=new Intent(getApplicationContext(),Doctor_Message.class);
-                    startActivity(i);
-                    finish();
-                }
+                return false;
             }
         });
     }

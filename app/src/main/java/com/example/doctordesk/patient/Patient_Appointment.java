@@ -24,42 +24,41 @@ public class Patient_Appointment extends AppCompatActivity {
         binding = ActivityPatientAppointmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.BnView.setSelectedItemId(R.id.Appointment);
 
-        binding.BnView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+
+        binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item)
-            {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 switch (id)
                 {
                     case R.id.MyProfile:
-                        Intent i = new Intent(getApplicationContext(), Patient_MyProfile.class);
-                        startActivity(i);
+                        startActivity(new Intent(getApplicationContext(), Patient_MyProfile.class));
+                        overridePendingTransition(0 ,0);
                         finish();
-                        break;
-
+                        return true;
                     case R.id.SearchDoctor:
-                        Intent i2 = new Intent(getApplicationContext(), Patient_DoctorSearch.class);
-                        startActivity(i2);
+                        startActivity(new Intent(getApplicationContext(), Patient_DoctorSearch.class));
+                        overridePendingTransition(0 ,0);
                         finish();
-                        break;
-
-                    case R.id.MyDoctor:
-                        Intent i3 = new Intent(getApplicationContext(), Patient_MyDoctor.class);
-                        startActivity(i3);
-                        finish();
-                        break;
-
-
+                        return true;
                     case R.id.History:
-                        Intent i4 = new Intent(getApplicationContext(), Patient_TreatmentHistory.class);
-                        startActivity(i4);
+                        startActivity(new Intent(getApplicationContext(), Patient_TreatmentHistory.class));
+                        overridePendingTransition(0 ,0);
                         finish();
-                        break;
+                        return true;
 
+                    case R.id.Appointment:
+                        return true;
+                    case R.id.MyDoctor:
+                        startActivity(new Intent(getApplicationContext(), Patient_MyDoctor.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
                 }
+                return false;
             }
-
         });
 
     }
