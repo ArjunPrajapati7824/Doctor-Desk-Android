@@ -29,18 +29,10 @@ public class DoctorLogin extends AppCompatActivity {
         setContentView(binding.getRoot());
         preferenceManager=new PreferenceManager(getApplicationContext());
 
+        setListeners();
 
 
 
-        binding.DoctorLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent i = new Intent(DoctorLogin.this, doctor_home.class);
-//                startActivity(i);
-//                finish();
-                setListeners();
-            }
-        });
     }
 
     private void setListeners(){

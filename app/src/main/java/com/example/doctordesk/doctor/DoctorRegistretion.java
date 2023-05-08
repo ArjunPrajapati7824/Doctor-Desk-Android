@@ -63,15 +63,23 @@ public class DoctorRegistretion extends AppCompatActivity {
     private void setListeners() {
 
 
+        binding.RegLoginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DoctorRegistretion.this, DoctorLogin.class);
+                startActivity(i);
+            }
+        });
+
         binding.DoctorSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                if (Signup_Isvalid()) {
 
-                binding.DoctorSignup.setVisibility(INVISIBLE);
-                binding.ProgressBar.setVisibility(View.VISIBLE);
                 if(Signup_Isvalid()){
 
+                    binding.DoctorSignup.setVisibility(INVISIBLE);
+                    binding.ProgressBar.setVisibility(View.VISIBLE);
                     PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
                             .setActivity(DoctorRegistretion.this)
                             .setPhoneNumber("+91"+binding.DoctorPhoneNumber.getText().toString())
@@ -110,25 +118,15 @@ public class DoctorRegistretion extends AppCompatActivity {
                             .build();
                     PhoneAuthProvider.verifyPhoneNumber(options);
                 }
+                else{
+                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                    binding.ProgressBar.setVisibility(View.INVISIBLE);
+                }
 
-                  binding.DoctorSignup.setVisibility(INVISIBLE);
             }
 
         });
 
-
-
-
-
-
-
-        binding.RegLoginText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(DoctorRegistretion.this, DoctorLogin.class);
-                startActivity(i);
-            }
-        });
     }
 
 
