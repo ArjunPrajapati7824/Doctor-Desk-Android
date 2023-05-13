@@ -25,6 +25,7 @@ ActivityPatientMyProfileBinding binding;
         preferencesManager = new PreferenceManager(getApplicationContext());
         LoadUserDetails();
 
+
         binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

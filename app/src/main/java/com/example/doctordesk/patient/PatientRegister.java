@@ -10,6 +10,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -26,6 +28,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +41,9 @@ public class PatientRegister extends AppCompatActivity {
 
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+
+    String[] bloodGroup = {"A+", "A-", "B+", "B-","AB+", "AB-","O+","O-"};
+    ArrayList<String> arrayList;
     int SelectedId;
 
     public static boolean verify_otp_patient=false;
@@ -50,6 +56,20 @@ public class PatientRegister extends AppCompatActivity {
         setContentView(binding.getRoot());
         mAuth = FirebaseAuth.getInstance();
 
+
+        arrayList=new ArrayList<>();
+        arrayList.add("A+");
+        arrayList.add("A-");
+        arrayList.add("B+");
+        arrayList.add("B-");
+        arrayList.add("AB+");
+        arrayList.add("AB-");
+        arrayList.add("O+");
+        arrayList.add("O-");
+        //add items in bloodgroup spinner
+        ArrayAdapter<String> bloodGroupAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,bloodGroup);
+        binding.spinnerLanguage.setAdapter(bloodGroupAdapter);
+
         radioGroup = (RadioGroup) findViewById(R.id.PatientGender);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -61,6 +81,17 @@ public class PatientRegister extends AppCompatActivity {
         });
         //ShowToast(radioGroup.getCheckedRadioButtonId().getText().toString());
 
+    binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        binding.spinnerLanguage.getSelectedItem().toString();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    });
 
         preferencesManager = new PreferenceManager(this);
         setListeners();
@@ -71,6 +102,7 @@ public class PatientRegister extends AppCompatActivity {
         binding.PatientSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
 
                 if(Signup_Isvalid()){
@@ -144,7 +176,7 @@ public class PatientRegister extends AppCompatActivity {
         user.put(Constants.KEY_PATIENT_PHONE_NUMBER, binding.PatientPhoneNumber.getText().toString());
         user.put(Constants.KEY_PATIENT_AGE, binding.PatientAge.getText().toString());
         user.put(Constants.KEY_PATIENT_CITY, binding.PatientCity.getText().toString());
-        user.put(Constants.KEY_PATIENT_BLOOD_GROUP, binding.PatientBloodGroup.getText().toString());
+        user.put(Constants.KEY_PATIENT_BLOOD_GROUP, binding.spinnerLanguage.getSelectedItem().toString());
         user.put(Constants.KEY_PATIENT_GENDER,radioButton.getText().toString());
         user.put(Constants.KEY_PATIENT_WEIGHT, binding.PatientWeight.getText().toString());
         user.put(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass1.getText().toString());
@@ -200,7 +232,7 @@ public class PatientRegister extends AppCompatActivity {
         } else if (binding.PatientCity.getText().toString().trim().isEmpty()) {
             ShowToast("Confirm City");
             return false;
-        } else if (binding.PatientBloodGroup.getText().toString().trim().isEmpty()) {
+        } else if (binding.spinnerLanguage.getSelectedItem().toString().isEmpty()) {
             ShowToast("Enter Blood Group");
             return false;
         }

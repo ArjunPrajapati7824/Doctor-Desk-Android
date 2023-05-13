@@ -48,4 +48,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.4.0')
     implementation 'com.google.firebase:firebase-auth'
 
+    //for payment gateway
+    implementation 'com.stripe:stripe-android:20.24.2'
+    implementation 'com.android.volley:volley:1.2.1'
+
 }

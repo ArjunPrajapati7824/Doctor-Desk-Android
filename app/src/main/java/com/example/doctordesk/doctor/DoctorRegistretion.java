@@ -35,12 +35,16 @@ public class DoctorRegistretion extends AppCompatActivity {
 
     public static boolean verify_otp_doctor=false;
 
+
+    public static boolean is_payment_successful=false;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityDoctorRegistretionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//        clearData();
 
         FirebaseApp.initializeApp(DoctorRegistretion.this);
         mAuth = FirebaseAuth.getInstance();
@@ -48,8 +52,23 @@ public class DoctorRegistretion extends AppCompatActivity {
 //        DoctorRegister=findViewById(R.id.DoctorSignup);
 //        phoneNumber=findViewById(R.id.DoctorPhoneNumber);
 
-        binding.DoctorSignup.setText("Get Otp");
         preferencesManager = new PreferenceManager(this);
+
+        if(is_payment_successful){
+
+            binding.DoctorRegName.setText(preferencesManager.getString(Constants.KEY_DOCTOR_NAME));
+            binding.DoctorPhoneNumber.setText(preferencesManager.getString(Constants.KEY_DOCTOR_PHONENUMBER));
+            binding.DoctorClinicName.setText(preferencesManager.getString(Constants.KEY_CLINIC_NAME));
+            binding.DoctorClinicAddress.setText(preferencesManager.getString(Constants.KEY_CLINIC_ADDRESS));
+            binding.DoctorRegistrationNumber.setText(preferencesManager.getString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER));
+            binding.DoctorSpecialization.setText(preferencesManager.getString(Constants.KEY_SPECIALIZATION));
+            binding.DoctorRegPass1.setText(preferencesManager.getString(Constants.KEY_DOCTOR_PASSWORD));
+            binding.DoctorRegPass2.setText(preferencesManager.getString(Constants.KEY_DOCTOR_PASSWORD));
+
+            binding.VerifyOtp.setVisibility(INVISIBLE);
+            binding.DoctorSignup.setVisibility(View.VISIBLE);
+        }
+
         setListeners();
 
     }
@@ -68,11 +87,26 @@ public class DoctorRegistretion extends AppCompatActivity {
         binding.DoctorSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (Signup_Isvalid()) {
+                SignUp();
+            }
+        });
+        binding.VerifyOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                if(Signup_Isvalid()){
 
-                    binding.DoctorSignup.setVisibility(INVISIBLE);
+                if (Signup_Isvalid()) {
+
+                    preferencesManager.putString(Constants.KEY_DOCTOR_NAME, binding.DoctorRegName.getText().toString());
+                    preferencesManager.putString(Constants.KEY_DOCTOR_PHONENUMBER, binding.DoctorPhoneNumber.getText().toString());
+                    preferencesManager.putString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER, binding.DoctorRegistrationNumber.getText().toString());
+                    preferencesManager.putString(Constants.KEY_CLINIC_NAME, binding.DoctorClinicName.getText().toString());
+                    preferencesManager.putString(Constants.KEY_CLINIC_ADDRESS, binding.DoctorClinicAddress.getText().toString());
+                    preferencesManager.putString(Constants.KEY_SPECIALIZATION, binding.DoctorSpecialization.getText().toString());
+                    preferencesManager.putString(Constants.KEY_DOCTOR_PASSWORD, binding.DoctorRegPass1.getText().toString());
+
+
+                    binding.VerifyOtp.setVisibility(INVISIBLE);
                     binding.ProgressBar.setVisibility(View.VISIBLE);
                     PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
                             .setActivity(DoctorRegistretion.this)
@@ -82,12 +116,12 @@ public class DoctorRegistretion extends AppCompatActivity {
                                 @Override
                                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                                 }
                                 @Override
                                 public void onVerificationFailed(@NonNull FirebaseException e) {
 
-                                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                                     binding.ProgressBar.setVisibility(INVISIBLE);
                                     Toast.makeText(DoctorRegistretion.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
                                 }
@@ -97,9 +131,9 @@ public class DoctorRegistretion extends AppCompatActivity {
                                     super.onCodeSent(otp, forceResendingToken);
 
                                     verify_otp_doctor=true;
-                                    binding.DoctorSignup.setVisibility(INVISIBLE);
+                                    binding.VerifyOtp.setVisibility(INVISIBLE);
                                     binding.ProgressBar.setVisibility(View.VISIBLE);
-                                    SignUp();
+//                                    SignUp();
 
                                     Intent intent = new Intent(DoctorRegistretion.this, otpVerification.class);
                                     intent.putExtra("mobile",binding.DoctorPhoneNumber.getText().toString());
@@ -113,23 +147,24 @@ public class DoctorRegistretion extends AppCompatActivity {
                     PhoneAuthProvider.verifyPhoneNumber(options);
                 }
                 else{
-                    binding.DoctorSignup.setVisibility(View.VISIBLE);
+                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                     binding.ProgressBar.setVisibility(View.INVISIBLE);
                 }
 
-            }
 
+
+            }
         });
 
+
     }
-
-
 
             public void SignUp() {//sign up of doctor
                 Loading(true);
                 FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
                 HashMap<String, Object> user = new HashMap<>();
                 //put data in database
+
                 user.put(Constants.KEY_DOCTOR_NAME, binding.DoctorRegName.getText().toString());
                 user.put(Constants.KEY_DOCTOR_PHONENUMBER, binding.DoctorPhoneNumber.getText().toString());
                 user.put(Constants.KEY_CLINIC_NAME, binding.DoctorClinicName.getText().toString());
@@ -141,18 +176,17 @@ public class DoctorRegistretion extends AppCompatActivity {
                         .add(user)
                         .addOnSuccessListener(documentReference -> {
                             Loading(false);
-//                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
-//                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
-//                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
-//                            Intent intent = new Intent(getApplicationContext(), doctor_home.class);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            ShowToast("Verify otp");
-//                            startActivity(intent);//if signup then go to mainactivity
-//                            finish();
-
+////                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
+////                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
+////                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
+                            Intent intent = new Intent(getApplicationContext(), Doctor_Profile.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            ShowToast("Welcome");
+                            startActivity(intent);//if signup then go to mainactivity
+                            finish();
+//
                         })
                         .addOnFailureListener(exception -> {
-//                            Loading(false);
                             ShowToast(exception.getMessage());
                         });
             }

@@ -28,16 +28,7 @@ public class DoctorLogin extends AppCompatActivity {
         setContentView(binding.getRoot());
         preferencesManager =new PreferenceManager(getApplicationContext());
 
-
-
-
-        binding.DoctorLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                setListeners();
-            }
-        });
+        setListeners();
     }
 
     private void setListeners(){
@@ -65,8 +56,6 @@ public class DoctorLogin extends AppCompatActivity {
 
                         //Code fpr Getting data from Database And Sending to Profile
                         //Start here
-
-
 
                         preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
                         preferencesManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());

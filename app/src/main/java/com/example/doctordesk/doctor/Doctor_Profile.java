@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorProfileBinding;
@@ -35,6 +36,7 @@ ActivityDoctorProfileBinding binding;
         binding=ActivityDoctorProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferencesManager = new PreferenceManager(getApplicationContext());
+
 
 
         LoadUserDetails();

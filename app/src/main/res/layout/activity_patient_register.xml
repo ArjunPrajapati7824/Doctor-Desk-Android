@@ -145,20 +145,33 @@
                 android:paddingStart="8dp"
                 android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/PatientBloodGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:ems="20"
-                android:inputType="text"
-                android:background="@drawable/edit_text"
-                android:paddingStart="8dp"
-                android:hint="  Blood Group"
-                android:drawableLeft="@drawable/baseline_bloodtype_24"
-                android:textColor="@color/black"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blood Group"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
 
+                <Spinner
+                    android:id="@+id/spinner_language"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/edit_text"
+                    android:padding="4dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/PatientLoginPass1"
@@ -172,6 +185,7 @@
                 android:paddingStart="8dp"
                 android:hint="  Password"
                 android:textColor="@color/black"/>
+
             <EditText
                 android:id="@+id/PatientLoginPass2"
                 android:layout_width="wrap_content"
