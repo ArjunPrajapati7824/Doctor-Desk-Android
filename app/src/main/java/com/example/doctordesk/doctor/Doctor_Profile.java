@@ -3,25 +3,16 @@ package com.example.doctordesk.doctor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorProfileBinding;
-import com.example.doctordesk.patient.Patient_DoctorSearch;
-import com.example.doctordesk.patient.Patient_MyDoctor;
-import com.example.doctordesk.patient.Patient_MyProfile;
-import com.example.doctordesk.patient.Patient_TreatmentHistory;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
-
-import org.checkerframework.checker.units.qual.C;
 
 public class Doctor_Profile extends AppCompatActivity {
 ActivityDoctorProfileBinding binding;
@@ -39,8 +30,16 @@ ActivityDoctorProfileBinding binding;
 
 
 
-        LoadUserDetails();
+        LoadDoctorDetails();
         binding.BnViewDoc.setSelectedItemId(R.id.MyProfile);
+
+
+        binding.DoctorEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Doctor_Profile.this, Doctor_EditProfile.class));
+            }
+        });
         binding.BnViewDoc.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -70,7 +69,7 @@ ActivityDoctorProfileBinding binding;
         });
     }
 
-    private void LoadUserDetails(){
+    private void LoadDoctorDetails(){
 
         binding.DoctorNameProfile.setText(preferencesManager.getString(Constants.KEY_DOCTOR_NAME));
         binding.DoctorClinicNameProfile.setText(preferencesManager.getString(Constants.KEY_CLINIC_NAME));

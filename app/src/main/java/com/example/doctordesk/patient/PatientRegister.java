@@ -106,6 +106,7 @@ public class PatientRegister extends AppCompatActivity {
 
 
                 if(Signup_Isvalid()){
+//                    SignUp();
 
                     binding.PatientSingUp.setVisibility(INVISIBLE);
                     binding.ProgressBar.setVisibility(View.VISIBLE);
@@ -168,8 +169,11 @@ public class PatientRegister extends AppCompatActivity {
     }
 
     public void SignUp() {//sign up of doctor
+
         Loading(true);
         FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+        String uid =firebaseFireStore.collection(Constants.KEY_COLLECTION_PATIENTS).document().getId();
+
         HashMap<String, Object> user = new HashMap<>();
         //put data in database
         user.put(Constants.KEY_PATIENTS_NAME, binding.PatientRgName.getText().toString());
@@ -180,8 +184,12 @@ public class PatientRegister extends AppCompatActivity {
         user.put(Constants.KEY_PATIENT_GENDER,radioButton.getText().toString());
         user.put(Constants.KEY_PATIENT_WEIGHT, binding.PatientWeight.getText().toString());
         user.put(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass1.getText().toString());
+        user.put(Constants.KEY_PATIENT_ID, uid);
+
+
         firebaseFireStore.collection(Constants.KEY_COLLECTION_PATIENTS)//create collection name
-                .add(user)
+                .document(uid)
+                .set(user)
                 .addOnSuccessListener(documentReference -> {
                     Loading(false);
 //                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);

@@ -6,24 +6,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.doctordesk.R;
+import com.example.doctordesk.databinding.ActivityPatientEditProfileBinding;
 import com.example.doctordesk.databinding.ActivityPatientMyProfileBinding;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class Patient_MyProfile extends AppCompatActivity {
-ActivityPatientMyProfileBinding binding;
+    ActivityPatientMyProfileBinding binding;
+
+    ActivityPatientEditProfileBinding binding2;
     PreferenceManager preferencesManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityPatientMyProfileBinding.inflate(getLayoutInflater());
+        binding2=ActivityPatientEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.BnView.setSelectedItemId(R.id.MyProfile);
         preferencesManager = new PreferenceManager(getApplicationContext());
-        LoadUserDetails();
+        LoadPatientDetails();
+
+
+
+        binding.PatientEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              startActivity(new Intent(Patient_MyProfile.this,Patient_EditProfile.class));
+            }
+        });
 
 
         binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -60,7 +74,8 @@ ActivityPatientMyProfileBinding binding;
         });
     }
 
-    private void LoadUserDetails(){
+
+    private void LoadPatientDetails(){
 
         binding.PatientNameProfile.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
         binding.PatientGenderProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_GENDER));

@@ -96,19 +96,6 @@
                     android:layout_marginTop="15dp"/>
 
                 <EditText
-                    android:id="@+id/DoctorEditRegistrationNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:ems="20"
-                    android:background="@drawable/edit_text"
-                    android:drawableLeft="@drawable/baseline_app_registration_24"
-                    android:paddingStart="8dp"
-                    android:hint="  Registration Number"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="15dp"/>
-
-                <EditText
                     android:id="@+id/DoctorEditSpecialization"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -122,9 +109,6 @@
                     android:layout_marginTop="15dp"/>
 
 
-
-
-
             </LinearLayout>
 
             <FrameLayout
@@ -136,7 +120,7 @@
                     android:id="@+id/DoctorUpdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:text="Update"
                     android:backgroundTint="@color/Main"
                     android:background="@drawable/buttion"/>
