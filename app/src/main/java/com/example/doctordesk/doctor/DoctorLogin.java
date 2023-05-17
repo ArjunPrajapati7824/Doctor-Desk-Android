@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.doctordesk.MainActivity;
 import com.example.doctordesk.databinding.ActivityDoctorLoginBinding;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
@@ -27,6 +28,11 @@ public class DoctorLogin extends AppCompatActivity {
         binding=ActivityDoctorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferencesManager =new PreferenceManager(getApplicationContext());
+        if(preferencesManager.getBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN)){
+            Intent intent = new Intent(getApplicationContext(), Doctor_Profile.class);
+            startActivity(intent);
+            finish();
+        }
 
         setListeners();
     }
@@ -56,6 +62,7 @@ public class DoctorLogin extends AppCompatActivity {
 
                         //Code fpr Getting data from Database And Sending to Profile
                         //Start here
+
 
                         preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);
                         preferencesManager.putString(Constants.KEY_DOCTOR_ID,documentSnapshot.getId());

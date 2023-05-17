@@ -92,6 +92,7 @@ public class Patient_EditProfile extends AppCompatActivity {
                     }
                 });
 
+
     }
 
     public void getPatientData() {

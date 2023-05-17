@@ -7,12 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorProfileBinding;
+import com.example.doctordesk.patient.PatientLogin;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class Doctor_Profile extends AppCompatActivity {
 ActivityDoctorProfileBinding binding;
@@ -33,6 +40,7 @@ ActivityDoctorProfileBinding binding;
         LoadDoctorDetails();
         binding.BnViewDoc.setSelectedItemId(R.id.MyProfile);
 
+        binding.DoctorLogout.setOnClickListener(view -> SignOut());
 
         binding.DoctorEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +75,21 @@ ActivityDoctorProfileBinding binding;
                 return false;
             }
         });
+    }
+
+    private void SignOut(){
+
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=
+                database.collection(Constants.KEY_COLLECTION_DOCTORS).document(preferencesManager.getString(Constants.KEY_DOCTOR_ID));
+        HashMap<String,Object> updates=new HashMap<>();
+        documentReference.update(updates)
+                .addOnSuccessListener(unused -> {
+                    preferencesManager.clear();
+                    startActivity(new Intent(getApplicationContext(), DoctorLogin.class));
+                    finish();
+                })
+                .addOnFailureListener(e-> Toast.makeText(this, "Unable to sign out...", Toast.LENGTH_SHORT).show());
     }
 
     private void LoadDoctorDetails(){
