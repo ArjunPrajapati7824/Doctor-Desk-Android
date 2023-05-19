@@ -1,44 +1,53 @@
 package com.example.doctordesk.doctor;
 
 public class ModelPatientList {
-    String name,gender,age,number;
+    String Appointment_Name,Appointment_Gender,Appointment_Age,Appointment_Phone_Number,Appointment_Id;
 
-    public ModelPatientList(String name, String gender, String age, String number) {
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-        this.number = number;
-        }
-
-    public String getName() {
-        return name;
+    public ModelPatientList() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public ModelPatientList(String appointment_Name, String appointment_Gender, String appointment_Age, String appointment_Phone_Number,String appointment_Id) {
+        Appointment_Name = appointment_Name;
+        Appointment_Gender = appointment_Gender;
+        Appointment_Age = appointment_Age;
+        Appointment_Phone_Number = appointment_Phone_Number;
+        Appointment_Id=appointment_Id;
     }
 
-    public String getGender() {
-        return gender;
+
+    public String getAppointment_Name() {
+        return Appointment_Name;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setAppointment_Name(String appointment_Name) {
+        Appointment_Name = appointment_Name;
     }
 
-    public String getAge() {
-        return age;
+    public String getAppointment_Gender() {
+        return Appointment_Gender;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setAppointment_Gender(String appointment_Gender) {
+        Appointment_Gender = appointment_Gender;
     }
 
-    public String getNumber() {
-        return number;
+    public String getAppointment_Age() {
+        return Appointment_Age;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setAppointment_Age(String appointment_Age) {
+        Appointment_Age = appointment_Age;
     }
+
+    public String getAppointment_Phone_Number() {
+        return Appointment_Phone_Number;
+    }
+
+    public void setAppointment_Phone_Number(String appointment_Phone_Number) {
+        Appointment_Phone_Number = appointment_Phone_Number;
+    }
+    public String getAppointment_Id() {
+        return Appointment_Id;
+    }
+
 }

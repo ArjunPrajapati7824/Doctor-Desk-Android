@@ -25,6 +25,7 @@ public class PatientLogin extends AppCompatActivity {
         binding=ActivityPatientLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferencesManager =new PreferenceManager(getApplicationContext());
+
         if(preferencesManager.getBoolean(Constants.KEY_IS_PATIENT_SIGNED_IN)){
             Intent intent =new Intent(getApplicationContext(),Patient_MyProfile.class);
             startActivity(intent);
@@ -66,7 +67,6 @@ public class PatientLogin extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
                         DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(0);
-
 
                         preferencesManager.putBoolean(Constants.KEY_IS_PATIENT_SIGNED_IN,true);
                         preferencesManager.putString(Constants.KEY_PATIENT_ID,documentSnapshot.getId());

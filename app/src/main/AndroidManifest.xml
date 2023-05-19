@@ -19,6 +19,9 @@
         android:theme="@style/Theme.DoctorDesk"
         tools:targetApi="31">
         <activity
+            android:name=".patient.AppointmentBooking"
+            android:exported="false" />
+        <activity
             android:name=".doctor.PaymentSubscription"
             android:exported="false" />
         <activity

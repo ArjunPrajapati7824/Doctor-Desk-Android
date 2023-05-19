@@ -7,11 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".patient.Patient_Appointment">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myAppointmentRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/TextErrorMessage"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Appoint"
-        android:textSize="50dp"/>
+        android:gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BnView"

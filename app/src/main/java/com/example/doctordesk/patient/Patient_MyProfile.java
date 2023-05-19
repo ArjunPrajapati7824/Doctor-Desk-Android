@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.doctordesk.R;
-import com.example.doctordesk.SelectionActivity;
 import com.example.doctordesk.databinding.ActivityPatientEditProfileBinding;
 import com.example.doctordesk.databinding.ActivityPatientMyProfileBinding;
 import com.example.doctordesk.utilities.Constants;
@@ -33,14 +32,11 @@ public class Patient_MyProfile extends AppCompatActivity {
         binding=ActivityPatientMyProfileBinding.inflate(getLayoutInflater());
         binding2=ActivityPatientEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        Toast.makeText(this, "Welcome again", Toast.LENGTH_SHORT).show();
         binding.BnView.setSelectedItemId(R.id.MyProfile);
         preferencesManager = new PreferenceManager(getApplicationContext());
         LoadPatientDetails();
 
 
-        binding.PatientLogout.setOnClickListener(view -> SignOut());
 
         binding.PatientEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,21 +44,9 @@ public class Patient_MyProfile extends AppCompatActivity {
               startActivity(new Intent(Patient_MyProfile.this,Patient_EditProfile.class));
             }
         });
-        binding.PatientLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseFirestore database= FirebaseFirestore.getInstance();
-                DocumentReference documentReference=
-                        database.collection(Constants.KEY_COLLECTION_PATIENTS).document(preferencesManager.getString(Constants.KEY_PATIENT_ID));
-                HashMap<String,Object> updates=new HashMap<>();
-                documentReference.update(updates).addOnSuccessListener(unused -> {
-                    preferencesManager.clear();
-                    startActivity(new Intent(getApplicationContext(), SelectionActivity.class));
-                    finish();
-                }).addOnFailureListener(e-> Toast.makeText(Patient_MyProfile.this, "Unable to sign out...", Toast.LENGTH_SHORT).show());
-            }
-        });
 
+
+        binding.PatientLogout.setOnClickListener(view -> logout());
         binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -97,8 +81,10 @@ public class Patient_MyProfile extends AppCompatActivity {
         });
     }
 
-    private void SignOut(){
-
+    private void ShowToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private void logout(){
         FirebaseFirestore database= FirebaseFirestore.getInstance();
         DocumentReference documentReference=
                 database.collection(Constants.KEY_COLLECTION_PATIENTS).document(preferencesManager.getString(Constants.KEY_PATIENT_ID));
@@ -106,13 +92,13 @@ public class Patient_MyProfile extends AppCompatActivity {
         documentReference.update(updates)
                 .addOnSuccessListener(unused -> {
                     preferencesManager.clear();
-                    startActivity(new Intent(getApplicationContext(), PatientLogin.class));
+                    startActivity(new Intent(getApplicationContext(),PatientLogin.class));
                     finish();
                 })
-                .addOnFailureListener(e-> Toast.makeText(this, "Unable to sign out...", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e-> ShowToast("Unable to Sign out"));
     }
 
-    public void LoadPatientDetails(){
+    private void LoadPatientDetails(){
 
         binding.PatientNameProfile.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
         binding.PatientGenderProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_GENDER));

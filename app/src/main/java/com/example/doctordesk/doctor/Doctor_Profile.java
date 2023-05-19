@@ -3,6 +3,9 @@ package com.example.doctordesk.doctor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,7 +19,6 @@ import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -26,6 +28,8 @@ ActivityDoctorProfileBinding binding;
     PreferenceManager preferencesManager;
 
 
+    Context context;
+    public static boolean accept=false;
 
 
     @Override
@@ -38,10 +42,12 @@ ActivityDoctorProfileBinding binding;
 
 
         LoadDoctorDetails();
+
+
         binding.BnViewDoc.setSelectedItemId(R.id.MyProfile);
 
-        binding.DoctorLogout.setOnClickListener(view -> SignOut());
 
+        binding.DoctorLogout.setOnClickListener(view -> logout());
         binding.DoctorEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,8 +83,10 @@ ActivityDoctorProfileBinding binding;
         });
     }
 
-    private void SignOut(){
-
+    private void ShowToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private void logout(){
         FirebaseFirestore database= FirebaseFirestore.getInstance();
         DocumentReference documentReference=
                 database.collection(Constants.KEY_COLLECTION_DOCTORS).document(preferencesManager.getString(Constants.KEY_DOCTOR_ID));
@@ -89,7 +97,7 @@ ActivityDoctorProfileBinding binding;
                     startActivity(new Intent(getApplicationContext(), DoctorLogin.class));
                     finish();
                 })
-                .addOnFailureListener(e-> Toast.makeText(this, "Unable to sign out...", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e-> ShowToast("Unable to Sign out"));
     }
 
     private void LoadDoctorDetails(){

@@ -79,9 +79,11 @@ public class otpVerification extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     if(PatientRegister.verify_otp_patient){
                                         startActivity(new Intent(otpVerification.this, Patient_MyProfile.class));
+                                        finish();
                                     }
                                     if(DoctorRegistretion.verify_otp_doctor){
                                         startActivity(new Intent(otpVerification.this, PaymentSubscription.class));
+
                                     }
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                                    startActivities(new Intent[]{intent});
