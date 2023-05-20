@@ -162,6 +162,8 @@ public class DoctorRegistretion extends AppCompatActivity {
             public void SignUp() {//sign up of doctor
                 Loading(true);
                 FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+                String drid =firebaseFireStore.collection(Constants.KEY_COLLECTION_DOCTORS).document().getId();
+
                 HashMap<String, Object> user = new HashMap<>();
                 //put data in database
 
@@ -172,8 +174,11 @@ public class DoctorRegistretion extends AppCompatActivity {
                 user.put(Constants.KEY_DOCTOR_REGISTRATION_NUMBER, binding.DoctorRegistrationNumber.getText().toString());
                 user.put(Constants.KEY_SPECIALIZATION, binding.DoctorSpecialization.getText().toString());
                 user.put(Constants.KEY_DOCTOR_PASSWORD, binding.DoctorRegPass1.getText().toString());
+                user.put(Constants.KEY_DOCTOR_ID,drid);
+
                 firebaseFireStore.collection(Constants.KEY_COLLECTION_DOCTORS)//create collection name
-                        .add(user)
+                        .document(drid)
+                        .set(user)
                         .addOnSuccessListener(documentReference -> {
                             Loading(false);
 ////                   preferencesManager.putBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN,true);

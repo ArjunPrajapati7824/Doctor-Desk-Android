@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityPatientEditProfileBinding;
@@ -14,6 +15,11 @@ import com.example.doctordesk.databinding.ActivityPatientMyProfileBinding;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class Patient_MyProfile extends AppCompatActivity {
     ActivityPatientMyProfileBinding binding;
@@ -40,6 +46,7 @@ public class Patient_MyProfile extends AppCompatActivity {
         });
 
 
+        binding.PatientLogout.setOnClickListener(view -> logout());
         binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -74,6 +81,22 @@ public class Patient_MyProfile extends AppCompatActivity {
         });
     }
 
+    private void ShowToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private void logout(){
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=
+                database.collection(Constants.KEY_COLLECTION_PATIENTS).document(preferencesManager.getString(Constants.KEY_PATIENT_ID));
+        HashMap<String,Object> updates=new HashMap<>();
+        documentReference.update(updates)
+                .addOnSuccessListener(unused -> {
+                    preferencesManager.clear();
+                    startActivity(new Intent(getApplicationContext(),PatientLogin.class));
+                    finish();
+                })
+                .addOnFailureListener(e-> ShowToast("Unable to Sign out"));
+    }
 
     private void LoadPatientDetails(){
 

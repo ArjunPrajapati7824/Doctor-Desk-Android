@@ -52,7 +52,10 @@ public class Patient_DoctorSearch extends AppCompatActivity {
         setListeners();
 
         getDoctors();
+
+
     }
+
 
 
     public void getDoctors(){

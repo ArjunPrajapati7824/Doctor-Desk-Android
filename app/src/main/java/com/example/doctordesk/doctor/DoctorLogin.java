@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.doctordesk.databinding.ActivityDoctorLoginBinding;
+import com.example.doctordesk.patient.Patient_MyProfile;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,6 +28,12 @@ public class DoctorLogin extends AppCompatActivity {
         binding=ActivityDoctorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferencesManager =new PreferenceManager(getApplicationContext());
+
+        if(preferencesManager.getBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN)){
+            Intent intent =new Intent(getApplicationContext(), Doctor_Profile.class);
+            startActivity(intent);
+            finish();
+        }
 
         setListeners();
     }

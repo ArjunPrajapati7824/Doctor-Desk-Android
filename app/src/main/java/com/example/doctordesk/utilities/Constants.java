@@ -35,4 +35,19 @@ public class Constants {
     public static final String KEY_PATIENT_ID ="Patient_Id";
 
 
+    //Appointments
+    public static final String KEY_COLLECTION_APPOINTMENTS="Appointments";
+
+    public static final String KEY_APPOINTMENT_ID ="Appointment_Id";
+    public static final String KEY_APPOINTMENT_NAME ="Appointment_Name";
+    public static final String KEY_APPOINTMENT_PHONE_NUMBER ="Appointment_Phone_Number";
+    public static final String KEY_APPOINTMENT_GENDER ="Appointment_Gender";
+    public static final String KEY_APPOINTMENT_AGE ="Appointment_Age";
+
+    public static final String KEY_APPOINTMENT_STATUS ="Appointment_Status";
+    public static final String KEY_APPOINTMENT_DESCRIPTION ="Appointment_Description";
+
+
+
+
 }

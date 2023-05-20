@@ -3,22 +3,33 @@ package com.example.doctordesk.doctor;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorProfileBinding;
+import com.example.doctordesk.patient.PatientLogin;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class Doctor_Profile extends AppCompatActivity {
 ActivityDoctorProfileBinding binding;
     PreferenceManager preferencesManager;
 
 
+    Context context;
+    public static boolean accept=false;
 
 
     @Override
@@ -31,9 +42,12 @@ ActivityDoctorProfileBinding binding;
 
 
         LoadDoctorDetails();
+
+
         binding.BnViewDoc.setSelectedItemId(R.id.MyProfile);
 
 
+        binding.DoctorLogout.setOnClickListener(view -> logout());
         binding.DoctorEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +81,23 @@ ActivityDoctorProfileBinding binding;
                 return false;
             }
         });
+    }
+
+    private void ShowToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+    private void logout(){
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        DocumentReference documentReference=
+                database.collection(Constants.KEY_COLLECTION_DOCTORS).document(preferencesManager.getString(Constants.KEY_DOCTOR_ID));
+        HashMap<String,Object> updates=new HashMap<>();
+        documentReference.update(updates)
+                .addOnSuccessListener(unused -> {
+                    preferencesManager.clear();
+                    startActivity(new Intent(getApplicationContext(), DoctorLogin.class));
+                    finish();
+                })
+                .addOnFailureListener(e-> ShowToast("Unable to Sign out"));
     }
 
     private void LoadDoctorDetails(){
