@@ -13,6 +13,9 @@ public class DoctorModel {
         this.Doctor_Id = Doctor_Id;
     }
 
+    public DoctorModel() {
+    }
+
     public String getDr_Name() {
         return Dr_Name;
     }

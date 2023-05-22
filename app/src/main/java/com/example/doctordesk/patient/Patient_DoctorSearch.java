@@ -131,32 +131,32 @@ public class Patient_DoctorSearch extends AppCompatActivity {
     }
 
     private void setListeners() {
-        binding.BnView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                int id= item.getItemId();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id)
+                {
+                    case R.id.PMyProfile:
+                        startActivity(new Intent(getApplicationContext(), Patient_MyProfile.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.SearchDoctor:
+                        return true;
+                    case R.id.PAppointment:
+                        startActivity(new Intent(getApplicationContext(), Patient_Appointment.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.MyDoctor:
+                        startActivity(new Intent(getApplicationContext(), Patient_MyDoctor.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
 
-                if(id==R.id.MyProfile){
-                    Intent i=new Intent(getApplicationContext(), Patient_MyProfile.class);
-                    startActivity(i);
-                    finish();
+                        return true;
                 }
-                if(id==R.id.Appointment){
-                    Intent i=new Intent(getApplicationContext(), Patient_Appointment.class);
-                    startActivity(i);
-                    finish();
-                }
-                if(id==R.id.MyDoctor){
-                    Intent i=new Intent(getApplicationContext(), Patient_MyDoctor.class);
-                    startActivity(i);
-                    finish();
-                }
-
-                if(id==R.id.History){
-                    Intent i=new Intent(getApplicationContext(), Patient_TreatmentHistory.class);
-                    startActivity(i);
-                    finish();
-                }
+                return false;
             }
         });
     }

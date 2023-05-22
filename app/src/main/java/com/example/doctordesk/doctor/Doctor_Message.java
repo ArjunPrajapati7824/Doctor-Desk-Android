@@ -117,28 +117,35 @@ public class Doctor_Message extends AppCompatActivity {
 //
 //        }, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
 //
-        binding.BnViewDoc.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+        binding.BnViewDoc.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                int id= item.getItemId();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id)
+                {
+                    case R.id.MyProfile:
+                        startActivity(new Intent(getApplicationContext(), Doctor_Profile.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.MyPtient:
+                        startActivity(new Intent(getApplicationContext(), Doctor_MyPatient.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.Appointment:
+                        startActivity(new Intent(getApplicationContext(), Doctor_Appointment.class));
+                        overridePendingTransition(0 ,0);
+                        finish();
+                        return true;
+                    case R.id.message:
 
-                if(id==R.id.MyProfile){
-                    Intent i=new Intent(getApplicationContext(), Doctor_Profile.class);
-                    startActivity(i);
-                    finish();
+                        return true;
                 }
-                if(id==R.id.Appointment){
-                    Intent i=new Intent(getApplicationContext(), Doctor_Appointment.class);
-                    startActivity(i);
-                    finish();
-                }
-                if(id==R.id.MyPtient){
-                    Intent i=new Intent(getApplicationContext(), Doctor_MyPatient.class);
-                    startActivity(i);
-                    finish();
-                }
+                return false;
             }
         });
+
     }
 
     public void getUsers(){

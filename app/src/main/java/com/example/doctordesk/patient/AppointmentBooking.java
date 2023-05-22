@@ -46,7 +46,13 @@ public class AppointmentBooking extends AppCompatActivity {
             }
         });
 
-        binding.BookAppointment.setOnClickListener(view-> bookAppintment());
+        binding.BookAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bookAppintment();
+                bookAppointment2();
+            }
+        });
 
     }
 
@@ -54,7 +60,7 @@ public class AppointmentBooking extends AppCompatActivity {
 
             Loading(true);
             FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
-            String uid =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document().getId();
+            String app_id =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document().getId();
 
             HashMap<String, Object> user = new HashMap<>();
             //put data in database
@@ -63,14 +69,20 @@ public class AppointmentBooking extends AppCompatActivity {
             user.put(Constants.KEY_APPOINTMENT_AGE, binding.ApPatientAge.getText().toString());
             user.put(Constants.KEY_APPOINTMENT_GENDER, radioButton.getText().toString());
             user.put(Constants.KEY_APPOINTMENT_DESCRIPTION, binding.ApDescription.getText().toString());
-            user.put(Constants.KEY_APPOINTMENT_ID,uid);
+            user.put(Constants.KEY_APPOINTMENT_ID,app_id);
             user.put(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID));
             user.put(Constants.KEY_DOCTOR_ID,getIntent().getStringExtra(Constants.KEY_DOCTOR_ID));
-            user.put(Constants.KEY_APPOINTMENT_STATUS,"False");
+            user.put(Constants.KEY_DOCTOR_NAME,getIntent().getStringExtra(Constants.KEY_DOCTOR_NAME));
+            user.put(Constants.KEY_CLINIC_NAME,getIntent().getStringExtra(Constants.KEY_CLINIC_NAME));
+            user.put(Constants.KEY_CLINIC_ADDRESS,getIntent().getStringExtra(Constants.KEY_CLINIC_ADDRESS));
+            user.put(Constants.KEY_SPECIALIZATION,getIntent().getStringExtra(Constants.KEY_SPECIALIZATION));
+            user.put(Constants.KEY_APPOINTMENT_STATUS,"Pending");
+
+
 
 
             firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS)//create collection name
-                    .document(uid)
+                    .document(app_id)
                     .set(user)
                     .addOnSuccessListener(documentReference -> {
                         Loading(false);
@@ -90,6 +102,47 @@ public class AppointmentBooking extends AppCompatActivity {
                     });
 
     }
+
+
+    private void bookAppointment2(){
+
+        Loading(true);
+        FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+        String app_id_2 =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY).document().getId();
+
+        HashMap<String, Object> user = new HashMap<>();
+        //put data in database
+        user.put(Constants.KEY_APPOINTMENT_NAME, binding.ApPatientName.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_PHONE_NUMBER, binding.ApPatientPhoneNumber.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_AGE, binding.ApPatientAge.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_GENDER, radioButton.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_DESCRIPTION, binding.ApDescription.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_ID,app_id_2);
+        user.put(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID));
+        user.put(Constants.KEY_DOCTOR_ID,getIntent().getStringExtra(Constants.KEY_DOCTOR_ID));
+        user.put(Constants.KEY_APPOINTMENT_STATUS,"False");
+
+        firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY)//create collection name
+                .document(app_id_2)
+                .set(user)
+                .addOnSuccessListener(documentReference -> {
+                    Loading(false);
+//                   preferencesManager.putString(Constants.KEY_APPOINTMENT_ID,uid.toString());
+//                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
+//                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
+//                    Intent intent = new Intent(getApplicationContext(),PatientHome.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    startActivity(intent);//if signup then go to mainactivity
+//                    finish();
+
+                })
+                .addOnFailureListener(exception -> {
+                    Loading(false);
+                    ShowToast(exception.getMessage());
+                });
+
+    }
+
 
     private void ShowToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

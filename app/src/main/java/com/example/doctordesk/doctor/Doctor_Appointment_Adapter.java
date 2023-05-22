@@ -1,5 +1,6 @@
 package com.example.doctordesk.doctor;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +19,7 @@ import com.example.doctordesk.R;
 import com.example.doctordesk.patient.AppointmentBooking;
 import com.example.doctordesk.patient.Patient_EditProfile;
 import com.example.doctordesk.patient.Patient_MyProfile;
+import com.example.doctordesk.patient.models.myAppointmentDoctorModel;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,11 +42,16 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
        Doctor_Appointment doctor_appointment;
 
     FirebaseFirestore db;
+    String status;
 
+
+    PreferenceManager preferencesManager;
 
     public Doctor_Appointment_Adapter(ArrayList<ModelPatientList> Patients) {
         this.Patients=Patients;
     }
+
+
 
     @NonNull
     @Override
@@ -54,13 +61,21 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
         return new PatientsHolder(view);//reference of Holder class
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull PatientsHolder holder, int position) {
+
+
+
 
         holder.NameOfPatient.setText(Patients.get(position).getAppointment_Name());
         holder.GenderOfPatient.setText(Patients.get(position).getAppointment_Gender());
         holder.AgeOfPatient.setText(Patients.get(position).getAppointment_Age());
         holder.NumberOfPatient.setText(Patients.get(position).getAppointment_Phone_Number());
+
+
+
+
 
         holder.AcceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,13 +83,15 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
 //                preferencesManager=new PreferenceManager(appointmentBooking);
 
                 FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+
+
 //                String uid =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(Constants.KEY_APPOINTMENT_ID).getId();
 
 //                DocumentReference userRef = db.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(preferencesManager.getString(Constants.KEY_APPOINTMENT_ID));
 //                firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(uid)
                 firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(Patients.get(position).getAppointment_Id())
 
-                        .update(Constants.KEY_APPOINTMENT_STATUS,"True").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .update(Constants.KEY_APPOINTMENT_STATUS,"Accept").addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
@@ -115,37 +132,83 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder dialog= new AlertDialog.Builder(view.getContext());
-                dialog.setCancelable(false);
-                dialog.setTitle("delete");
-                dialog.setMessage("Are you Sure ?");
-                dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        db= FirebaseFirestore.getInstance();
-                        db.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(Patients.get(position).getAppointment_Id()).delete()
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(view.getContext(), "Data Deleted", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else
-                                            Toast.makeText(view.getContext(), "Data Deletion failed", Toast.LENGTH_SHORT).show();
 
-                                    }
-                                });
-                    }
-                });
+                FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
 
-                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
 
-                dialog.show();
+//                DocumentReference userRef = db.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(preferencesManager.getString(Constants.KEY_APPOINTMENT_ID));
+//                firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(uid)
+                firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(Patients.get(position).getAppointment_Id())
+
+                        .update(Constants.KEY_APPOINTMENT_STATUS,"Reject").addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(view.getContext(), "Appointment Rejected", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(view.getContext(), "Appointment Declined", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                        });
+//                Map<String, Object> updates = new HashMap<>();
+//                updates.put(Constants.KEY_APPOINTMENT_STATUS,"True");
+//                userRef.update(updates)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void aVoid) {
+//
+//                                FirebaseFirestore database= FirebaseFirestore.getInstance();
+//                                database.collection(Constants.KEY_COLLECTION_APPOINTMENTS)
+//                                        .get()
+//                                        .addOnCompleteListener(task -> {
+//                                            if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
+//                                                Toast.makeText(view.getContext(), "Appointment Accepted", Toast.LENGTH_SHORT).show();
+//                                            }
+//
+//                                        });
+//                            }
+//                        })
+//                        .addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Toast.makeText(view.getContext(), "Data Updation Failed....", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+
+
+////                AlertDialog.Builder dialog= new AlertDialog.Builder(view.getContext());
+////                dialog.setCancelable(false);
+////                dialog.setTitle("delete");
+////                dialog.setMessage("Are you Sure ?");
+////                dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+////                    @Override
+////                    public void onClick(DialogInterface dialogInterface, int i) {
+////                        db= FirebaseFirestore.getInstance();
+////                        db.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(Patients.get(position).getAppointment_Id()).delete()
+////                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+////                                    @Override
+////                                    public void onComplete(@NonNull Task<Void> task) {
+////                                        if(task.isSuccessful()){
+////                                            Toast.makeText(view.getContext(), "Data Deleted", Toast.LENGTH_SHORT).show();
+////                                        }
+////                                        else
+////                                            Toast.makeText(view.getContext(), "Data Deletion failed", Toast.LENGTH_SHORT).show();
+////
+////                                    }
+////                                });
+////                    }
+////                });
+//
+//                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.dismiss();
+//                    }
+//                });
+//
+//                dialog.show();
             }
         });
 

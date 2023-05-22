@@ -29,11 +29,6 @@ public class DoctorLogin extends AppCompatActivity {
         binding=ActivityDoctorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferencesManager =new PreferenceManager(getApplicationContext());
-        if(preferencesManager.getBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN)){
-            Intent intent = new Intent(getApplicationContext(), Doctor_Profile.class);
-            startActivity(intent);
-            finish();
-        }
 
         if(preferencesManager.getBoolean(Constants.KEY_IS_DOCTOR_SIGNED_IN)){
             Intent intent =new Intent(getApplicationContext(), Doctor_Profile.class);
@@ -53,7 +48,6 @@ public class DoctorLogin extends AppCompatActivity {
         binding.DoctorLogin.setOnClickListener(view -> {
             if(isValidSignInDetails())
                 SignIn();
-
         });
     }
     private void SignIn(){

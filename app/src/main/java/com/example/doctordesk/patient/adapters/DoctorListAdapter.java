@@ -46,6 +46,10 @@ public class DoctorListAdapter extends  RecyclerView.Adapter<DoctorListAdapter.D
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), AppointmentBooking.class);
                 intent.putExtra(Constants.KEY_DOCTOR_ID,arrayList.get(position).getDoctor_Id());
+                intent.putExtra(Constants.KEY_DOCTOR_NAME,arrayList.get(position).getDr_Name());
+                intent.putExtra(Constants.KEY_CLINIC_ADDRESS,arrayList.get(position).getClinic_Address());
+                intent.putExtra(Constants.KEY_CLINIC_NAME,arrayList.get(position).getClinic_Name());
+                intent.putExtra(Constants.KEY_SPECIALIZATION,arrayList.get(position).getSpecialization());
                 view.getContext().startActivity(intent);
             }
         });

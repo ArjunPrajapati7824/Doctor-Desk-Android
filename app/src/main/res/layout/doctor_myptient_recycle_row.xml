@@ -11,10 +11,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageDoctor"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/baseline_person_24" />
+            android:id="@+id/imagePatient"
+            android:layout_width="151dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/man_health_worker_svgrepo_com" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -22,43 +22,47 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/NameOfDoctor"
+                android:id="@+id/NameOfPatient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
                 android:text="Name"
                 android:textColor="@color/black"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
 
             <TextView
-                android:id="@+id/Specialization"
+                android:id="@+id/appointmentPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:text="Specialization"
+                android:text="Phone Number"
+                android:textSize="20dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/NameOfClinic"
+                android:id="@+id/appointmentGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:text="Clinic Name"
+                android:textSize="20dp"
+                android:text="Gender"
 
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ClinicAddress"
+                android:id="@+id/appointmentAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:text="Clinic Address"
+                android:textSize="20dp"
+                android:text="Age"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 

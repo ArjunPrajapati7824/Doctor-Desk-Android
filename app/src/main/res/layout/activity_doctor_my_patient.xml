@@ -7,21 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".doctor.Doctor_MyPatient">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myPatientRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/TextErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BnViewDoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:itemIconTint="@drawable/selector"
         app:menu="@menu/doctor_bottom_nav"
+        app:itemIconTint="@drawable/selector"
         app:labelVisibilityMode="labeled"
         />
     <FrameLayout
-        android:id="@+id/ContainerDoc"
+        android:id="@+id/Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        />
+        android:layout_marginBottom="?attr/actionBarSize"/>
 
 
 

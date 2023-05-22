@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 
 public class Patient_MyProfile extends AppCompatActivity {
-    ActivityPatientMyProfileBinding binding;
+    private ActivityPatientMyProfileBinding binding;
 
     ActivityPatientEditProfileBinding binding2;
     PreferenceManager preferencesManager;
@@ -60,12 +60,8 @@ public class Patient_MyProfile extends AppCompatActivity {
                         overridePendingTransition(0 ,0);
                         finish();
                         return true;
-                    case R.id.History:
-                        startActivity(new Intent(getApplicationContext(), Patient_TreatmentHistory.class));
-                        overridePendingTransition(0 ,0);
-                        finish();
-                        return true;
-                    case R.id.Appointment:
+
+                    case R.id.PAppointment:
                         startActivity(new Intent(getApplicationContext(), Patient_Appointment.class));
                         overridePendingTransition(0 ,0);
                         finish();

@@ -1,19 +1,19 @@
 package com.example.doctordesk.doctor;
 
 public class ModelPatientList {
-    String Appointment_Name,Appointment_Gender,Appointment_Age,Appointment_Phone_Number,Appointment_Id;
+    String Appointment_Name, Appointment_Gender, Appointment_Age, Appointment_Phone_Number, Appointment_Id, Appointment_Status;
 
     public ModelPatientList() {
     }
 
-    public ModelPatientList(String appointment_Name, String appointment_Gender, String appointment_Age, String appointment_Phone_Number,String appointment_Id) {
+    public ModelPatientList(String appointment_Name, String appointment_Gender, String appointment_Age, String appointment_Phone_Number, String appointment_Id, String appointment_Status) {
         Appointment_Name = appointment_Name;
         Appointment_Gender = appointment_Gender;
         Appointment_Age = appointment_Age;
         Appointment_Phone_Number = appointment_Phone_Number;
-        Appointment_Id=appointment_Id;
+        Appointment_Id = appointment_Id;
+        Appointment_Status = appointment_Status;
     }
-
 
     public String getAppointment_Name() {
         return Appointment_Name;
@@ -46,8 +46,21 @@ public class ModelPatientList {
     public void setAppointment_Phone_Number(String appointment_Phone_Number) {
         Appointment_Phone_Number = appointment_Phone_Number;
     }
+
     public String getAppointment_Id() {
         return Appointment_Id;
     }
 
+    public void setAppointment_Id(String appointment_Id) {
+        Appointment_Id = appointment_Id;
+    }
+
+    public String getAppointment_Status() {
+        return Appointment_Status;
+    }
+
+    public void setAppointment_Status(String appointment_Status) {
+        Appointment_Status = appointment_Status;
+    }
 }
+

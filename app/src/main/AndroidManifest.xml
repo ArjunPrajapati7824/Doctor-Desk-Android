@@ -28,9 +28,6 @@
             android:name=".patient.Patient_Appointment"
             android:exported="false" />
         <activity
-            android:name=".patient.Patient_TreatmentHistory"
-            android:exported="false" />
-        <activity
             android:name=".patient.Patient_MyProfile"
             android:exported="false" />
         <activity

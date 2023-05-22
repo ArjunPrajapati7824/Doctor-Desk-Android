@@ -49,7 +49,9 @@ public class Doctor_Appointment extends AppCompatActivity {
 
 
         FirebaseFirestore database= FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID)).get()
+        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
+                .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Pending")
+                .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -106,7 +108,6 @@ public class Doctor_Appointment extends AppCompatActivity {
                         finish();
                         return true;
                     case R.id.Appointment:
-
                         return true;
                     case R.id.message:
                         startActivity(new Intent(getApplicationContext(), Doctor_Message.class));

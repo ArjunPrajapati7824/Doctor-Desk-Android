@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityPatientAppointmentBinding;
@@ -66,7 +67,7 @@ public class Patient_Appointment extends AppCompatActivity {
                 int id = item.getItemId();
                 switch (id)
                 {
-                    case R.id.MyProfile:
+                    case R.id.PMyProfile:
                         startActivity(new Intent(getApplicationContext(), Patient_MyProfile.class));
                         overridePendingTransition(0 ,0);
                         finish();
@@ -76,13 +77,9 @@ public class Patient_Appointment extends AppCompatActivity {
                         overridePendingTransition(0 ,0);
                         finish();
                         return true;
-                    case R.id.History:
-                        startActivity(new Intent(getApplicationContext(), Patient_TreatmentHistory.class));
-                        overridePendingTransition(0 ,0);
-                        finish();
-                        return true;
 
-                    case R.id.Appointment:
+
+                    case R.id.PAppointment:
                         return true;
                     case R.id.MyDoctor:
                         startActivity(new Intent(getApplicationContext(), Patient_MyDoctor.class));
@@ -96,38 +93,69 @@ public class Patient_Appointment extends AppCompatActivity {
 
     }
 
-    public void my_Doctors(){
+    public void my_Doctors() {
 
 
-        FirebaseFirestore database= FirebaseFirestore.getInstance();
-//        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID)).get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+//        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document()
+
+
+
+
+
+//        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS)
+//                .whereEqualTo(Constants.KEY_PATIENT_ID, preferencesManager.getString(Constants.KEY_PATIENT_ID))
+//                .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS, "true")
+//                .get()
+//                .addOnSuccessListener(queryDocumentSnapshots -> {
 //                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
-//                        if(list.size()==0){
-//                            binding.TextErrorMessage.setVisibility(View.VISIBLE);
-//                            binding.TextErrorMessage.setText("Nodata");
-//                        }
 //                        for(DocumentSnapshot d:list){
 //                            myAppointmentDoctorModel doctorModel=d.toObject(myAppointmentDoctorModel.class);
 //                            appointmentArray.add(doctorModel);
 //                        }
-//                        adapter.notifyDataSetChanged();
+//
+//                        binding.myAppointmentRecyclerView.setAdapter(new My_Appointment_Adapter(appointmentArray));
+//
+//                })
+//                .addOnFailureListener(e -> {
+//                    Toast.makeText(this, "no data ", Toast.LENGTH_SHORT).show();
+//                });
+
+
+//        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID))
+//                .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"true")
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+//                        for(DocumentSnapshot d:list){
+//                            myAppointmentDoctorModel doctorModel=d.toObject(myAppointmentDoctorModel.class);
+//                            appointmentArray.add(doctorModel);
+//                        }
+//
+//                        binding.myAppointmentRecyclerView.setAdapter(new My_Appointment_Adapter(appointmentArray));
 //
 //                    }
 //                });
 
-        database.collection(Constants.KEY_COLLECTION_DOCTORS).addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error==null){
-                    List<myAppointmentDoctorModel> data =value.toObjects(myAppointmentDoctorModel.class);
-                    appointmentArray.addAll(data);
-//                    binding.searchdr.setLayoutManager(new LinearLayoutManager(Patient_DoctorSearch.this));
-//                    binding.searchdr.setAdapter(new DoctorListAdapter(Patient_DoctorSearch.this,arrayList));
-                }
-            }
-        });
+        database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID))
+//                .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"True")
+                .get()
+
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        for(DocumentSnapshot d:list){
+                            myAppointmentDoctorModel doctorModel=d.toObject(myAppointmentDoctorModel.class);
+                            appointmentArray.add(doctorModel);
+                        }
+                        binding.myAppointmentRecyclerView.setAdapter(new My_Appointment_Adapter(appointmentArray));
+
+
+                    }
+                });
+
     }
-}
+    }

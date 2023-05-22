@@ -1,22 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".doctor.DoctorLogin"
+    android:orientation="vertical"
     android:gravity="center"
-    android:orientation="vertical">
+    android:background="@drawable/login_page">
 
-    <Button
-        android:id="@+id/Pay"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment"/>
+        android:layout_marginTop="150dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1000"
-        android:id="@+id/txtView"/>
+        android:background="@drawable/edit_text">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+            >
+
+            <TextView
+                android:id="@+id/LoginText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment"
+                android:textAlignment="center"
+                android:textColor="@color/Main"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="999"
+                android:textColor="@color/Black"
+                android:textStyle="bold"
+                android:id="@+id/txtView"
+                android:textSize="36sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appointment handling"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/baseline_cloud_done_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easily Send Common To All Patient"
+                android:textSize="20dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/baseline_cloud_done_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage All Patient Data"
+                android:textSize="20dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/baseline_cloud_done_24"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easily Manage Your Profile"
+                android:textSize="20dp"
+                android:drawablePadding="10dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/baseline_cloud_done_24"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:animateLayoutChanges="true">
+
+                <Button
+                    android:id="@+id/Pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Proceed to Payment"
+                    android:backgroundTint="@color/Main"
+                    android:background="@drawable/buttion"/>
+
+                <ProgressBar
+                    android:id="@+id/ProgressBar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
 
 </LinearLayout>
