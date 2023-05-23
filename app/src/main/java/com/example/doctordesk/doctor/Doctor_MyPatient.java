@@ -48,6 +48,9 @@ public class Doctor_MyPatient extends AppCompatActivity {
         binding.myPatientRecyclerView.setLayoutManager(new LinearLayoutManager(Doctor_MyPatient.this));
 
         my_Patients();
+
+
+
         binding.BnViewDoc.setSelectedItemId(R.id.MyPtient);
         binding.BnViewDoc.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

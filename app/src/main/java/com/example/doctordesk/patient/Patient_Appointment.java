@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Patient_Appointment extends AppCompatActivity {
-    ActivityPatientAppointmentBinding binding;
+    private ActivityPatientAppointmentBinding binding;
 
     ArrayList <myAppointmentDoctorModel> appointmentArray;
     My_Appointment_Adapter adapter;

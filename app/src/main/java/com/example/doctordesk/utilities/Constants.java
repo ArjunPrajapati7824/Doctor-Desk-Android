@@ -52,5 +52,13 @@ public class Constants {
 
 
 
+    //Medicine Table
+    public static final String KEY_COLLECTION_MEDICINES ="Medicine";
+    public static final String KEY_MEDICINE_NAME ="medicineName";
+
+
+
+
+
 
 }

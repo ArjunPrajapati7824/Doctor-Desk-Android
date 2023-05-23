@@ -2,14 +2,18 @@ package com.example.doctordesk.doctor;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.doctordesk.R;
@@ -27,7 +31,7 @@ public class Doctor_Profile extends AppCompatActivity {
 ActivityDoctorProfileBinding binding;
     PreferenceManager preferencesManager;
 
-
+FirebaseFirestore firestore;
     Context context;
     public static boolean accept=false;
 
@@ -43,6 +47,8 @@ ActivityDoctorProfileBinding binding;
 
         LoadDoctorDetails();
 
+
+        binding.AddMedicineFloating.setOnClickListener(view -> addMedicine());
 
         binding.BnViewDoc.setSelectedItemId(R.id.MyProfile);
 
@@ -83,6 +89,43 @@ ActivityDoctorProfileBinding binding;
         });
     }
 
+    private void addMedicine(){
+
+        firestore=FirebaseFirestore.getInstance();
+        Button addMedicineBtn,cancel;
+        EditText edit;
+        Dialog dialog= new Dialog(Doctor_Profile.this);
+        dialog.setContentView(R.layout.add_medcine_database_dialog);
+
+        addMedicineBtn=dialog.findViewById(R.id.addMedicineBtn);
+        cancel=dialog.findViewById(R.id.cancel);
+        edit=dialog.findViewById(R.id.addMedicineEdit);
+
+        addMedicineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(edit.getText().toString().isEmpty()){
+                    ShowToast("Enter Medicine");
+                }else{
+                    HashMap<String,Object> medicine=new HashMap<>();
+
+                    medicine.put(Constants.KEY_MEDICINE_NAME,edit.getText().toString());
+
+                    firestore.collection(Constants.KEY_COLLECTION_MEDICINES).add(medicine).addOnSuccessListener(documentReference -> {
+                        ShowToast("Medicine Added");
+                        edit.setText("");
+                    });
+                }
+
+            }
+        });
+        dialog.show();
+
+        cancel.setOnClickListener(view -> dialog.dismiss());
+
+
+
+    }
     private void ShowToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
