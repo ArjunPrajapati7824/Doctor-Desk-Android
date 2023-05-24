@@ -66,7 +66,27 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/PatientName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:textSize="20dp"
+                android:text="Patient Name"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/appointmentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:textSize="20dp"
+                android:text="Appointment Date"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/CheckStatus"
                 android:layout_width="wrap_content"

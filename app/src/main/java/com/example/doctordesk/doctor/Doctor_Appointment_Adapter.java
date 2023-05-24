@@ -72,6 +72,7 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
         holder.GenderOfPatient.setText(Patients.get(position).getAppointment_Gender());
         holder.AgeOfPatient.setText(Patients.get(position).getAppointment_Age());
         holder.NumberOfPatient.setText(Patients.get(position).getAppointment_Phone_Number());
+        holder.appointmentdate.setText(Patients.get(position).getAppointment_Date());
 
 
 
@@ -226,7 +227,7 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
 
 
     class PatientsHolder extends RecyclerView.ViewHolder{
-            TextView NameOfPatient, GenderOfPatient,AgeOfPatient, NumberOfPatient;
+            TextView NameOfPatient, GenderOfPatient,AgeOfPatient, NumberOfPatient,appointmentdate;
 
             Button AcceptButton,DeleteButton;
         public PatientsHolder(@NonNull View itemView) {
@@ -236,8 +237,10 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
             GenderOfPatient =(TextView)itemView.findViewById(R.id.GenderOfPatient);
             AgeOfPatient=(TextView)itemView.findViewById(R.id.AgeOfPatient);
             NumberOfPatient=(TextView)itemView.findViewById(R.id.NumberOfPatient);
+            appointmentdate=(TextView)itemView.findViewById(R.id.Appointment_date);
             AcceptButton=(Button)itemView.findViewById(R.id.AcceptButton);
             DeleteButton=(Button)itemView.findViewById(R.id.DeleteButton);
+
         }
     }
 }

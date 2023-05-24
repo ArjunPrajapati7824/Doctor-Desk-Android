@@ -50,6 +50,8 @@ public class Constants {
     public static final String KEY_APPOINTMENT_STATUS ="Appointment_Status";
     public static final String KEY_APPOINTMENT_DESCRIPTION ="Appointment_Description";
 
+    public static final String KEY_APPOINTMENT_DATE ="Appointment_date";
+
 
 
     //Medicine Table
