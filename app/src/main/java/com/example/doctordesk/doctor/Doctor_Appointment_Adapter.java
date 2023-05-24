@@ -95,9 +95,12 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    Intent i = new Intent(view.getContext(),Doctor_MyPatient.class);
+                                    view.getContext().startActivity(i);
                                       Toast.makeText(view.getContext(), "Appointment Accepted", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(view.getContext(), "Appointment Declined", Toast.LENGTH_SHORT).show();
+
 
                                 }
                             }
@@ -144,6 +147,8 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    Intent i = new Intent(view.getContext(),Doctor_Appointment.class);
+                                    view.getContext().startActivity(i);
                                     Toast.makeText(view.getContext(), "Appointment Rejected", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(view.getContext(), "Appointment Declined", Toast.LENGTH_SHORT).show();

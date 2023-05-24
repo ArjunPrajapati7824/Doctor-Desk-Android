@@ -95,6 +95,10 @@ private ActivityPatientMyDoctorBinding binding;
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        if(list.size() == 0)
+                        {
+                            binding.showTextDoc.setVisibility(View.VISIBLE);
+                        }
                         for(DocumentSnapshot d:list){
                             myAppointmentDoctorModel doctorModel=d.toObject(myAppointmentDoctorModel.class);
                             appointmentArray.add(doctorModel);

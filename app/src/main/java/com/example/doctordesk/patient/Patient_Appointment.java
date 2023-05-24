@@ -54,8 +54,9 @@ public class Patient_Appointment extends AppCompatActivity {
 
         appointmentArray=new ArrayList<>();
 
+
       adapter=new My_Appointment_Adapter(appointmentArray);
-        binding.BnView.setSelectedItemId(R.id.Appointment);
+        binding.BnView.setSelectedItemId(R.id.PAppointment);
 
         binding.myAppointmentRecyclerView.setLayoutManager(new LinearLayoutManager(Patient_Appointment.this));
 
@@ -147,6 +148,10 @@ public class Patient_Appointment extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        if(list.size() == 0)
+                        {
+                            binding.showText.setVisibility(View.VISIBLE);
+                        }
                         for(DocumentSnapshot d:list){
                             myAppointmentDoctorModel doctorModel=d.toObject(myAppointmentDoctorModel.class);
                             appointmentArray.add(doctorModel);

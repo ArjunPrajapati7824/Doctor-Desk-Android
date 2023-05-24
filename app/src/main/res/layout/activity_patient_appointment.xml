@@ -11,7 +11,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myAppointmentRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="670dp"/>
+        android:layout_height="620dp"/>
+    <TextView
+        android:id="@+id/showText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="No Appointment"
+        android:visibility="invisible"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

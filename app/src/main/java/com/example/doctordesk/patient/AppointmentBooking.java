@@ -49,8 +49,15 @@ public class AppointmentBooking extends AppCompatActivity {
         binding.BookAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bookAppintment();
-                bookAppointment2();
+
+                if (Signup_Isvalid())
+                {
+                    bookAppintment();
+                    clear_data();
+                }
+//                bookAppointment2();
+
+
             }
         });
 
@@ -79,8 +86,6 @@ public class AppointmentBooking extends AppCompatActivity {
             user.put(Constants.KEY_APPOINTMENT_STATUS,"Pending");
 
 
-
-
             firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS)//create collection name
                     .document(app_id)
                     .set(user)
@@ -92,57 +97,65 @@ public class AppointmentBooking extends AppCompatActivity {
 //                    Intent intent = new Intent(getApplicationContext(),PatientHome.class);
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         ShowToast("Waiting For Confirmation");
-//                    startActivity(intent);//if signup then go to mainactivity
-//                    finish();
-
+                        startActivity(new Intent(getApplicationContext(),Patient_Appointment.class));
+                        finish();
                     })
                     .addOnFailureListener(exception -> {
                         Loading(false);
                         ShowToast(exception.getMessage());
                     });
 
-    }
-
-
-    private void bookAppointment2(){
-
-        Loading(true);
-        FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
-        String app_id_2 =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY).document().getId();
-
-        HashMap<String, Object> user = new HashMap<>();
-        //put data in database
-        user.put(Constants.KEY_APPOINTMENT_NAME, binding.ApPatientName.getText().toString());
-        user.put(Constants.KEY_APPOINTMENT_PHONE_NUMBER, binding.ApPatientPhoneNumber.getText().toString());
-        user.put(Constants.KEY_APPOINTMENT_AGE, binding.ApPatientAge.getText().toString());
-        user.put(Constants.KEY_APPOINTMENT_GENDER, radioButton.getText().toString());
-        user.put(Constants.KEY_APPOINTMENT_DESCRIPTION, binding.ApDescription.getText().toString());
-        user.put(Constants.KEY_APPOINTMENT_ID,app_id_2);
-        user.put(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID));
-        user.put(Constants.KEY_DOCTOR_ID,getIntent().getStringExtra(Constants.KEY_DOCTOR_ID));
-        user.put(Constants.KEY_APPOINTMENT_STATUS,"False");
-
-        firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY)//create collection name
-                .document(app_id_2)
-                .set(user)
-                .addOnSuccessListener(documentReference -> {
-                    Loading(false);
-//                   preferencesManager.putString(Constants.KEY_APPOINTMENT_ID,uid.toString());
-//                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
-//                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
-//                    Intent intent = new Intent(getApplicationContext(),PatientHome.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                    startActivity(intent);//if signup then go to mainactivity
-//                    finish();
-
-                })
-                .addOnFailureListener(exception -> {
-                    Loading(false);
-                    ShowToast(exception.getMessage());
-                });
 
     }
 
+
+//    private void bookAppointment2(){
+//
+//        Loading(true);
+//        FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+//        String app_id_2 =firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY).document().getId();
+//
+//        HashMap<String, Object> user = new HashMap<>();
+//        //put data in database
+//        user.put(Constants.KEY_APPOINTMENT_NAME, binding.ApPatientName.getText().toString());
+//        user.put(Constants.KEY_APPOINTMENT_PHONE_NUMBER, binding.ApPatientPhoneNumber.getText().toString());
+//        user.put(Constants.KEY_APPOINTMENT_AGE, binding.ApPatientAge.getText().toString());
+//        user.put(Constants.KEY_APPOINTMENT_GENDER, radioButton.getText().toString());
+//        user.put(Constants.KEY_APPOINTMENT_DESCRIPTION, binding.ApDescription.getText().toString());
+//        user.put(Constants.KEY_APPOINTMENT_ID,app_id_2);
+//        user.put(Constants.KEY_PATIENT_ID,preferencesManager.getString(Constants.KEY_PATIENT_ID));
+//        user.put(Constants.KEY_DOCTOR_ID,getIntent().getStringExtra(Constants.KEY_DOCTOR_ID));
+//        user.put(Constants.KEY_APPOINTMENT_STATUS,"False");
+//
+//        firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS_HISTORY)//create collection name
+//                .document(app_id_2)
+//                .set(user)
+//                .addOnSuccessListener(documentReference -> {
+//                    Loading(false);
+////                   preferencesManager.putString(Constants.KEY_APPOINTMENT_ID,uid.toString());
+////                   preferencesManager.putString(Constants.KEY_DOCTOR_ID, documentReference.getId());
+////                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
+////                    Intent intent = new Intent(getApplicationContext(),PatientHome.class);
+////                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+////                    startActivity(intent);//if signup then go to mainactivity
+////                    finish();
+//                })
+//                .addOnFailureListener(exception -> {
+//                    Loading(false);
+//                    ShowToast(exception.getMessage());
+//                });
+//
+//    }
+
+    private void clear_data()
+    {
+        binding.ApPatientName.setText("");
+        binding.ApPatientAge.setText("");
+        binding.ApDescription.setText("");
+        binding.ApPatientGender.clearCheck();
+        binding.ApPatientPhoneNumber.setText("");
+
+    }
 
     private void ShowToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -156,5 +169,29 @@ public class AppointmentBooking extends AppCompatActivity {
                 binding.BookAppointment.setVisibility(View.VISIBLE);
             }
         }
-
+    private boolean Signup_Isvalid() {//validation for all fields
+        if (binding.ApPatientName.getText().toString().trim().isEmpty()) {
+            ShowToast("Enter Patient Name");
+            return false;
+        } else if (!binding.ApPatientName.getText().toString().trim().matches("^[A-Za-z]+$")) {
+            ShowToast("Enter valid Name");
+            return false;
+        }else if (binding.ApPatientPhoneNumber.getText().toString().trim().isEmpty()) {
+            ShowToast("Enter Number");
+            return false;
+        } else if (binding.ApPatientPhoneNumber.getText().toString().length() != 10) {
+            ShowToast("Enter Valid Mobile Number");
+            return false;
+        } else if (binding.ApPatientAge.getText().toString().trim().isEmpty()) {
+            ShowToast("Enter Age");
+            return false;
+        }
+        else if (binding.ApPatientGender.getCheckedRadioButtonId() == -1){
+            ShowToast("Select Gender");
+            return false;
+        }
+        else
+            return true;
     }
+    }
+

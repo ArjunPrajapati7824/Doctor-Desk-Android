@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchdr"
         android:layout_width="match_parent"
-        android:layout_height="670dp"/>
+        android:layout_height="620dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -40,7 +40,6 @@
         />
     <FrameLayout
         android:id="@+id/Container"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
