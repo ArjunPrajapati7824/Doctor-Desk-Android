@@ -21,12 +21,14 @@ import com.example.doctordesk.databinding.ActivityPatientRegisterBinding;
 import com.example.doctordesk.otpVerification;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +43,8 @@ public class PatientRegister extends AppCompatActivity {
 
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+
+    public static boolean checkpatientExists;
 
     String[] bloodGroup = {"A+", "A-", "B+", "B-","AB+", "AB-","O+","O-"};
     ArrayList<String> arrayList;
@@ -208,6 +212,19 @@ public class PatientRegister extends AppCompatActivity {
                 });
     }
 
+    private boolean patientExists(){
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        checkpatientExists=true;
+                    }
+                });
+        return checkpatientExists;
+    }
+
     private void Loading(boolean IsLoading) {
         if (IsLoading) {
             binding.PatientSingUp.setVisibility(View.INVISIBLE);
@@ -233,6 +250,9 @@ public class PatientRegister extends AppCompatActivity {
             return false;
         } else if (binding.PatientPhoneNumber.getText().toString().length() != 10) {
             ShowToast("Enter Valid Mobile Number");
+            return false;
+        } else if (!patientExists()) {
+            ShowToast("Already exists");
             return false;
         } else if (binding.PatientAge.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Age");
