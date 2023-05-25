@@ -43,7 +43,6 @@ public class PatientRegister extends AppCompatActivity {
 
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-
     public static boolean checkpatientExists;
 
     String[] bloodGroup = {"A+", "A-", "B+", "B-","AB+", "AB-","O+","O-"};
@@ -98,6 +97,23 @@ public class PatientRegister extends AppCompatActivity {
     });
 
         preferencesManager = new PreferenceManager(this);
+
+        if(otpVerification.confirm){
+            if(getIntent().getStringExtra("confirm").equals("1")){
+
+                binding.PatientRgName.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
+                binding.PatientPhoneNumber.setText(preferencesManager.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
+                binding.PatientAge.setText(preferencesManager.getString(Constants.KEY_PATIENT_AGE));
+                binding.PatientCity.setText(preferencesManager.getString(Constants.KEY_PATIENT_CITY));
+                binding.PatientWeight.setText(preferencesManager.getString(Constants.KEY_PATIENT_WEIGHT));
+                binding.PatientLoginPass1.setText(preferencesManager.getString(Constants.KEY_PATIENT_PASSWORD));
+                binding.PatientLoginPass2.setText(preferencesManager.getString(Constants.KEY_PATIENT_PASSWORD));
+//            radioGroup.setOnCheckedChangeListener(preferencesManager.getString(Constants.KEY_DOCTOR_ID));
+                binding.VerifyOtp.setVisibility(INVISIBLE);
+                binding.PatientSingUp.setVisibility(View.VISIBLE);
+            }
+        }
+
         setListeners();
     }
 
@@ -106,13 +122,27 @@ public class PatientRegister extends AppCompatActivity {
         binding.PatientSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(Signup_Isvalid())
+                    SignUp();
+            }
+        });
+        binding.VerifyOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
 
                 if(Signup_Isvalid()){
+                    preferencesManager.putString(Constants.KEY_PATIENTS_NAME, binding.PatientRgName.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER, binding.PatientPhoneNumber.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_AGE, binding.PatientAge.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_CITY, binding.PatientCity.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT, binding.PatientWeight.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass1.getText().toString());
+                    preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass2.getText().toString());
 //                    SignUp();
 
-                    binding.PatientSingUp.setVisibility(INVISIBLE);
+                    binding.VerifyOtp.setVisibility(INVISIBLE);
                     binding.ProgressBar.setVisibility(View.VISIBLE);
                     PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
                             .setActivity(PatientRegister.this)
@@ -122,12 +152,12 @@ public class PatientRegister extends AppCompatActivity {
                                 @Override
                                 public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-                                    binding.PatientSingUp.setVisibility(View.VISIBLE);
+                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                                 }
                                 @Override
                                 public void onVerificationFailed(@NonNull FirebaseException e) {
 
-                                    binding.PatientSingUp.setVisibility(View.VISIBLE);
+                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                                     binding.ProgressBar.setVisibility(INVISIBLE);
                                     Toast.makeText(PatientRegister.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
                                 }
@@ -137,12 +167,13 @@ public class PatientRegister extends AppCompatActivity {
                                     super.onCodeSent(otp, forceResendingToken);
 
                                     verify_otp_patient=true;
-                                    binding.PatientSingUp.setVisibility(INVISIBLE);
+                                    binding.VerifyOtp.setVisibility(INVISIBLE);
                                     binding.ProgressBar.setVisibility(View.VISIBLE);
-                                    SignUp();
+//                                    SignUp();
                                     Intent intent = new Intent(PatientRegister.this, otpVerification.class);
                                     intent.putExtra("mobile",binding.PatientPhoneNumber.getText().toString());
                                     intent.putExtra("otp",otp);
+                                    intent.putExtra("check","1");
                                     startActivity(intent);
                                     finish();
 
@@ -153,7 +184,7 @@ public class PatientRegister extends AppCompatActivity {
                 }
 
                 else{
-                    binding.PatientSingUp.setVisibility(View.VISIBLE);
+                    binding.VerifyOtp.setVisibility(View.VISIBLE);
                     binding.ProgressBar.setVisibility(View.INVISIBLE);
                 }
 
@@ -201,6 +232,7 @@ public class PatientRegister extends AppCompatActivity {
 //                   preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.InputName.getText().toString());
 //                    Intent intent = new Intent(getApplicationContext(),PatientHome.class);
 //                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(new Intent(getApplicationContext(),PatientLogin.class));
                     ShowToast("Welcome");
 //                    startActivity(intent);//if signup then go to mainactivity
 //                    finish();
@@ -210,6 +242,16 @@ public class PatientRegister extends AppCompatActivity {
                     Loading(false);
                     ShowToast(exception.getMessage());
                 });
+    }
+
+    private void Loading(boolean IsLoading) {
+        if (IsLoading) {
+            binding.PatientSingUp.setVisibility(View.INVISIBLE);
+            binding.ProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            binding.ProgressBar.setVisibility(View.INVISIBLE);
+            binding.PatientSingUp.setVisibility(View.VISIBLE);
+        }
     }
 
     private boolean patientExists(){
@@ -225,16 +267,6 @@ public class PatientRegister extends AppCompatActivity {
         return checkpatientExists;
     }
 
-    private void Loading(boolean IsLoading) {
-        if (IsLoading) {
-            binding.PatientSingUp.setVisibility(View.INVISIBLE);
-            binding.ProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            binding.ProgressBar.setVisibility(View.INVISIBLE);
-            binding.PatientSingUp.setVisibility(View.VISIBLE);
-        }
-    }
-
 
     private void ShowToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -245,16 +277,22 @@ public class PatientRegister extends AppCompatActivity {
         if (binding.PatientRgName.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Name");
             return false;
-        } else if (binding.PatientPhoneNumber.getText().toString().trim().isEmpty()) {
+        }
+        else if (!binding.PatientRgName.getText().toString().trim().matches("^[A-Za-z]+$")) {
+            ShowToast("Enter valid Name");
+            return false;
+        }else if (binding.PatientPhoneNumber.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Number");
             return false;
         } else if (binding.PatientPhoneNumber.getText().toString().length() != 10) {
             ShowToast("Enter Valid Mobile Number");
             return false;
-        } else if (!patientExists()) {
-            ShowToast("Already exists");
-            return false;
-        } else if (binding.PatientAge.getText().toString().trim().isEmpty()) {
+        }
+//        else if (!patientExists()) {
+//            ShowToast("Already exists");
+//            return false;
+//        }
+        else if (binding.PatientAge.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Age");
             return false;
         } else if (binding.PatientCity.getText().toString().trim().isEmpty()) {
@@ -278,6 +316,8 @@ public class PatientRegister extends AppCompatActivity {
         else
             return true;
     }
+
+
 
 //        binding.PatientSingin.setOnClickListener(new View.OnClickListener() {
 //            @Override

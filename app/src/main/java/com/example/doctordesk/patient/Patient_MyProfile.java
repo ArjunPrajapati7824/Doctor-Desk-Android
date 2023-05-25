@@ -26,6 +26,8 @@ public class Patient_MyProfile extends AppCompatActivity {
 
     ActivityPatientEditProfileBinding binding2;
     PreferenceManager preferencesManager;
+    public static boolean update = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,10 @@ public class Patient_MyProfile extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.BnView.setSelectedItemId(R.id.MyProfile);
         preferencesManager = new PreferenceManager(getApplicationContext());
+        if(update)
         LoadPatientDetails();
+        else
+            loadupdateData();
 
 
 
@@ -75,6 +80,16 @@ public class Patient_MyProfile extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void loadupdateData() {
+        binding.PatientNameProfile.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
+        binding.PatientGenderProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_GENDER));
+        binding.PatientNumberProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
+        binding.PatientCityProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_CITY));
+        binding.BloodGroupProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
+        binding.PatientAgeProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_AGE));
+        binding.WeightPatientProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_WEIGHT));
     }
 
     private void ShowToast(String message){

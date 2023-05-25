@@ -56,6 +56,10 @@ public class Doctor_Appointment extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        if(list.size() == 0)
+                        {
+                            binding.showText.setVisibility(View.VISIBLE);
+                        }
                         for(DocumentSnapshot d:list){
                             ModelPatientList doctorModel=d.toObject(ModelPatientList.class);
                             PatientsArray.add(doctorModel);

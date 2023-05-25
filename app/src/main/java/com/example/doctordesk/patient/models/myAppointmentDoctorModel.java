@@ -2,9 +2,31 @@ package com.example.doctordesk.patient.models;
 
 public class myAppointmentDoctorModel {
 
-    String Dr_Name, Clinic_Name, Clinic_Address, Specialization,Doctor_Id,Appointment_Id,Appointment_Status,Patient_Id;
+    String Dr_Name;
+    String Clinic_Name;
+    String Clinic_Address;
+    String Specialization;
+    String Doctor_Id;
+    String Appointment_Id;
+    String Appointment_Status;
+    String Patient_Id;
+    String Appointment_Name;
+    String Appointment_date;
 
     public myAppointmentDoctorModel() {
+    }
+
+    public myAppointmentDoctorModel(String dr_Name, String clinic_Name, String clinic_Address, String specialization, String doctor_Id, String appointment_Id, String appointment_Status, String patient_Id, String appointment_Name, String appointment_date) {
+        Dr_Name = dr_Name;
+        Clinic_Name = clinic_Name;
+        Clinic_Address = clinic_Address;
+        Specialization = specialization;
+        Doctor_Id = doctor_Id;
+        Appointment_Id = appointment_Id;
+        Appointment_Status = appointment_Status;
+        Patient_Id = patient_Id;
+        Appointment_Name = appointment_Name;
+        Appointment_date = appointment_date;
     }
 
     public String getDr_Name() {
@@ -71,16 +93,20 @@ public class myAppointmentDoctorModel {
         Patient_Id = patient_Id;
     }
 
-    public myAppointmentDoctorModel(String dr_Name, String clinic_Name, String clinic_Address, String specialization, String doctor_Id, String appointment_Id, String appointment_Status, String patient_Id) {
-        Dr_Name = dr_Name;
-        Clinic_Name = clinic_Name;
-        Clinic_Address = clinic_Address;
-        Specialization = specialization;
-        Doctor_Id = doctor_Id;
-        Appointment_Id = appointment_Id;
-        Appointment_Status = appointment_Status;
-        Patient_Id = patient_Id;
+    public String getAppointment_Name() {
+        return Appointment_Name;
+    }
 
+    public void setAppointment_Name(String appointment_Name) {
+        Appointment_Name = appointment_Name;
+    }
 
+    public String getAppointment_date() {
+        return Appointment_date;
+    }
+
+    public void setAppointment_date(String appointment_date) {
+        Appointment_date = appointment_date;
     }
 }
+

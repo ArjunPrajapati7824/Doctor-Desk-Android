@@ -22,12 +22,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class DoctorRegistretion extends AppCompatActivity {
@@ -40,6 +38,7 @@ public class DoctorRegistretion extends AppCompatActivity {
     public static boolean verify_otp_doctor=false;
 
     public static boolean checkDoctorExists=false;
+
 
     public static boolean is_payment_successful=false;
 
@@ -92,8 +91,6 @@ public class DoctorRegistretion extends AppCompatActivity {
         binding.DoctorSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(Signup_Isvalid())
                 SignUp();
             }
         });
@@ -213,18 +210,20 @@ public class DoctorRegistretion extends AppCompatActivity {
                 }
             }
 
-            private boolean doctorExists(){
-                FirebaseFirestore database= FirebaseFirestore.getInstance();
-                database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                checkDoctorExists=true;
-                            }
-                        });
-                return checkDoctorExists;
-            }
+
+    private boolean doctorExists(){
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        checkDoctorExists=true;
+                    }
+                });
+        return checkDoctorExists;
+    }
+
 
             private void ShowToast(String message) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -234,16 +233,21 @@ public class DoctorRegistretion extends AppCompatActivity {
                 if (binding.DoctorRegName.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Name");
                     return false;
+                }else if (!binding.DoctorRegName.getText().toString().trim().matches("^[A-Za-z]+$")) {
+                    ShowToast("Enter valid Name");
+                    return false;
                 } else if (binding.DoctorPhoneNumber.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Number");
                     return false;
                 } else if (binding.DoctorPhoneNumber.getText().toString().length() != 10) {
                     ShowToast("Enter Valid Mobile Number");
                     return false;
-                } else if (!doctorExists()) {
-                    ShowToast("Already Exists");
-                    return false;
-                }else if (binding.DoctorClinicName.getText().toString().trim().isEmpty()) {
+                }
+//                else if (doctorExists()) {
+//                    ShowToast("Already Exists");
+//                    return false;
+//                }
+                else if (binding.DoctorClinicName.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Clinic Name");
                     return false;
                 } else if (binding.DoctorClinicAddress.getText().toString().trim().isEmpty()) {

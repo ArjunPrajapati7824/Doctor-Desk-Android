@@ -32,7 +32,7 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
     @Override
     public My_DoctorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.patient_mydoctor_recycler_row,parent, false);//view created
+        View view=inflater.inflate(R.layout.patient_appointments_row,parent, false);//view created
         return new My_DoctorViewHolder(view);//reference of Holder class
 
     }
@@ -43,6 +43,8 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
         holder.DoctorAddress.setText(myApppointmentArrayList.get(position).getClinic_Address());
         holder.Specialization.setText(myApppointmentArrayList.get(position).getSpecialization());
         holder.NameOfClinic.setText(myApppointmentArrayList.get(position).getClinic_Name());
+        holder.Appointment_Name.setText(myApppointmentArrayList.get(position).getAppointment_Name());
+        holder.Appointment_date.setText(myApppointmentArrayList.get(position).getAppointment_date());
         if(myApppointmentArrayList.get(position).getAppointment_Status().equals("Accept")){
             holder.CheckStatus.setVisibility(View.VISIBLE);
             holder.CheckStatus.setText("Approved");
@@ -65,7 +67,7 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
     }
 
     public class My_DoctorViewHolder extends RecyclerView.ViewHolder {
-        TextView NameOfDoctor,DoctorAddress,Specialization,NameOfClinic,CheckStatus;
+        TextView NameOfDoctor,DoctorAddress,Specialization,NameOfClinic,CheckStatus,Appointment_date,Appointment_Name;
 
         My_DoctorViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +77,8 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
             Specialization=itemView.findViewById(R.id.Specialization);
             NameOfClinic=itemView.findViewById(R.id.NameOfClinic);
             CheckStatus=itemView.findViewById(R.id.CheckStatus);
+            Appointment_date=itemView.findViewById(R.id.appointmentDate);
+            Appointment_Name=itemView.findViewById(R.id.PatientName);
 
         }
 

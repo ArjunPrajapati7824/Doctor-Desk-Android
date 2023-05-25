@@ -33,7 +33,9 @@ public class Patient_EditProfile extends AppCompatActivity {
         preferencesManager = new PreferenceManager(getApplicationContext());
        db=FirebaseFirestore.getInstance();
 
-       getPatientData();
+
+           getupdateData();
+
 
        binding.PatientUpdate.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -42,6 +44,14 @@ public class Patient_EditProfile extends AppCompatActivity {
            }
        });
 
+    }
+
+    private void getupdateData() {
+        binding.PatientEditLoginName.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
+        binding.PatientEditPhoneNumber.setText(preferencesManager.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
+        binding.PatientEditAge.setText(preferencesManager.getString(Constants.KEY_PATIENT_AGE));
+        binding.PatientEditCity.setText(preferencesManager.getString(Constants.KEY_PATIENT_CITY));
+        binding.PatientEditWeight.setText(preferencesManager.getString(Constants.KEY_PATIENT_WEIGHT));
     }
 
     private void updataPatientData() {
@@ -72,12 +82,12 @@ public class Patient_EditProfile extends AppCompatActivity {
                                         preferencesManager.clear();
                                         preferencesManager.putString(Constants.KEY_PATIENTS_NAME,binding.PatientEditLoginName.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientEditPhoneNumber.getText().toString());
-                                        preferencesManager.putString(Constants.KEY_PATIENT_CITY,binding.PatientEditCity.getText().toString());
+                                        preferencesManager.putString(Constants.KEY_PATIENT_CITY,documentSnapshot.getString(Constants.KEY_PATIENT_CITY));
                                         preferencesManager.putString(Constants.KEY_PATIENT_AGE,binding.PatientEditAge.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT,binding.PatientEditWeight.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_GENDER,documentSnapshot.getString(Constants.KEY_PATIENT_GENDER));
                                         preferencesManager.putString(Constants.KEY_PATIENT_BLOOD_GROUP,documentSnapshot.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
-
+                                        Patient_MyProfile.update=true;
                                         startActivity(new Intent(getApplicationContext(),Patient_MyProfile.class));
 
                                     }

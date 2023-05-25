@@ -35,6 +35,7 @@ public class otpVerification extends AppCompatActivity {
     ProgressBar progressBar;
 
 
+    public static boolean confirm;
 
 
     @Override
@@ -60,7 +61,6 @@ public class otpVerification extends AppCompatActivity {
         verfiybuttonclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),PaymentSubscription.class));
                 if (!intputnumber1.getText().toString().trim().isEmpty() && !intputnumber2.getText().toString().trim().isEmpty() && !intputnumber3.getText().toString().trim().isEmpty() && !intputnumber4.getText().toString().trim().isEmpty() && !intputnumber5.getText().toString().trim().isEmpty() && !intputnumber6.getText().toString().trim().isEmpty())
                 {
                     String entercode = intputnumber1.getText().toString() + intputnumber2.getText().toString() + intputnumber3.getText().toString() + intputnumber4.getText().toString() + intputnumber5.getText().toString() + intputnumber6.getText().toString();
@@ -77,14 +77,24 @@ public class otpVerification extends AppCompatActivity {
 //                                progressBar.setVisibility(View.INVISIBLE);
 //                                verfiybuttonclick.setVisibility(View.VISIBLE);
                                 if (task.isSuccessful()) {
+
                                     if(PatientRegister.verify_otp_patient){
-                                        startActivity(new Intent(otpVerification.this, Patient_MyProfile.class));
-                                        finish();
+                                        if(getIntent().getStringExtra("check").equals("1")){
+                                            confirm=true;
+                                            Intent intent = new Intent(otpVerification.this, PatientRegister.class);
+                                            intent.putExtra("confirm","1");
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
                                     }
                                     if(DoctorRegistretion.verify_otp_doctor){
                                         startActivity(new Intent(otpVerification.this, PaymentSubscription.class));
-
+                                        finish();
                                     }
+
+
+
                                     //  Intent intent1 = Intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //                                    startActivities(new Intent[]{intent});
                                 } else {

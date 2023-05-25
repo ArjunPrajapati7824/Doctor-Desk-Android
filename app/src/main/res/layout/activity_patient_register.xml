@@ -202,6 +202,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:animateLayoutChanges="true">
+                <Button
+                    android:id="@+id/VerifyOtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Verify Otp"
+                    android:backgroundTint="@color/Main"
+                    android:background="@drawable/buttion"/>
             <Button
                 android:id="@+id/PatientSingUp"
                 android:layout_width="match_parent"
@@ -209,7 +217,8 @@
                 android:layout_marginTop="30dp"
                 android:text="Sign Up"
                 android:backgroundTint="@color/Main"
-                android:background="@drawable/buttion"/>
+                android:background="@drawable/buttion"
+                android:visibility="gone"/>
             <ProgressBar
                 android:id="@+id/ProgressBar"
                 android:layout_width="25dp"

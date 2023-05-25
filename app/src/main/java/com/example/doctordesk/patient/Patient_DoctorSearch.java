@@ -52,6 +52,7 @@ public class Patient_DoctorSearch extends AppCompatActivity {
         setListeners();
 
         getDoctors();
+        binding.BnView.setSelectedItemId(R.id.SearchDoctor);
 
 
     }

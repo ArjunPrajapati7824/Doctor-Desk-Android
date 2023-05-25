@@ -57,6 +57,7 @@ public class myDoctorAdapter extends  RecyclerView.Adapter<myDoctorAdapter.Patie
             Specialization=itemView.findViewById(R.id.Specialization);
             NameOfClinic=itemView.findViewById(R.id.NameOfClinic);
 
+
         }
 
     }

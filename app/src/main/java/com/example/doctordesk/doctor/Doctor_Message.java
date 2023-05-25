@@ -65,8 +65,10 @@ public class Doctor_Message extends AppCompatActivity {
                                     patientMessage.mobileNumber= queryDocumentSnapshot.getString(Constants.KEY_PATIENT_PHONE_NUMBER);
                                     mobile.add(patientMessage.mobileNumber);
                                 }
+
                                 if(mobile.toString() != null){
                                     SmsManager sms = SmsManager.getDefault();
+                                    Log.d("Num", "onClick: "+mobile);
 
                                     for (String phoneNumber : mobile) {
                                         Log.i("Numbersssssssssss", "onClick: "+phoneNumber);

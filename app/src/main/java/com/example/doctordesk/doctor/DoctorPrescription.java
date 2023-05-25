@@ -55,6 +55,7 @@ import java.util.List;
 import java.util.Locale;
 
 
+
 public class DoctorPrescription extends AppCompatActivity {
 
     private ActivityDoctorPrescriptionBinding binding;
@@ -275,7 +276,7 @@ public class DoctorPrescription extends AppCompatActivity {
         Table table1 = new Table(columnWidth);
 
         // 1st , belove Three are cell for The doctor Name and Clinic detail
-        table1.addCell(new Cell().add(new Paragraph("Clinic_Name" + "\n" +getIntent().getStringExtra("Clinic_Name")).setFontSize(26f).setFontColor(color)).setBorder(Border.NO_BORDER));
+        table1.addCell(new Cell().add(new Paragraph(  getIntent().getStringExtra("Clinic_Name")).setFontSize(26f).setFontColor(color)).setBorder(Border.NO_BORDER));
         table1.addCell(new Cell().add(new Paragraph("Dr. " +getIntent().getStringExtra("Doctor_name")).setFontSize(26f).setFontColor(color)).setBorder(Border.NO_BORDER));
 
 
@@ -286,6 +287,8 @@ public class DoctorPrescription extends AppCompatActivity {
         // 3rd
         table1.addCell(new Cell().add(new Paragraph("Contact No. " +getIntent().getStringExtra("Doctor_contact"))).setBorder(Border.NO_BORDER));
         table1.addCell(new Cell().add(new Paragraph("Registration No : " +getIntent().getStringExtra("registration_number"))).setBorder(Border.NO_BORDER));
+
+        table1.addCell(new Cell().add(new Paragraph("Date : " +date)).setBorder(Border.NO_BORDER));
 
         LineSeparator line = new LineSeparator(new SolidLine());
 

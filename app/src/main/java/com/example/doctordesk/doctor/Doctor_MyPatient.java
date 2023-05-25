@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorMyPatientBinding;
@@ -92,6 +93,10 @@ public class Doctor_MyPatient extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        if(list.size() == 0)
+                        {
+                            binding.showTextPatient.setVisibility(View.VISIBLE);
+                        }
                         for(DocumentSnapshot d:list){
                             myPatientsModel myPatientsModel =d.toObject(myPatientsModel.class);
                             myPatientsArray.add(myPatientsModel);
