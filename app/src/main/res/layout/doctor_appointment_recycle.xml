@@ -25,14 +25,14 @@
                 android:text="Name"
                 android:paddingStart="10dp"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/GenderOfPatient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gender"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
                 android:textColor="@color/black"
@@ -41,11 +41,10 @@
                 android:id="@+id/AgeOfPatient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:text="Age"
                 android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
-
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
 
@@ -53,7 +52,7 @@
                 android:id="@+id/NumberOfPatient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:text="Number"
                 android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
@@ -64,13 +63,23 @@
                 android:id="@+id/Appointment_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:text="Appointment Date"
                 android:paddingStart="10dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/Appointment_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Appointment Time"
+                android:paddingStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

@@ -211,18 +211,6 @@ public class DoctorRegistretion extends AppCompatActivity {
             }
 
 
-    private boolean doctorExists(){
-        FirebaseFirestore database= FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        checkDoctorExists=true;
-                    }
-                });
-        return checkDoctorExists;
-    }
 
 
             private void ShowToast(String message) {
@@ -230,10 +218,21 @@ public class DoctorRegistretion extends AppCompatActivity {
             }
 
             private boolean Signup_Isvalid() {//validation for all fields
+                FirebaseFirestore database= FirebaseFirestore.getInstance();
+                database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
+                                checkDoctorExists=true;
+                            }else {
+                                checkDoctorExists=false;
+                            }
+
+                        });
                 if (binding.DoctorRegName.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Name");
                     return false;
-                }else if (!binding.DoctorRegName.getText().toString().trim().matches("^[A-Za-z]+$")) {
+                }else if (!binding.DoctorRegName.getText().toString().trim().matches("^[A-Z a-z]+$")) {
                     ShowToast("Enter valid Name");
                     return false;
                 } else if (binding.DoctorPhoneNumber.getText().toString().trim().isEmpty()) {
@@ -242,11 +241,10 @@ public class DoctorRegistretion extends AppCompatActivity {
                 } else if (binding.DoctorPhoneNumber.getText().toString().length() != 10) {
                     ShowToast("Enter Valid Mobile Number");
                     return false;
+                } else if (!checkDoctorExists) {
+                    ShowToast("Already Exists");
+                    return false;
                 }
-//                else if (doctorExists()) {
-//                    ShowToast("Already Exists");
-//                    return false;
-//                }
                 else if (binding.DoctorClinicName.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Clinic Name");
                     return false;

@@ -57,6 +57,7 @@ public class Doctor_Message extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseFirestore database=FirebaseFirestore.getInstance();
                 database.collection(Constants.KEY_COLLECTION_PATIENTS)
+
                         .get()
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful() && task.getResult()!=null ){

@@ -1,19 +1,20 @@
 package com.example.doctordesk.doctor;
 
 public class ModelPatientList {
-    String Appointment_Name, Appointment_Gender, Appointment_Age, Appointment_Phone_Number, Appointment_Id, Appointment_Status,Appointment_date;
+    String Appointment_Name, Appointment_Gender, Appointment_Age, Appointment_Phone_Number, Appointment_Id, Appointment_Status,Appointment_date,Appointment_time;
 
     public ModelPatientList() {
     }
 
-    public ModelPatientList(String appointment_Name, String appointment_Gender, String appointment_Age, String appointment_Phone_Number, String appointment_Id, String appointment_Status, String appointment_Date) {
+    public ModelPatientList(String appointment_Name, String appointment_Gender, String appointment_Age, String appointment_Phone_Number, String appointment_Id, String appointment_Status, String appointment_date, String appointment_time) {
         Appointment_Name = appointment_Name;
         Appointment_Gender = appointment_Gender;
         Appointment_Age = appointment_Age;
         Appointment_Phone_Number = appointment_Phone_Number;
         Appointment_Id = appointment_Id;
         Appointment_Status = appointment_Status;
-        Appointment_date = appointment_Date;
+        Appointment_date = appointment_date;
+        Appointment_time = appointment_time;
     }
 
     public String getAppointment_Name() {
@@ -64,12 +65,20 @@ public class ModelPatientList {
         Appointment_Status = appointment_Status;
     }
 
-    public String getAppointment_Date() {
+    public String getAppointment_date() {
         return Appointment_date;
     }
 
-    public void setAppointment_Date(String appointment_Date) {
-        Appointment_date = appointment_Date;
+    public void setAppointment_date(String appointment_date) {
+        Appointment_date = appointment_date;
+    }
+
+    public String getAppointment_time() {
+        return Appointment_time;
+    }
+
+    public void setAppointment_time(String appointment_time) {
+        Appointment_time = appointment_time;
     }
 }
 

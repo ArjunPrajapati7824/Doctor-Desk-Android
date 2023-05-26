@@ -36,10 +36,10 @@ public class DoctorListAdapter extends  RecyclerView.Adapter<DoctorListAdapter.D
 
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
-        holder.NameOfDoctor.setText(arrayList.get(position).getDr_Name());
-        holder.DoctorAddress.setText(arrayList.get(position).getClinic_Address());
-        holder.Specialization.setText(arrayList.get(position).getSpecialization());
-        holder.NameOfClinic.setText(arrayList.get(position).getClinic_Name());
+        holder.NameOfDoctor.setText("Doctor Name : "+arrayList.get(position).getDr_Name());
+        holder.DoctorAddress.setText("Clinic Address : "+arrayList.get(position).getClinic_Address());
+        holder.Specialization.setText("Specialization : "+arrayList.get(position).getSpecialization());
+        holder.NameOfClinic.setText("Clinic Name : "+arrayList.get(position).getClinic_Name());
 
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override

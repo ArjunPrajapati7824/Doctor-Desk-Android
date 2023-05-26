@@ -68,11 +68,12 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
 
 
 
-        holder.NameOfPatient.setText(Patients.get(position).getAppointment_Name());
-        holder.GenderOfPatient.setText(Patients.get(position).getAppointment_Gender());
-        holder.AgeOfPatient.setText(Patients.get(position).getAppointment_Age());
-        holder.NumberOfPatient.setText(Patients.get(position).getAppointment_Phone_Number());
-        holder.appointmentdate.setText(Patients.get(position).getAppointment_Date());
+        holder.NameOfPatient.setText("Name : "+Patients.get(position).getAppointment_Name());
+        holder.GenderOfPatient.setText("Gender : "+Patients.get(position).getAppointment_Gender());
+        holder.AgeOfPatient.setText("Age : "+Patients.get(position).getAppointment_Age());
+        holder.NumberOfPatient.setText("Phone No. : "+Patients.get(position).getAppointment_Phone_Number());
+        holder.appointmentdate.setText("Date : "+Patients.get(position).getAppointment_date());
+        holder.Appointmenttime.setText("Time : "+Patients.get(position).getAppointment_time());
 
 
 
@@ -227,7 +228,7 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
 
 
     class PatientsHolder extends RecyclerView.ViewHolder{
-            TextView NameOfPatient, GenderOfPatient,AgeOfPatient, NumberOfPatient,appointmentdate;
+            TextView NameOfPatient, GenderOfPatient,AgeOfPatient, NumberOfPatient,appointmentdate,Appointmenttime;
 
             Button AcceptButton,DeleteButton;
         public PatientsHolder(@NonNull View itemView) {
@@ -240,6 +241,7 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
             appointmentdate=(TextView)itemView.findViewById(R.id.Appointment_date);
             AcceptButton=(Button)itemView.findViewById(R.id.AcceptButton);
             DeleteButton=(Button)itemView.findViewById(R.id.DeleteButton);
+            Appointmenttime=(TextView) itemView.findViewById(R.id.Appointment_time);
 
         }
     }
