@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorAppointmentBinding;
@@ -18,13 +19,17 @@ import com.example.doctordesk.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Doctor_Appointment extends AppCompatActivity {
     private ActivityDoctorAppointmentBinding binding;
@@ -48,9 +53,18 @@ public class Doctor_Appointment extends AppCompatActivity {
         binding.DoctorAppointmentsRCV.setLayoutManager(new LinearLayoutManager(Doctor_Appointment.this));
 
 
+        Date currentDate = new Date();
+
+// Create a SimpleDateFormat object to format the date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy", Locale.getDefault());
+
+// Format the date as a string
+        String formattedDate = dateFormat.format(currentDate);
+        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
         FirebaseFirestore database= FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
                 .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Pending")
+//                .whereGreaterThan(Constants.KEY_APPOINTMENT_DATE,"22-5-2023")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -68,29 +82,6 @@ public class Doctor_Appointment extends AppCompatActivity {
 
                     }
                 });
-
-//        PatientsArray.add(new ModelPatientList("Meet","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet a","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan a","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun a","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet b ","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan b","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun b","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet b","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan b","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun c","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet c","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan e","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun r","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet r","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan t","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun y","Male","22","7210545666"));
-//        PatientsArray.add(new ModelPatientList("Meet u","Male","21","8866230406"));
-//        PatientsArray.add(new ModelPatientList("Manthan h","Male","21","9586460406"));
-//        PatientsArray.add(new ModelPatientList("Arjun m ","Male","22","7210545666"));
-
 
 
         binding.DoctorAppointmentsRCV.setAdapter(adapter);
