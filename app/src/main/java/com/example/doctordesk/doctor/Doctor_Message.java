@@ -37,6 +37,7 @@ public class Doctor_Message extends AppCompatActivity {
     ActivityDoctorMessageBinding binding;
     EditText WriteMessage;
     Button btn;
+    String messageString="";
     TextView t1;
     ArrayList<String> mobile=new ArrayList<String>();
     private PreferenceManager preferencesManager;
@@ -48,8 +49,6 @@ public class Doctor_Message extends AppCompatActivity {
         WriteMessage=binding.DoctorSendMessage;
         btn=binding.DoctorMessageButton;
 
-        preferencesManager=new PreferenceManager(getApplicationContext());
-
 
 
 
@@ -57,15 +56,14 @@ public class Doctor_Message extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore database=FirebaseFirestore.getInstance();
-                database.collection(Constants.KEY_COLLECTION_APPOINTMENTS)
-                        .whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
-                        .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Accept")
+                database.collection(Constants.KEY_COLLECTION_PATIENTS)
+
                         .get()
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful() && task.getResult()!=null ){
                                 for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()) {
                                     MessageModel patientMessage = new MessageModel();
-                                    patientMessage.mobileNumber= queryDocumentSnapshot.getString(Constants.KEY_APPOINTMENT_PHONE_NUMBER);
+                                    patientMessage.mobileNumber= queryDocumentSnapshot.getString(Constants.KEY_PATIENT_PHONE_NUMBER);
                                     mobile.add(patientMessage.mobileNumber);
                                 }
 
@@ -74,7 +72,7 @@ public class Doctor_Message extends AppCompatActivity {
                                     Log.d("Num", "onClick: "+mobile);
 
                                     for (String phoneNumber : mobile) {
-                                        Log.i("Numbers", "onClick: "+phoneNumber);
+                                        Log.i("Numbersssssssssss", "onClick: "+phoneNumber);
                                         sms.sendTextMessage(phoneNumber, null, WriteMessage.getText().toString(), null, null);
                                     }
                                     Toast.makeText(getApplicationContext(), "Message Sent", Toast.LENGTH_SHORT).show();
@@ -96,7 +94,32 @@ public class Doctor_Message extends AppCompatActivity {
             }
         });
 
-
+//        registerReceiver(new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                // TODO Auto-generated method stub
+//                Bundle msgBundle = intent.getExtras();
+//                SmsMessage message[];
+//
+//                Toast.makeText(context, "In Broadcast Receive", Toast.LENGTH_SHORT).show();
+//                if(msgBundle != null) {
+//
+//                    Object[] pdus = (Object[]) msgBundle.get("pdus");
+//                    message = new SmsMessage[1];
+//
+//                    message[0] = SmsMessage.createFromPdu((byte[])pdus[0]);
+//
+//                    messageString += "SMS from " + message[0].getOriginatingAddress();
+//                    messageString += " :";
+//                    messageString += message[0].getMessageBody().toString();
+//                    messageString += "\n";
+//                }
+////                Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        }, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+//
         binding.BnViewDoc.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -128,4 +151,7 @@ public class Doctor_Message extends AppCompatActivity {
 
     }
 
+    public void getUsers(){
+
+}
 }

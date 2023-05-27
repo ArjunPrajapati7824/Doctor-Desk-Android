@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/imageDoctor"
-            android:layout_width="151dp"
+            android:layout_width="109dp"
             android:layout_height="match_parent"
             android:src="@drawable/man_health_worker_svgrepo_com" />
 
@@ -28,7 +28,7 @@
                 android:paddingStart="10dp"
                 android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
 
@@ -39,7 +39,7 @@
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
                 android:text="Specialization"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Clinic Name"
 
                 android:textColor="@color/black"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Clinic Address"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Patient Name"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -83,21 +83,48 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:text="Appointment Date"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+
             <TextView
-                android:id="@+id/CheckStatus"
+                android:id="@+id/appointmentTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:paddingStart="10dp"
-                android:textSize="20dp"
-                android:text="Status"
-                android:visibility="invisible"
+                android:textSize="16dp"
+                android:text="Appointment Time"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:textSize="16dp"
+                    android:text="Status : "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/CheckStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    android:text="Status"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

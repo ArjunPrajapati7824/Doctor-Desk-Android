@@ -34,10 +34,10 @@ public class myDoctorAdapter extends  RecyclerView.Adapter<myDoctorAdapter.Patie
 
     @Override
     public void onBindViewHolder(@NonNull myDoctorAdapter.Patient_My_DoctorViewHolder holder, int position) {
-        holder.NameOfDoctor.setText(myDoctorArrayList.get(position).getDr_Name());
-        holder.DoctorAddress.setText(myDoctorArrayList.get(position).getClinic_Address());
-        holder.Specialization.setText(myDoctorArrayList.get(position).getSpecialization());
-        holder.NameOfClinic.setText(myDoctorArrayList.get(position).getClinic_Name());
+        holder.NameOfDoctor.setText("Doctor Name : "+myDoctorArrayList.get(position).getDr_Name());
+        holder.DoctorAddress.setText("Clinic Address : "+myDoctorArrayList.get(position).getClinic_Address());
+        holder.Specialization.setText("Specialization : "+myDoctorArrayList.get(position).getSpecialization());
+        holder.NameOfClinic.setText("Clinic NAme : "+myDoctorArrayList.get(position).getClinic_Name());
 
     }
 

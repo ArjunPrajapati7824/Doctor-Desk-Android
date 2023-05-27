@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.doctordesk.R;
@@ -89,6 +91,29 @@ public class AppointmentBooking extends AppCompatActivity {
             }
         });
 
+        binding.appointmentTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int mHour,mMinute;
+
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(AppointmentBooking.this, new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int mhour,
+                                          int minute) {
+
+                        binding.appointmentTime.setText(mhour+ ":" + minute);
+                    }
+                },mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        });
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int i) {
@@ -126,6 +151,7 @@ public class AppointmentBooking extends AppCompatActivity {
         user.put(Constants.KEY_APPOINTMENT_GENDER, radioButton.getText().toString());
         user.put(Constants.KEY_APPOINTMENT_DESCRIPTION, binding.ApDescription.getText().toString());
         user.put(Constants.KEY_APPOINTMENT_DATE,binding.appointmentDate.getText().toString());
+        user.put(Constants.KEY_APPOINTMENT_TIME,binding.appointmentTime.getText().toString());
         user.put(Constants.KEY_APPOINTMENT_ID, app_id);
         user.put(Constants.KEY_PATIENT_ID, preferencesManager.getString(Constants.KEY_PATIENT_ID));
         user.put(Constants.KEY_DOCTOR_ID, getIntent().getStringExtra(Constants.KEY_DOCTOR_ID));

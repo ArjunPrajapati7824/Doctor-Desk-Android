@@ -91,7 +91,6 @@ public class DoctorRegistretion extends AppCompatActivity {
         binding.DoctorSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Signup_Isvalid())
                 SignUp();
             }
         });
@@ -212,18 +211,6 @@ public class DoctorRegistretion extends AppCompatActivity {
             }
 
 
-//    private boolean doctorExists(){
-//        FirebaseFirestore database= FirebaseFirestore.getInstance();
-//        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        checkDoctorExists=true;
-//                    }
-//                });
-//        return checkDoctorExists;
-//    }
 
 
             private void ShowToast(String message) {
@@ -231,7 +218,6 @@ public class DoctorRegistretion extends AppCompatActivity {
             }
 
             private boolean Signup_Isvalid() {//validation for all fields
-
                 FirebaseFirestore database= FirebaseFirestore.getInstance();
                 database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorPhoneNumber.getText().toString())
                         .get()
@@ -249,14 +235,13 @@ public class DoctorRegistretion extends AppCompatActivity {
                 }else if (!binding.DoctorRegName.getText().toString().trim().matches("^[A-Z a-z]+$")) {
                     ShowToast("Enter valid Name");
                     return false;
-                }else if (binding.DoctorPhoneNumber.getText().toString().trim().isEmpty()) {
+                } else if (binding.DoctorPhoneNumber.getText().toString().trim().isEmpty()) {
                     ShowToast("Enter Number");
                     return false;
                 } else if (binding.DoctorPhoneNumber.getText().toString().length() != 10) {
                     ShowToast("Enter Valid Mobile Number");
                     return false;
-                }
-                else if (!checkDoctorExists) {
+                } else if (!checkDoctorExists) {
                     ShowToast("Already Exists");
                     return false;
                 }

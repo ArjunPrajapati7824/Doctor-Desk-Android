@@ -13,10 +13,12 @@ public class myAppointmentDoctorModel {
     String Appointment_Name;
     String Appointment_date;
 
+    String Appointment_time;
+
     public myAppointmentDoctorModel() {
     }
 
-    public myAppointmentDoctorModel(String dr_Name, String clinic_Name, String clinic_Address, String specialization, String doctor_Id, String appointment_Id, String appointment_Status, String patient_Id, String appointment_Name, String appointment_date) {
+    public myAppointmentDoctorModel(String dr_Name, String clinic_Name, String clinic_Address, String specialization, String doctor_Id, String appointment_Id, String appointment_Status, String patient_Id, String appointment_Name, String appointment_date,String appointment_time) {
         Dr_Name = dr_Name;
         Clinic_Name = clinic_Name;
         Clinic_Address = clinic_Address;
@@ -27,6 +29,7 @@ public class myAppointmentDoctorModel {
         Patient_Id = patient_Id;
         Appointment_Name = appointment_Name;
         Appointment_date = appointment_date;
+        Appointment_time = appointment_time;
     }
 
     public String getDr_Name() {
@@ -107,6 +110,14 @@ public class myAppointmentDoctorModel {
 
     public void setAppointment_date(String appointment_date) {
         Appointment_date = appointment_date;
+    }
+
+    public String getAppointment_time() {
+        return Appointment_time;
+    }
+
+    public void setAppointment_tate(String appointment_time) {
+        Appointment_time = appointment_time;
     }
 }
 

@@ -39,12 +39,14 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
 
     @Override
     public void onBindViewHolder(@NonNull My_Appointment_Adapter.My_DoctorViewHolder holder, int position) {
-        holder.NameOfDoctor.setText(myApppointmentArrayList.get(position).getDr_Name());
-        holder.DoctorAddress.setText(myApppointmentArrayList.get(position).getClinic_Address());
-        holder.Specialization.setText(myApppointmentArrayList.get(position).getSpecialization());
-        holder.NameOfClinic.setText(myApppointmentArrayList.get(position).getClinic_Name());
-        holder.Appointment_Name.setText(myApppointmentArrayList.get(position).getAppointment_Name());
-        holder.Appointment_date.setText(myApppointmentArrayList.get(position).getAppointment_date());
+        holder.NameOfDoctor.setText("Doctor Name : "+myApppointmentArrayList.get(position).getDr_Name());
+        holder.DoctorAddress.setText("Clinic Address : "+myApppointmentArrayList.get(position).getClinic_Address());
+        holder.Specialization.setText("Specialization : "+myApppointmentArrayList.get(position).getSpecialization());
+        holder.NameOfClinic.setText("Clinic Name : "+myApppointmentArrayList.get(position).getClinic_Name());
+        holder.Appointment_Name.setText("Patient Name : "+myApppointmentArrayList.get(position).getAppointment_Name());
+        holder.Appointment_date.setText("Date : "+myApppointmentArrayList.get(position).getAppointment_date());
+        holder.Appointment_Time.setText("Time : "+myApppointmentArrayList.get(position).getAppointment_time());
+
         if(myApppointmentArrayList.get(position).getAppointment_Status().equals("Accept")){
             holder.CheckStatus.setVisibility(View.VISIBLE);
             holder.CheckStatus.setText("Approved");
@@ -67,7 +69,7 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
     }
 
     public class My_DoctorViewHolder extends RecyclerView.ViewHolder {
-        TextView NameOfDoctor,DoctorAddress,Specialization,NameOfClinic,CheckStatus,Appointment_date,Appointment_Name;
+        TextView NameOfDoctor,DoctorAddress,Specialization,NameOfClinic,CheckStatus,Appointment_date,Appointment_Name,Appointment_Time;
 
         My_DoctorViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class My_Appointment_Adapter extends  RecyclerView.Adapter<My_Appointment
             CheckStatus=itemView.findViewById(R.id.CheckStatus);
             Appointment_date=itemView.findViewById(R.id.appointmentDate);
             Appointment_Name=itemView.findViewById(R.id.PatientName);
+            Appointment_Time=itemView.findViewById(R.id.appointmentTime);
 
         }
 

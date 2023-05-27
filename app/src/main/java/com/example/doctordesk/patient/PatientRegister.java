@@ -254,6 +254,18 @@ public class PatientRegister extends AppCompatActivity {
         }
     }
 
+    private boolean patientExists(){
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        checkpatientExists=true;
+                    }
+                });
+        return checkpatientExists;
+    }
 
 
     private void ShowToast(String message) {
@@ -262,19 +274,17 @@ public class PatientRegister extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     private boolean Signup_Isvalid() {//validation for all fields
+        FirebaseFirestore database= FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_PATIENTS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.PatientPhoneNumber.getText().toString())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
+                        checkpatientExists=true;
+                    }else {
+                        checkpatientExists=false;
+                    }
 
-            FirebaseFirestore database= FirebaseFirestore.getInstance();
-            database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
-                            checkpatientExists=true;
-                        }else {
-                            checkpatientExists=false;
-                        }
-
-                    });
-
+                });
         if (binding.PatientRgName.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Name");
             return false;
