@@ -50,20 +50,21 @@ public class Doctor_Message extends AppCompatActivity {
         btn=binding.DoctorMessageButton;
 
 
-
+        preferencesManager=new PreferenceManager(getApplicationContext());
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore database=FirebaseFirestore.getInstance();
-                database.collection(Constants.KEY_COLLECTION_PATIENTS)
-
+                database.collection(Constants.KEY_COLLECTION_APPOINTMENTS)
+                        .whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
+                        .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Accept")
                         .get()
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful() && task.getResult()!=null ){
                                 for(QueryDocumentSnapshot queryDocumentSnapshot:task.getResult()) {
                                     MessageModel patientMessage = new MessageModel();
-                                    patientMessage.mobileNumber= queryDocumentSnapshot.getString(Constants.KEY_PATIENT_PHONE_NUMBER);
+                                    patientMessage.mobileNumber= queryDocumentSnapshot.getString(Constants.KEY_APPOINTMENT_PHONE_NUMBER);
                                     mobile.add(patientMessage.mobileNumber);
                                 }
 

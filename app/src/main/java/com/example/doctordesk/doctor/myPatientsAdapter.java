@@ -47,10 +47,10 @@ public class myPatientsAdapter extends RecyclerView.Adapter<myPatientsAdapter.My
     public void onBindViewHolder(@NonNull My_PatientsViewHolder holder, int position) {
 
 
-        holder.NameOfPatient.setText(myPatientasArrayList.get(position).getAppointment_Name());
-        holder.appointmentPhoneNumber.setText(myPatientasArrayList.get(position).getAppointment_Phone_Number());
-        holder.appointmentGender.setText(myPatientasArrayList.get(position).getAppointment_Gender());
-        holder.appointmentAge.setText(myPatientasArrayList.get(position).getAppointment_Age());
+        holder.NameOfPatient.setText("Name : "+myPatientasArrayList.get(position).getAppointment_Name());
+        holder.appointmentPhoneNumber.setText("Contact : "+myPatientasArrayList.get(position).getAppointment_Phone_Number());
+        holder.appointmentGender.setText("Gender : "+myPatientasArrayList.get(position).getAppointment_Gender());
+        holder.appointmentAge.setText("Age : "+myPatientasArrayList.get(position).getAppointment_Age());
 
         holder.PrescriptionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
