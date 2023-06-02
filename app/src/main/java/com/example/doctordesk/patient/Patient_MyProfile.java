@@ -36,11 +36,8 @@ public class Patient_MyProfile extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.BnView.setSelectedItemId(R.id.MyProfile);
         preferencesManager = new PreferenceManager(getApplicationContext());
-        if(update)
-        LoadPatientDetails();
-        else
-            loadupdateData();
 
+        LoadPatientDetails();
 
 
         binding.PatientEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -82,15 +79,7 @@ public class Patient_MyProfile extends AppCompatActivity {
         });
     }
 
-    private void loadupdateData() {
-        binding.PatientNameProfile.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
-        binding.PatientGenderProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_GENDER));
-        binding.PatientNumberProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
-        binding.PatientCityProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_CITY));
-        binding.BloodGroupProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
-        binding.PatientAgeProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_AGE));
-        binding.WeightPatientProfile.setText(preferencesManager.getString(Constants.KEY_PATIENT_WEIGHT));
-    }
+
 
     private void ShowToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();

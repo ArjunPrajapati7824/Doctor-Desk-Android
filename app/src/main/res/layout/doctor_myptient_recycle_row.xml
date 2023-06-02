@@ -65,11 +65,24 @@
                 android:text="Age"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-            <Button
-                android:id="@+id/PrescriptionBtn"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Make Prescription"/>
+                >
+                <Button
+                    android:id="@+id/PrescriptionBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Make Prescription"/>
+
+                <Button
+                    android:id="@+id/Rejectbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:text="Reject"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>

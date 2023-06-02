@@ -60,7 +60,6 @@ public class Doctor_Appointment extends AppCompatActivity {
 
 // Format the date as a string
         String formattedDate = dateFormat.format(currentDate);
-        Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
         FirebaseFirestore database= FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_APPOINTMENTS).whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
                 .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Pending")

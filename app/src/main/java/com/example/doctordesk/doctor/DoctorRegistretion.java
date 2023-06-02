@@ -224,6 +224,7 @@ public class DoctorRegistretion extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
                                 checkDoctorExists=true;
+                                ShowToast(String.valueOf(checkDoctorExists));
                             }else {
                                 checkDoctorExists=false;
                             }

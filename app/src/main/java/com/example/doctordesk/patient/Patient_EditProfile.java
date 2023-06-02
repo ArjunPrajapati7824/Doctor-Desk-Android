@@ -75,22 +75,16 @@ public class Patient_EditProfile extends AppCompatActivity {
                         database.collection(Constants.KEY_COLLECTION_PATIENTS)
                                 .get()
                                 .addOnCompleteListener(task -> {
-                                    preferencesManager.clear();
-                                    if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
-                                        DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(Integer.parseInt(preferencesManager.getString(Constants.KEY_PATIENT_ID)));
+
                                         Toast.makeText(Patient_EditProfile.this, "Data Updated", Toast.LENGTH_SHORT).show();
-                                        preferencesManager.clear();
                                         preferencesManager.putString(Constants.KEY_PATIENTS_NAME,binding.PatientEditLoginName.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientEditPhoneNumber.getText().toString());
-                                        preferencesManager.putString(Constants.KEY_PATIENT_CITY,documentSnapshot.getString(Constants.KEY_PATIENT_CITY));
+                                        preferencesManager.putString(Constants.KEY_PATIENT_CITY,binding.PatientEditCity.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_AGE,binding.PatientEditAge.getText().toString());
                                         preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT,binding.PatientEditWeight.getText().toString());
-                                        preferencesManager.putString(Constants.KEY_PATIENT_GENDER,documentSnapshot.getString(Constants.KEY_PATIENT_GENDER));
-                                        preferencesManager.putString(Constants.KEY_PATIENT_BLOOD_GROUP,documentSnapshot.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
-                                        Patient_MyProfile.update=true;
+                                        preferencesManager.putString(Constants.KEY_PATIENT_BLOOD_GROUP,preferencesManager.getString(Constants.KEY_PATIENT_BLOOD_GROUP));
+                                        preferencesManager.putString(Constants.KEY_PATIENT_GENDER,preferencesManager.getString(Constants.KEY_PATIENT_GENDER));
                                         startActivity(new Intent(getApplicationContext(),Patient_MyProfile.class));
-
-                                    }
 
                                 });
                     }
@@ -105,13 +99,4 @@ public class Patient_EditProfile extends AppCompatActivity {
 
     }
 
-    public void getPatientData() {
-        
-        binding.PatientEditLoginName.setText(preferencesManager.getString(Constants.KEY_PATIENTS_NAME));
-        binding.PatientEditPhoneNumber.setText(preferencesManager.getString(Constants.KEY_PATIENT_PHONE_NUMBER));
-        binding.PatientEditAge.setText(preferencesManager.getString(Constants.KEY_PATIENT_AGE));
-        binding.PatientEditCity.setText(preferencesManager.getString(Constants.KEY_PATIENT_CITY));
-        binding.PatientEditWeight.setText(preferencesManager.getString(Constants.KEY_PATIENT_WEIGHT));
-
-    }
 }

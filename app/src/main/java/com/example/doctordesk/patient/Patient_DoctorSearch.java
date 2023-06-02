@@ -77,59 +77,59 @@ public class Patient_DoctorSearch extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.search_doctor,menu);
+//        MenuItem menuItem =menu.findItem(R.id.search);
+//        SearchView searchView= (SearchView) menuItem.getActionView();
+//
 
-        getMenuInflater().inflate(R.menu.search_doctor,menu);
-        MenuItem menuItem =menu.findItem(R.id.search);
-        SearchView searchView= (SearchView) menuItem.getActionView();
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                doctorSearch(s);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                doctorSearch(s);
-
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String s) {
+//                doctorSearch(s);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String s) {
+//                doctorSearch(s);
+//
+//                return false;
+//            }
+//        });
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     //find doctore using search
-    private void doctorSearch(String str){
-
-        db.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_NAME,str)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for(DocumentSnapshot doc:task.getResult()){
-                            DoctorModel doctorModel=new DoctorModel(doc.getString(Constants.KEY_DOCTOR_NAME),
-                                    doc.getString(Constants.KEY_CLINIC_NAME),
-                                    doc.getString(Constants.KEY_CLINIC_ADDRESS),
-                                    doc.getString(Constants.KEY_SPECIALIZATION),
-                                    doc.getString(Constants.KEY_DOCTOR_ID));
-                            arrayList.clear();
-                            arrayList.add(doctorModel);
-                        }
-                        doctorListAdapter=new DoctorListAdapter(Patient_DoctorSearch.this,arrayList);
-                        binding.searchdr.setAdapter(doctorListAdapter);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
+//    private void doctorSearch(String str){
+//
+//        db.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_DOCTOR_NAME,str)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        for(DocumentSnapshot doc:task.getResult()){
+//                            DoctorModel doctorModel=new DoctorModel(doc.getString(Constants.KEY_DOCTOR_NAME),
+//                                    doc.getString(Constants.KEY_CLINIC_NAME),
+//                                    doc.getString(Constants.KEY_CLINIC_ADDRESS),
+//                                    doc.getString(Constants.KEY_SPECIALIZATION),
+//                                    doc.getString(Constants.KEY_DOCTOR_ID));
+//                            arrayList.clear();
+//                            arrayList.add(doctorModel);
+//                        }
+//                        doctorListAdapter=new DoctorListAdapter(Patient_DoctorSearch.this,arrayList);
+//                        binding.searchdr.setAdapter(doctorListAdapter);
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//
+//                    }
+//                });
+//    }
 
     private void setListeners() {
         binding.BnView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

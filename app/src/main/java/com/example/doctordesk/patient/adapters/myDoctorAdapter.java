@@ -37,7 +37,7 @@ public class myDoctorAdapter extends  RecyclerView.Adapter<myDoctorAdapter.Patie
         holder.NameOfDoctor.setText("Doctor Name : "+myDoctorArrayList.get(position).getDr_Name());
         holder.DoctorAddress.setText("Clinic Address : "+myDoctorArrayList.get(position).getClinic_Address());
         holder.Specialization.setText("Specialization : "+myDoctorArrayList.get(position).getSpecialization());
-        holder.NameOfClinic.setText("Clinic NAme : "+myDoctorArrayList.get(position).getClinic_Name());
+        holder.NameOfClinic.setText("Clinic Name : "+myDoctorArrayList.get(position).getClinic_Name());
 
     }
 

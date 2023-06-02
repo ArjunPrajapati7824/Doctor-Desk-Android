@@ -38,7 +38,6 @@ public class Constants {
     //Appointments
     public static final String KEY_COLLECTION_APPOINTMENTS="Appointments";
 
-    public static final String KEY_COLLECTION_APPOINTMENTS_HISTORY="Appointments_History";
 
 
     public static final String KEY_APPOINTMENT_ID ="Appointment_Id";

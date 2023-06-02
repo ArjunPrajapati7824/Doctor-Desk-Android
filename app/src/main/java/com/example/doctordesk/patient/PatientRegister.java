@@ -254,18 +254,7 @@ public class PatientRegister extends AppCompatActivity {
         }
     }
 
-    private boolean patientExists(){
-        FirebaseFirestore database= FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_DOCTORS).whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        checkpatientExists=true;
-                    }
-                });
-        return checkpatientExists;
-    }
+
 
 
     private void ShowToast(String message) {
@@ -278,12 +267,24 @@ public class PatientRegister extends AppCompatActivity {
         database.collection(Constants.KEY_COLLECTION_PATIENTS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.PatientPhoneNumber.getText().toString())
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
-                        checkpatientExists=true;
-                    }else {
-                        checkpatientExists=false;
-                    }
+                    if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot querySnapshot = task.getResult();
+                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                                // Phone number already exists
+                                ShowToast("Phone number already exists");
+                                checkpatientExists = true;
+                            } else {
+                                // Phone number does not exist
+                                checkpatientExists = false;
+//                                SignUp();
+                            }
+                        } else {
+                            checkpatientExists = false;
+//                            ShowToast("Failed to check phone number existence");
+                        }
 
+                    }
                 });
         if (binding.PatientRgName.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Name");
@@ -299,10 +300,7 @@ public class PatientRegister extends AppCompatActivity {
             ShowToast("Enter Valid Mobile Number");
             return false;
         }
-        else if (!checkpatientExists) {
-            ShowToast("Already exists");
-            return false;
-        }
+
         else if (binding.PatientAge.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Age");
             return false;
@@ -322,6 +320,10 @@ public class PatientRegister extends AppCompatActivity {
             return false;
         } else if (binding.PatientLoginPass2.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Confirm Password");
+            return false;
+        }
+        else if (checkpatientExists) {
+            ShowToast("Already exists");
             return false;
         }
         else

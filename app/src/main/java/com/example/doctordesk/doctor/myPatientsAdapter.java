@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,9 @@ import com.example.doctordesk.patient.adapters.myDoctorAdapter;
 import com.example.doctordesk.patient.models.myAppointmentDoctorModel;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -72,6 +76,31 @@ public class myPatientsAdapter extends RecyclerView.Adapter<myPatientsAdapter.My
             }
         });
 
+        holder.Rejctbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseFirestore firebaseFireStore = FirebaseFirestore.getInstance();
+
+                firebaseFireStore.collection(Constants.KEY_COLLECTION_APPOINTMENTS).document(myPatientasArrayList.get(position).getAppointment_Id())
+
+                        .update(Constants.KEY_APPOINTMENT_STATUS,"Pending").addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Intent i = new Intent(view.getContext(),Doctor_Appointment.class);
+                                    view.getContext().startActivity(i);
+                                    Toast.makeText(view.getContext(), "Appointment Rejected", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(view.getContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            }
+                        });
+            }
+        });
+
     }
 
     @Override
@@ -82,7 +111,7 @@ public class myPatientsAdapter extends RecyclerView.Adapter<myPatientsAdapter.My
     public class My_PatientsViewHolder extends RecyclerView.ViewHolder {
         TextView NameOfPatient,appointmentPhoneNumber,appointmentGender,appointmentAge;
 
-        Button PrescriptionBtn;
+        Button PrescriptionBtn,Rejctbtn;
         My_PatientsViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -91,6 +120,7 @@ public class myPatientsAdapter extends RecyclerView.Adapter<myPatientsAdapter.My
             appointmentGender=itemView.findViewById(R.id.appointmentGender);
             appointmentAge=itemView.findViewById(R.id.appointmentAge);
             PrescriptionBtn=itemView.findViewById(R.id.PrescriptionBtn);
+            Rejctbtn=itemView.findViewById(R.id.Rejectbtn);
         }
 
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -69,21 +70,16 @@ public class Doctor_EditProfile extends AppCompatActivity {
                         database.collection(Constants.KEY_COLLECTION_DOCTORS)
                                 .get()
                                 .addOnCompleteListener(task -> {
-                                    preferencesManager.clear();
-                                    if(task.isSuccessful() && task.getResult()!=null && task.getResult().getDocuments().size()>0){
-                                        DocumentSnapshot documentSnapshot=task.getResult().getDocuments().get(Integer.parseInt(preferencesManager.getString(Constants.KEY_DOCTOR_ID)));
                                         Toast.makeText(Doctor_EditProfile.this, "Data Updated", Toast.LENGTH_SHORT).show();
-                                        preferencesManager.clear();
                                         preferencesManager.putString(Constants.KEY_DOCTOR_NAME,binding.DoctorEditRegName.getText().toString());
                                         preferencesManager.putString(Constants.KEY_DOCTOR_PHONENUMBER,binding.DoctorEditPhoneNumber.getText().toString());
                                         preferencesManager.putString(Constants.KEY_CLINIC_NAME,binding.DoctorEditClinicName.getText().toString());
                                         preferencesManager.putString(Constants.KEY_CLINIC_ADDRESS,binding.DoctorEditClinicAddress.getText().toString());
                                         preferencesManager.putString(Constants.KEY_SPECIALIZATION,binding.DoctorEditSpecialization.getText().toString());
-                                        preferencesManager.putString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER,documentSnapshot.getString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER));
-
+                                        preferencesManager.putString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER,preferencesManager.getString(Constants.KEY_DOCTOR_REGISTRATION_NUMBER));
                                         startActivity(new Intent(getApplicationContext(), Doctor_Profile.class));
 
-                                    }
+                                   // }
 
                                 });
                     }
