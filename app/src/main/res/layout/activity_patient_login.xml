@@ -60,6 +60,15 @@
                 android:textColor="@color/black"
                 android:layout_marginTop="15dp"/>
 
+            <ImageView
+                android:id="@+id/showPassword"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="250dp"
+                android:layout_marginTop="-32dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_visibility" />
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

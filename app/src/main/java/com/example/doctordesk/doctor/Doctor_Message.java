@@ -56,6 +56,7 @@ public class Doctor_Message extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseFirestore database=FirebaseFirestore.getInstance();
+
                 database.collection(Constants.KEY_COLLECTION_APPOINTMENTS)
                         .whereEqualTo(Constants.KEY_DOCTOR_ID,preferencesManager.getString(Constants.KEY_DOCTOR_ID))
                         .whereEqualTo(Constants.KEY_APPOINTMENT_STATUS,"Accept")

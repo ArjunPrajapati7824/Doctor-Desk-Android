@@ -2,11 +2,17 @@ package com.example.doctordesk.patient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityPatientLoginBinding;
 import com.example.doctordesk.utilities.Constants;
 import com.example.doctordesk.utilities.PreferenceManager;
@@ -36,8 +42,30 @@ public class PatientLogin extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setListeners(){
 
+
+        binding.showPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
+
+        binding.PatientLoginPass.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                Drawable drawable = binding.PatientLoginPass.getCompoundDrawables()[DRAWABLE_RIGHT];
+
+                if (drawable != null && event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (binding.PatientLoginPass.getRight() - drawable.getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
+                }
+                return false;
+       }
+    });
 
         binding.RegisterText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +84,20 @@ public class PatientLogin extends AppCompatActivity {
 
     }
 
+    private void togglePasswordVisibility() {
+        if (binding.PatientLoginPass.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            // Show password
+            binding.PatientLoginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            binding.showPassword.setImageResource(R.drawable.ic_visibility_off);
+        } else {
+            // Hide password
+            binding.PatientLoginPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            binding.showPassword.setImageResource(R.drawable.ic_visibility);
+        }
+
+        // Move cursor to the end of the text
+        binding.PatientLoginPass.setSelection(binding.PatientLoginPass.getText().length());
+    }
     private void SignIn(){
         Loading(true);
 

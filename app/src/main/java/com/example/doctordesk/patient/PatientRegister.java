@@ -124,72 +124,14 @@ public class PatientRegister extends AppCompatActivity {
             public void onClick(View view) {
                 if(Signup_Isvalid())
                     SignUp();
+
             }
         });
         binding.VerifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                if(Signup_Isvalid()){
-                    preferencesManager.putString(Constants.KEY_PATIENTS_NAME, binding.PatientRgName.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER, binding.PatientPhoneNumber.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_AGE, binding.PatientAge.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_CITY, binding.PatientCity.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT, binding.PatientWeight.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass1.getText().toString());
-                    preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass2.getText().toString());
-//                    SignUp();
-
-                    binding.VerifyOtp.setVisibility(INVISIBLE);
-                    binding.ProgressBar.setVisibility(View.VISIBLE);
-                    PhoneAuthOptions options=PhoneAuthOptions.newBuilder(mAuth)
-                            .setActivity(PatientRegister.this)
-                            .setPhoneNumber("+91"+binding.PatientPhoneNumber.getText().toString())
-                            .setTimeout(60l, TimeUnit.SECONDS)
-                            .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                                @Override
-                                public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
-                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
-                                }
-                                @Override
-                                public void onVerificationFailed(@NonNull FirebaseException e) {
-
-                                    binding.VerifyOtp.setVisibility(View.VISIBLE);
-                                    binding.ProgressBar.setVisibility(INVISIBLE);
-                                    Toast.makeText(PatientRegister.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCodeSent(@NonNull String otp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                                    super.onCodeSent(otp, forceResendingToken);
-
-                                    verify_otp_patient=true;
-                                    binding.VerifyOtp.setVisibility(INVISIBLE);
-                                    binding.ProgressBar.setVisibility(View.VISIBLE);
-//                                    SignUp();
-                                    Intent intent = new Intent(PatientRegister.this, otpVerification.class);
-                                    intent.putExtra("mobile",binding.PatientPhoneNumber.getText().toString());
-                                    intent.putExtra("otp",otp);
-                                    intent.putExtra("check","1");
-                                    startActivity(intent);
-                                    finish();
-
-                                }
-                            })
-                            .build();
-                    PhoneAuthProvider.verifyPhoneNumber(options);
-                }
-
-                else{
-                    binding.VerifyOtp.setVisibility(View.VISIBLE);
-                    binding.ProgressBar.setVisibility(View.INVISIBLE);
-                }
-
+                isExists();
             }
-
         });
 
 
@@ -255,37 +197,105 @@ public class PatientRegister extends AppCompatActivity {
     }
 
 
+    private void PatientOtp(){
+
+        preferencesManager.putString(Constants.KEY_PATIENTS_NAME, binding.PatientRgName.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_PHONE_NUMBER, binding.PatientPhoneNumber.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_AGE, binding.PatientAge.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_CITY, binding.PatientCity.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_WEIGHT, binding.PatientWeight.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass1.getText().toString());
+        preferencesManager.putString(Constants.KEY_PATIENT_PASSWORD, binding.PatientLoginPass2.getText().toString());
+//                    SignUp();
+
+        binding.VerifyOtp.setVisibility(INVISIBLE);
+        binding.ProgressBar.setVisibility(View.VISIBLE);
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                .setActivity(PatientRegister.this)
+                .setPhoneNumber("+91" + binding.PatientPhoneNumber.getText().toString())
+                .setTimeout(60l, TimeUnit.SECONDS)
+                .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+                        binding.VerifyOtp.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+
+                        binding.VerifyOtp.setVisibility(View.VISIBLE);
+                        binding.ProgressBar.setVisibility(INVISIBLE);
+                        Toast.makeText(PatientRegister.this, "Please Check Your Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String otp, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        super.onCodeSent(otp, forceResendingToken);
+
+                        verify_otp_patient = true;
+                        binding.VerifyOtp.setVisibility(INVISIBLE);
+                        binding.ProgressBar.setVisibility(View.VISIBLE);
+//                                    SignUp();
+                        Intent intent = new Intent(PatientRegister.this, otpVerification.class);
+                        intent.putExtra("mobile", binding.PatientPhoneNumber.getText().toString());
+                        intent.putExtra("otp", otp);
+                        intent.putExtra("check", "1");
+                        startActivity(intent);
+                        finish();
+
+                    }
+                })
+                .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+    }
+
 
 
     private void ShowToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    @SuppressLint("ResourceType")
-    private boolean Signup_Isvalid() {//validation for all fields
+    private void isExists(){
+
+        binding.VerifyOtp.setVisibility(INVISIBLE);
+        binding.ProgressBar.setVisibility(View.VISIBLE);
+
         FirebaseFirestore database= FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_PATIENTS).whereEqualTo(Constants.KEY_DOCTOR_PHONENUMBER,binding.PatientPhoneNumber.getText().toString())
+        database.collection(Constants.KEY_COLLECTION_PATIENTS)
+                .whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
                 .get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
-                        if (task.isSuccessful()) {
-                            QuerySnapshot querySnapshot = task.getResult();
-                            if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                                // Phone number already exists
-                                ShowToast("Phone number already exists");
-                                checkpatientExists = true;
-                            } else {
-                                // Phone number does not exist
-                                checkpatientExists = false;
-//                                SignUp();
-                            }
-                        } else {
-                            checkpatientExists = false;
-//                            ShowToast("Failed to check phone number existence");
+                    if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
+                        ShowToast("User already exits");
+                        binding.VerifyOtp.setVisibility(View.VISIBLE);
+                        binding.ProgressBar.setVisibility(INVISIBLE);
+                    }
+                    else{
+                        if(Signup_Isvalid()){
+                            PatientOtp();
                         }
 
                     }
                 });
+    }
+
+    @SuppressLint("ResourceType")
+    private boolean Signup_Isvalid() {//validation for all fields
+
+//        FirebaseFirestore database= FirebaseFirestore.getInstance();
+//        database.collection(Constants.KEY_COLLECTION_PATIENTS)
+//                .whereEqualTo(Constants.KEY_PATIENT_PHONE_NUMBER,binding.PatientPhoneNumber.getText().toString())
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful() && task.getResult() != null && task.getResult().getDocuments().size() > 0) {
+//                        ShowToast("User already exits");
+//
+//                    }
+//
+//                });
+
         if (binding.PatientRgName.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Name");
             return false;
@@ -300,7 +310,6 @@ public class PatientRegister extends AppCompatActivity {
             ShowToast("Enter Valid Mobile Number");
             return false;
         }
-
         else if (binding.PatientAge.getText().toString().trim().isEmpty()) {
             ShowToast("Enter Age");
             return false;
@@ -322,12 +331,10 @@ public class PatientRegister extends AppCompatActivity {
             ShowToast("Enter Confirm Password");
             return false;
         }
-        else if (checkpatientExists) {
-            ShowToast("Already exists");
-            return false;
-        }
-        else
+        else{
             return true;
+
+        }
     }
 
 

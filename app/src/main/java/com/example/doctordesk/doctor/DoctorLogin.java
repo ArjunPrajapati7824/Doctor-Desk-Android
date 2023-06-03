@@ -2,13 +2,19 @@ package com.example.doctordesk.doctor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.doctordesk.MainActivity;
+import com.example.doctordesk.R;
 import com.example.doctordesk.databinding.ActivityDoctorLoginBinding;
 import com.example.doctordesk.patient.Patient_MyProfile;
 import com.example.doctordesk.utilities.Constants;
@@ -39,8 +45,30 @@ public class DoctorLogin extends AppCompatActivity {
         setListeners();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setListeners(){
 
+
+        binding.showPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
+
+        binding.DoctorLoginPass .setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                Drawable drawable = binding.DoctorLoginPass.getCompoundDrawables()[DRAWABLE_RIGHT];
+
+                if (drawable != null && event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (binding.DoctorLoginPass.getRight() - drawable.getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         binding.RegisterText.setOnClickListener(view ->
                 startActivity(new Intent(getApplicationContext(),DoctorRegistretion.class)));
@@ -49,6 +77,21 @@ public class DoctorLogin extends AppCompatActivity {
             if(isValidSignInDetails())
                 SignIn();
         });
+    }
+
+    private void togglePasswordVisibility() {
+        if (binding.DoctorLoginPass.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            // Show password
+            binding.DoctorLoginPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            binding.showPassword.setImageResource(R.drawable.ic_visibility_off);
+        } else {
+            // Hide password
+            binding.DoctorLoginPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            binding.showPassword.setImageResource(R.drawable.ic_visibility);
+        }
+
+        // Move cursor to the end of the text
+        binding.DoctorLoginPass.setSelection(binding.DoctorLoginPass.getText().length());
     }
     private void SignIn(){
         Loading(true);
