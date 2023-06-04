@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctordesk.R;
+import com.example.doctordesk.doctor.Model.MessageModel;
 import com.example.doctordesk.patient.AppointmentBooking;
 import com.example.doctordesk.patient.Patient_EditProfile;
 import com.example.doctordesk.patient.Patient_MyProfile;
@@ -36,6 +38,7 @@ import java.util.Map;
 
 public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appointment_Adapter.PatientsHolder> {
        Context context;
+       String phoneNumber;
        ArrayList<ModelPatientList> Patients;
 //    PreferenceManager preferencesManager;
 //AppointmentBooking appointmentBooking;
@@ -99,7 +102,10 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
                                 if(task.isSuccessful()){
                                     Intent i = new Intent(view.getContext(),Doctor_MyPatient.class);
                                     view.getContext().startActivity(i);
-                                      Toast.makeText(view.getContext(), "Appointment Accepted", Toast.LENGTH_SHORT).show();
+                                    SmsManager sms = SmsManager.getDefault();
+                                    phoneNumber=Patients.get(position).getAppointment_Phone_Number();
+                                    sms.sendTextMessage(phoneNumber, null, "Dear Patient, Your appointment is accepted", null, null);
+                                    Toast.makeText(view.getContext(), "Appointment Accepted", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(view.getContext(), "Appointment Declined", Toast.LENGTH_SHORT).show();
 
@@ -151,6 +157,9 @@ public class Doctor_Appointment_Adapter extends RecyclerView.Adapter<Doctor_Appo
                                 if(task.isSuccessful()){
                                     Intent i = new Intent(view.getContext(),Doctor_Appointment.class);
                                     view.getContext().startActivity(i);
+                                    SmsManager sms = SmsManager.getDefault();
+                                    phoneNumber=Patients.get(position).getAppointment_Phone_Number();
+                                    sms.sendTextMessage(phoneNumber, null, "Dear Patient, Your appointment is Rejected", null, null);
                                     Toast.makeText(view.getContext(), "Appointment Rejected", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(view.getContext(), "Appointment Declined", Toast.LENGTH_SHORT).show();

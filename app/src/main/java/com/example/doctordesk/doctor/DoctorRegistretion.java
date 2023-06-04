@@ -95,7 +95,7 @@ public class DoctorRegistretion extends AppCompatActivity {
         binding.showPassword2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                togglePasswordVisibility();
+                togglePasswordVisibility1();
             }
         });
 
@@ -113,6 +113,22 @@ public class DoctorRegistretion extends AppCompatActivity {
                 return false;
             }
         });
+
+
+        binding.DoctorRegPass2 .setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                Drawable drawable = binding.DoctorRegPass2.getCompoundDrawables()[DRAWABLE_RIGHT];
+
+                if (drawable != null && event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (binding.DoctorRegPass2.getRight() - drawable.getBounds().width())) {
+                    togglePasswordVisibility1();
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         binding.RegLoginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +170,21 @@ public class DoctorRegistretion extends AppCompatActivity {
 
         // Move cursor to the end of the text
         binding.DoctorRegPass1.setSelection(binding.DoctorRegPass1.getText().length());
+    }
+
+    private void togglePasswordVisibility1() {
+        if (binding.DoctorRegPass2.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            // Show password
+            binding.DoctorRegPass2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            binding.showPassword2.setImageResource(R.drawable.ic_visibility_off);
+        } else {
+            // Hide password
+            binding.DoctorRegPass2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            binding.showPassword2.setImageResource(R.drawable.ic_visibility);
+        }
+
+        // Move cursor to the end of the text
+        binding.DoctorRegPass2.setSelection(binding.DoctorRegPass2.getText().length());
     }
             public void SignUp() {//sign up of doctor
                 Loading(true);

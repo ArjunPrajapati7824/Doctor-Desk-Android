@@ -8,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -117,7 +121,50 @@ public class PatientRegister extends AppCompatActivity {
         setListeners();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setListeners() {
+
+        binding.showPassword1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility();
+            }
+        });
+
+        binding.showPassword2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility1();
+            }
+        });
+
+        binding.PatientLoginPass1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                Drawable drawable = binding.PatientLoginPass1.getCompoundDrawables()[DRAWABLE_RIGHT];
+
+                if (drawable != null && event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (binding.PatientLoginPass1.getRight() - drawable.getBounds().width())) {
+                    togglePasswordVisibility();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        binding.PatientLoginPass2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                Drawable drawable = binding.PatientLoginPass2.getCompoundDrawables()[DRAWABLE_RIGHT];
+
+                if (drawable != null && event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (binding.PatientLoginPass2.getRight() - drawable.getBounds().width())) {
+                    togglePasswordVisibility1();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         binding.PatientSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +192,35 @@ public class PatientRegister extends AppCompatActivity {
         });
     }
 
+    private void togglePasswordVisibility() {
+        if (binding.PatientLoginPass1.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            // Show password
+            binding.PatientLoginPass1.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            binding.showPassword1.setImageResource(R.drawable.ic_visibility_off);
+        } else {
+            // Hide password
+            binding.PatientLoginPass1.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            binding.showPassword1.setImageResource(R.drawable.ic_visibility);
+        }
+
+        // Move cursor to the end of the text
+        binding.PatientLoginPass1.setSelection(binding.PatientLoginPass1.getText().length());
+    }
+
+    private void togglePasswordVisibility1() {
+        if (binding.PatientLoginPass2.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+            // Show password
+            binding.PatientLoginPass2.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            binding.showPassword2.setImageResource(R.drawable.ic_visibility_off);
+        } else {
+            // Hide password
+            binding.PatientLoginPass2.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            binding.showPassword2.setImageResource(R.drawable.ic_visibility);
+        }
+
+        // Move cursor to the end of the text
+        binding.PatientLoginPass2.setSelection(binding.PatientLoginPass2.getText().length());
+    }
     public void SignUp() {//sign up of doctor
 
         Loading(true);
